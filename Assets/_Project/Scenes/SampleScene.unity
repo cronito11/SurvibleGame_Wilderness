@@ -1027,6 +1027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DestructibleBase
       objectReference: {fileID: 0}
+    - target: {fileID: 9052558875315920443, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

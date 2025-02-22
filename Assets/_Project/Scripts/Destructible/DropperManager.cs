@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DroppedManager : MonoBehaviour
+public class DropperManager : MonoBehaviour
 {
     [SerializeField] private Drops drop;
     [Min(0)]
@@ -25,6 +25,6 @@ public class DroppedManager : MonoBehaviour
 
     private void OnDestroyed ()
     {
-
+        Debug.Log($"Dropping {amount} of {drop}");
     }
 }
