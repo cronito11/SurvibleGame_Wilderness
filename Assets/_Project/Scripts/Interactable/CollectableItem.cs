@@ -11,6 +11,7 @@ namespace Surviblewilderness
         {
             //Collect item in inventary
             Debug.Log("Interactioin call "+gameObject.name, gameObject);
+            Destroy(gameObject);
         }
     }
 }
