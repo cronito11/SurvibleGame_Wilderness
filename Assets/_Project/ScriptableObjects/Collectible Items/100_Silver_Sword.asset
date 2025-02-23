@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: Silver Sword
   itemType: 0
   weight: 5
-  maxStackSize: 1
+  maxStackSize: 99
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

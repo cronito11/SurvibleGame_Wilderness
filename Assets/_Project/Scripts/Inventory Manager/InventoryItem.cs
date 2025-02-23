@@ -20,6 +20,11 @@ public class InventoryItem
     {
         get;  set;
     }
+    [field: SerializeField]
+    public bool isAssignedToSlot // Only for weapons/armor
+    {
+        get; set;
+    }
 
     public InventoryItem(GameItem item, int quantity)
     {

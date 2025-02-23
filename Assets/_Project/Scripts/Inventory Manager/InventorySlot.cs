@@ -1,16 +1,18 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
-    public Image itemIcon;
-    public TMP_Text quantityText;
-    public GameObject itemUi;
-    private InventoryItem currentItem;
-    //public bool IsEmpty { get; set => value = currentItem == null; }
+    //public static event Action OnItemDropOnSlot;  // 🔥 Event for inventory updates
 
-[SerializeField] private GameObject itemUiPrefab;   
+    public GameObject itemUi;
+
+    public InventoryItem currentInventoryItem { get; private set; }
+    [SerializeField] public bool IsEmpty => currentInventoryItem == null;    
+    [SerializeField] private GameObject itemUiPrefab;   
+    public bool isEmpty { get { return currentInventoryItem == null; } }   
     public void SetItem(InventoryItem item)
     {
         if(item.gameItem == null)
@@ -18,19 +20,31 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             Debug.Log("Item is null");
             return;
         }
-        currentItem = item;
+
+        
+        
+        if (itemUi == null && isEmpty)
+        {
+            itemUi = GameObject.Instantiate(itemUiPrefab, transform);
+            currentInventoryItem = item;
+            currentInventoryItem.isAssignedToSlot = true;
+        }
+
+        //just updating the quantity
         itemUi.SetActive(true);
         itemUi.GetComponentInChildren<Image>().sprite = item.gameItem.icon;
-        itemUi.GetComponentInChildren<TMP_Text>().text = item.gameItem.maxStackSize > 1 ? item.quantity.ToString() : "";
+        itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
+        itemUi.GetComponentInChildren<DraggableItem>().item = item;
         gameObject.SetActive(true);
     }
 
     public void ClearSlot()
     {
-        currentItem = null;
-        itemUi.GetComponentInChildren<Image>().sprite = null;
-        itemUi.GetComponentInChildren<TMP_Text>().text = "";    
-        itemUi.SetActive(false);
+        currentInventoryItem = null;
+        if (itemUi == null)
+            return;
+        
+        itemUi = null;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -38,5 +52,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         GameObject droppedItem = eventData.pointerDrag;
         DraggableItem draggableItem = droppedItem.GetComponent<DraggableItem>();
         draggableItem.parentAfterDrag = transform;
+        itemUi = droppedItem;
+        
+        SetItem(draggableItem.item);
     }
 }

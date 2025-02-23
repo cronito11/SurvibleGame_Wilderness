@@ -8,7 +8,7 @@ public class PlayerInventory :  MonoBehaviour
 
     private Dictionary<int, InventoryItem> inventory = new Dictionary<int, InventoryItem>();
 
-    public static event Action OnInventoryChanged;  // 🔥 Event for inventory updates
+    public static event Action<InventoryItem> OnInventoryChanged;  // 🔥 Event for inventory updates
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class PlayerInventory :  MonoBehaviour
         }
         Debug.Log($"Added {amount} {item.itemName} to inventory");
 
-        OnInventoryChanged?.Invoke();
+        OnInventoryChanged?.Invoke(inventory[item.id]);
     }
 
     public void RemoveItem(GameItem item, int amount)
@@ -59,7 +59,7 @@ public class PlayerInventory :  MonoBehaviour
                 inventory.Remove(item.id);
             }
         }
-        OnInventoryChanged?.Invoke();
+        //OnInventoryChanged?.Invoke(inventory[item.id]);
     }
 
     public Dictionary<int, InventoryItem> GetInventory()

@@ -51,7 +51,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 8822505520364031720}
+  prviousParent: {fileID: 0}
   parentAfterDrag: {fileID: 8878123377598831740}
+  item:
+    <gameItem>k__BackingField: {fileID: 0}
+    <quantity>k__BackingField: 0
+    <currentDurability>k__BackingField: 0
+    <isAssignedToSlot>k__BackingField: 0
 --- !u!1 &2897200957219399567
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,8 +207,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4292881409
+  m_fontColor: {r: 0.0041384934, g: 0.1744915, b: 0.8773585, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
