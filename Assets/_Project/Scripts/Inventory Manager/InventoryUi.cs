@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InventoryUi : MonoBehaviour
 {
@@ -22,11 +23,13 @@ public class InventoryUi : MonoBehaviour
     private void OnEnable()
     {
         PlayerInventory.OnInventoryChanged += UpdateUI;
+        //InventorySlot.OnItemDropOnSlot += UpdateUI;
     }
 
     private void OnDisable()
     {
         PlayerInventory.OnInventoryChanged -= UpdateUI;
+        //InventorySlot.OnItemDropOnSlot -= UpdateUI;
     }
 
     private void Start()
@@ -37,8 +40,9 @@ public class InventoryUi : MonoBehaviour
         inventorySlotsFood = foodItemsGrid.GetComponentsInChildren<InventorySlot>().ToList();
     }
 
-    void UpdateUI()
+    void UpdateUI(InventoryItem inventoryItem)
     {
+        Debug.Log("Inventory Ui Updated");
         // Populate UI with inventory items
         Dictionary<int, InventoryItem> inventory = playerInventory.GetInventory();
         
@@ -59,52 +63,79 @@ public class InventoryUi : MonoBehaviour
             .Where(pair => pair.Value.gameItem.itemType == ItemType.Weapon)
             .ToDictionary(pair => pair.Key, pair => pair.Value);
         
-
+        
         for(int i = 0; i < inventorySlotsClothing.Count; i++)
         {
             if(i<clothsInventory.Count)
             {
-                inventorySlotsClothing[i].SetItem(clothsInventory.Values.ElementAt(i));
+                InventoryItem item = clothsInventory.Values.ElementAt(i);
+
+                if (item.isAssignedToSlot)
+                    continue;
+                inventorySlotsClothing[i].SetItem(item);
             }
-            else
-            {
-                inventorySlotsClothing[i].ClearSlot();
-            }
+            
         }
 
         for (int i = 0; i < inventorySlotsMaterial.Count; i++)
         {
+
             if (i < materialsInventory.Count)
             {
-                inventorySlotsMaterial[i].SetItem(materialsInventory.Values.ElementAt(i));
+                InventoryItem item = materialsInventory.Values.ElementAt(i);
+
+                if (item.isAssignedToSlot)
+                    continue;
+                inventorySlotsMaterial[i].SetItem(item);
             }
-            else
-            {
-                inventorySlotsMaterial[i].ClearSlot();
-            }
+           
         }
 
-        for (int i = 0; i < inventorySlotsFood.Count; i++)
+        for(int i = 0,j=0; i < foodInventory.Count; i++)
         {
-            if (i < foodInventory.Count)
+            InventoryItem item = foodInventory.Values.ElementAt(i);
+            if (item.isAssignedToSlot)
+                continue;
+
+            while (!inventorySlotsFood[j].isEmpty)
             {
-                inventorySlotsFood[i].SetItem(foodInventory.Values.ElementAt(i));
+                if(inventorySlotsFood[j].currentInventoryItem.gameItem.id == item.gameItem.id)
+                {
+                    break;
+                    //inventorySlotsFood[j].SetItem(item);
+                }
+                j++;
+                if (j > inventorySlotsFood.Count)
+                {
+                    Debug.Log("No Empty Slots");
+                }
             }
-            else
-            {
-                inventorySlotsFood[i].ClearSlot();
-            }
+            inventorySlotsFood[j].SetItem(item);
         }
+
+        //for (int i = 0, j=0; i < inventorySlotsFood.Count; i++)
+        //{
+
+        //    if (j < foodInventory.Count)
+        //    {
+        //        InventoryItem item = foodInventory.Values.ElementAt(i); 
+                
+        //        if(item.isAssignedToSlot)
+        //            continue;
+
+        //        inventorySlotsFood[i].SetItem(item);
+        //        Debug.Log("Setting food item"+ foodInventory.Values.ElementAt(i).gameItem.name);
+        //    }
+        //}
 
         for (int i = 0; i < inventorySlotsWeapon.Count; i++)
         {
             if (i < weaponsInventory.Count)
             {
-                inventorySlotsWeapon[i].SetItem(weaponsInventory.Values.ElementAt(i));
-            }
-            else
-            {
-                inventorySlotsWeapon[i].ClearSlot();
+                InventoryItem item = weaponsInventory.Values.ElementAt(i);
+                if (item.isAssignedToSlot)
+                    continue;
+                inventorySlotsWeapon[i].SetItem(item);
             }
         }
 
