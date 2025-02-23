@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ObjectPool {
-    [CreateAssetMenu(fileName = "ObjectPooler", menuName = "ScriptableObject/ScriptablePoolList")]
+    [CreateAssetMenu(fileName = "ObjectPooler", menuName = "Scriptable Objects/ScriptablePoolList")]
     public class PoolListObjects : ScriptableObject 
     {
         [SerializeField] private List<PoolObject> objects =  new List<PoolObject>();
