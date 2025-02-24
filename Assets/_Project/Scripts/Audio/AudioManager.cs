@@ -52,25 +52,34 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
+        TimeController.OnChangeTimeOfDay += OnChangeTimeOfDay;
         UiManager.OnButtonClick += PlayButtonClickSound;
     }
+
+   
 
     private void OnDisable()
     {
         UiManager.OnButtonClick -= PlayButtonClickSound;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnChangeTimeOfDay(TimeOfDay day)
     {
-        //PlayMainMenuTheme(); 
-    }
+        if (day == TimeOfDay.Day)
+        {
+            StopMainMenuThemeAudio();
+            StopDayAmbienceThemeAudio();
+            StopNightAmbienceThemeAudio();
+            
+            PlayDayAmbienceSound();
+        }
+        else
+        {
+            StopMainMenuThemeAudio();
+            StopDayAmbienceThemeAudio();
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+            PlayNightAmbienceSound();
+        }
     }
 
     public void PlayButtonClickSound()
@@ -88,11 +97,11 @@ public class AudioManager : MonoBehaviour
 
         // Play the Alert audio clip
         s1.audioSource.Play();
-        yield return new WaitForSeconds(s1.audioSource.clip.length);
+        yield return new WaitForSecondsRealtime(s1.audioSource.clip.length);
 
         // Play the Spawn audio clip
         s2.audioSource.Play();
-        yield return new WaitForSeconds(s2.audioSource.clip.length);
+        yield return new WaitForSecondsRealtime(s2.audioSource.clip.length);
     }
 
     public void PlaySoundOnce(string name)
@@ -108,11 +117,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMainMenuTheme()
     {
-        mainMenuThemeSound = Array.Find(sounds, sound => sound.name == "MainMenuTheme");
+        mainMenuThemeSound = Array.Find(sounds, sound => sound.name == "MAINMENUTHEME");
 
         if(mainMenuThemeSound is null)
         {
-            Debug.LogWarning("Cound find the Audio Source with name " + "MainMenuTheme");
+            Debug.LogWarning("Cound find the Audio Source with name " + "MAINMENUTHEME");
             return;
         }
 
@@ -122,11 +131,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlayDayAmbienceSound()
     {
-        dayAmbienceSound = Array.Find(sounds, sound => sound.name == "MainGameTheme");
+        dayAmbienceSound = Array.Find(sounds, sound => sound.name == "DAYAMBIENCESOUND");
 
         if(dayAmbienceSound is null)
         {
-            Debug.LogWarning("Cound find the sound with name " + "MainGameTheme");
+            Debug.LogWarning("Cound find the sound with name " + "DAYAMBIENCESOUND");
             return;
         }
 
@@ -136,15 +145,15 @@ public class AudioManager : MonoBehaviour
 
     public void PlayNightAmbienceSound()
     {
-        nightAmbienceSound = Array.Find(sounds, sound => sound.name == "MainGameTheme");
+        nightAmbienceSound = Array.Find(sounds, sound => sound.name == "NIGHTAMBIENCESOUND");
 
         if (nightAmbienceSound is null)
         {
-            Debug.LogWarning("Cound find the sound with name " + "MainGameTheme");
+            Debug.LogWarning("Cound find the sound with name " + "NIGHTAMBIENCESOUND");
             return;
         }
 
-        audioCoroutine = StartCoroutine(PlayClipsInSequence(nightAmbienceSound, dayAmbienceClips, currentNightAmbienceThemeAudioClipIndex));
+        audioCoroutine = StartCoroutine(PlayClipsInSequence(nightAmbienceSound, nightAmbienceClips, currentNightAmbienceThemeAudioClipIndex));
 
     }
 
@@ -158,7 +167,7 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Clip "+sound.audioSource.clip.name+" is playing");
 
             // Wait until the current clip finishes playing
-            yield return new WaitForSeconds(sound.audioSource.clip.length);
+            yield return new WaitForSecondsRealtime(sound.audioSource.clip.length);
 
             // Move to the next clip or loop back to the first one
             index = (index + 1) % audios.Length;
@@ -176,17 +185,32 @@ public class AudioManager : MonoBehaviour
         mainMenuThemeSound.audioSource.clip = null;
     }  
 
-    public void StopMainGameThemeAudio()
+
+    public void StopDayAmbienceThemeAudio()
     {
         if (audioCoroutine != null)
         {
             StopCoroutine(audioCoroutine);  // Stop the current coroutine
             audioCoroutine = null;  // Clear the reference
         }
+        if (dayAmbienceSound is null)
+            return;
+        dayAmbienceSound.audioSource.Stop();
+        dayAmbienceSound.audioSource.clip = null;
+    }
+    public void StopNightAmbienceThemeAudio()
+    {
+        if (audioCoroutine != null)
+        {
+            StopCoroutine(audioCoroutine);  // Stop the current coroutine
+            audioCoroutine = null;  // Clear the reference
+        }
+        if (nightAmbienceSound is null)
+            return;
+        
         nightAmbienceSound.audioSource.Stop();
         nightAmbienceSound.audioSource.clip = null;
 
-        dayAmbienceSound.audioSource.Stop();
-        dayAmbienceSound.audioSource.clip = null;   
+        
     }
 }

@@ -1,21 +1,24 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Surviblewilderness
 {
-    
+
     public class UiManager : MonoBehaviour
     {
         public static event Action OnButtonClick;
-
+        public static event Action OnGameStart;
         [Header("Menu Pannels")]
         [SerializeField] private GameObject mainMenuPannel;
         [SerializeField] private GameObject pauseMenuPannel;
         [SerializeField] private GameObject optionMenuPannel;
         [SerializeField] private GameObject gameOverMenuPannel;
+        [SerializeField] private List<GameObject> pannels;
 
         [Header("Inventory")]
-        [SerializeField] private GameObject inventoryButton;
+        [SerializeField] private GameObject inGameUiElements;
         [SerializeField] private GameObject inventoryPannel;
         [SerializeField] private GameObject foodItemsInventory;
         [SerializeField] private GameObject cothingItemsInventory;
@@ -26,6 +29,11 @@ namespace Surviblewilderness
 
         private bool isInventoryOpen = false;
 
+        private void Start()
+        {
+            AudioManager.Instance.PlayMainMenuTheme();  
+            Time.timeScale = 0;
+        }
         public void OnClosePannel(GameObject pannel)
         {
             pannel.SetActive(false);
@@ -35,12 +43,14 @@ namespace Surviblewilderness
         #region MainMenu Ui 
         public void OnStartGameClick()
         {
-            Debug.Log("Start Game Clicked");  
+            Time.timeScale = 1;
+            Debug.Log("Start Game Clicked");
             OnButtonClick?.Invoke();
-            
+
             mainMenuPannel.SetActive(false);
-            inventoryButton.SetActive(true);
-            
+            inGameUiElements.SetActive(true);
+            OnGameStart?.Invoke();  
+            //CloseAllAndOpenThisPannel(inGameUiElements);    
         }
 
 
@@ -54,12 +64,15 @@ namespace Surviblewilderness
         {
             Debug.Log("Settings Clicked");
             OnButtonClick?.Invoke();
+            CloseAllAndOpenThisPannel(optionMenuPannel);
         }
 
-        public void OnMainMenuQuitClick()
+        public void OnQuitGame()
         {
             Debug.Log("Quit Clicked");
             OnButtonClick?.Invoke();
+            Time.timeScale = 0;
+            Application.Quit(); 
         }
         #endregion
 
@@ -69,12 +82,14 @@ namespace Surviblewilderness
         {
             Debug.Log("Pause Clicked");
             OnButtonClick?.Invoke();
+            CloseAllAndOpenThisPannel(pauseMenuPannel);
         }
 
         public void OnResumeClick()
         {
             Debug.Log("Resume Clicked");
             OnButtonClick?.Invoke();
+            CloseAllAndOpenThisPannel(inGameUiElements);
         }
 
         public void OnSaveClick()
@@ -88,7 +103,6 @@ namespace Surviblewilderness
             Debug.Log("Quiting to Main Menu clicked");
             OnButtonClick?.Invoke();
         }
-
         
 
         #endregion
@@ -105,7 +119,6 @@ namespace Surviblewilderness
             //Debug.Log("Inventory clicked");
 
             inventoryPannel.SetActive(!isInventoryOpen);
-
             isInventoryOpen = !isInventoryOpen;
             OnButtonClick?.Invoke();
 
@@ -161,10 +174,27 @@ namespace Surviblewilderness
             OnButtonClick?.Invoke();
 
         }
+        
         #endregion
 
         #region Crafting Ui
 
+        #endregion
+
+
+        #region Uitility
+
+        private void CloseAllAndOpenThisPannel(GameObject _pannel)
+        {
+            foreach (var pannel in pannels)
+            {
+                if (pannel == _pannel)
+                    pannel.SetActive(true);
+                else
+                    pannel.SetActive(false);
+                //pannel.SetActive(false);
+            }
+        }
         #endregion
     }
 }
