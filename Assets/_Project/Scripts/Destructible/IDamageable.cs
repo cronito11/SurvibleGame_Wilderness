@@ -4,7 +4,7 @@ using UnityEngine;
 public interface IDamageable
 {
     event Action<int> OnDamageRecieved;
-
+    public int health { get; }
     public void ApplyDamage (int amount);
 }
 

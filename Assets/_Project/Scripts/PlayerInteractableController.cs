@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Surviblewilderness
@@ -16,13 +14,6 @@ namespace Surviblewilderness
         private Collider[] targetsInViewRadius = new Collider[10];
         private int targetsFound;
 
-
-
-        private void Start ()
-        {
-            input.EnablePlayerActions();
-        }
-
         private void OnEnable ()
         {
             input.Interact += DetectTargets;
@@ -36,7 +27,6 @@ namespace Surviblewilderness
         private void DetectTargets ()
         {
             targetsFound = Physics.OverlapSphereNonAlloc(transform.position, viewRadius, targetsInViewRadius, targetMask);
-            Debug.Log($"Call {targetsFound}");
 
             if (targetsFound == 0)
                 return;

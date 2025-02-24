@@ -4,5 +4,4 @@ namespace Surviblewilderness
     {
         public void Interact ();
     }
-
 }
