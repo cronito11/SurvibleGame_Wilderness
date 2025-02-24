@@ -8,8 +8,15 @@ namespace Surviblewilderness
     {
         public static event Action OnButtonClick;
 
-        [SerializeField] private GameObject inventoryUi;
+        [Header("Menu Pannels")]
+        [SerializeField] private GameObject mainMenuPannel;
+        [SerializeField] private GameObject pauseMenuPannel;
+        [SerializeField] private GameObject optionMenuPannel;
+        [SerializeField] private GameObject gameOverMenuPannel;
 
+        [Header("Inventory")]
+        [SerializeField] private GameObject inventoryButton;
+        [SerializeField] private GameObject inventoryPannel;
         [SerializeField] private GameObject foodItemsInventory;
         [SerializeField] private GameObject cothingItemsInventory;
         [SerializeField] private GameObject weaponItemsInventory;
@@ -19,12 +26,23 @@ namespace Surviblewilderness
 
         private bool isInventoryOpen = false;
 
+        public void OnClosePannel(GameObject pannel)
+        {
+            pannel.SetActive(false);
+            OnButtonClick?.Invoke();
+        }
+
         #region MainMenu Ui 
         public void OnStartGameClick()
         {
             Debug.Log("Start Game Clicked");  
-            OnButtonClick?.Invoke();    
+            OnButtonClick?.Invoke();
+            
+            mainMenuPannel.SetActive(false);
+            inventoryButton.SetActive(true);
+            
         }
+
 
         public void OnLoadGameClick()
         {
@@ -46,6 +64,12 @@ namespace Surviblewilderness
         #endregion
 
         #region PauseMenu Ui    
+
+        public void OnPauseClick()
+        {
+            Debug.Log("Pause Clicked");
+            OnButtonClick?.Invoke();
+        }
 
         public void OnResumeClick()
         {
@@ -80,7 +104,7 @@ namespace Surviblewilderness
         {
             //Debug.Log("Inventory clicked");
 
-            inventoryUi.SetActive(!isInventoryOpen);
+            inventoryPannel.SetActive(!isInventoryOpen);
 
             isInventoryOpen = !isInventoryOpen;
             OnButtonClick?.Invoke();
