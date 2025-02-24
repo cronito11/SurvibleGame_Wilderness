@@ -7,6 +7,8 @@ namespace Surviblewilderness
         private const float COLD_DOWN = 2;
 
         [SerializeField] private int attackDamage = 10;
+        [SerializeField] private AudioClip attackSound;
+
         private float currentColdDownCounter;
 
         private IDamageable target;
@@ -43,6 +45,7 @@ namespace Surviblewilderness
             {
                 currentColdDownCounter = COLD_DOWN;
                 target.ApplyDamage(attackDamage);
+                AudioSource.PlayClipAtPoint(attackSound, transform.position);
             }
         }
     }

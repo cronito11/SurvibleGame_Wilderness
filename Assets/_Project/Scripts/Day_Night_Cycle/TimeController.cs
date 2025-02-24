@@ -1,9 +1,17 @@
+using Surviblewilderness;
 using System;
 using TMPro;
 using UnityEngine;
 
+public enum TimeOfDay
+{
+    Day,
+    Night
+}   
 public class TimeController : MonoBehaviour
 {
+    public static event Action<TimeOfDay> OnChangeTimeOfDay;
+
     [Header("Time Variables")]
     [SerializeField] private float timeMultiplier; // Controls how fast time passes in the game
     [SerializeField] private float startHour; // The hour that the game starts with (e.g., 6 for 6 AM)
@@ -11,7 +19,7 @@ public class TimeController : MonoBehaviour
     private DateTime currentTime; // Holds the current in-game time as a DateTime object
     private TimeSpan sunriseTime;
     private TimeSpan sunsetTime;
-
+    [SerializeField]private TimeOfDay currentTimeOfDay = TimeOfDay.Day;
 
     [Header("Light Variables")]
     [SerializeField] private Light sunLight;
@@ -25,6 +33,16 @@ public class TimeController : MonoBehaviour
 
 
     [SerializeField] private AnimationCurve lightChangeCurve;
+
+
+    private void OnEnable()
+    {
+        UiManager.OnGameStart += OnGameStart;
+    }
+    private void OnDisable()
+    {
+        UiManager.OnGameStart -= OnGameStart;
+    }
 
     private void Start()
     {
@@ -48,6 +66,10 @@ public class TimeController : MonoBehaviour
         UpdateLightSettings();
     }
 
+    private void OnGameStart()
+    {
+        OnChangeTimeOfDay?.Invoke(currentTimeOfDay);
+    }
     private void UpdateTimeOfDay()
     {
         /*
@@ -62,6 +84,25 @@ public class TimeController : MonoBehaviour
         {
             // Assign the current time to the timeText in 24 hr format 
             timeText.text = currentTime.ToString("HH:mm");
+        }
+
+        if(currentTime.TimeOfDay > sunriseTime && currentTime.TimeOfDay < sunsetTime)
+        {
+            if(currentTimeOfDay == TimeOfDay.Night)
+            {
+                OnChangeTimeOfDay?.Invoke(TimeOfDay.Day);
+                currentTimeOfDay = TimeOfDay.Day;
+                Debug.Log("Time of day changed to Day");    
+            }
+        }
+        else
+        {
+            if(currentTimeOfDay == TimeOfDay.Day)
+            {
+                OnChangeTimeOfDay?.Invoke(TimeOfDay.Night);
+                currentTimeOfDay = TimeOfDay.Night;
+                Debug.Log("Time of day changed to Night");
+            }
         }
     }
 
@@ -109,4 +150,6 @@ public class TimeController : MonoBehaviour
 
         return difference;
     }
+    
+    
 }
