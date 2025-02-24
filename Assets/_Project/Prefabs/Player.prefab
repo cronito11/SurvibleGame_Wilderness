@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 3151348453753549425}
   - component: {fileID: 242337902581076473}
   - component: {fileID: 3871996858610948706}
+  - component: {fileID: 7743722598472044482}
+  - component: {fileID: 4448587234252428595}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -90,7 +92,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3151348453753549425
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,6 +156,37 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &7743722598472044482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223608411577400816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd43a2b9f2ae844d87f5cbf394e334d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 769
+  input: {fileID: 11400000, guid: 54cdc9996d145f4478ef104210e91f49, type: 2}
+  attackDistance: 10
+  atttackAmount: 10
+--- !u!114 &4448587234252428595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223608411577400816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21564870258917a4bae23b50cc067a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
 --- !u!1001 &3668368865173392945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466648, guid: 996b1cdc214c6ad43b2b0a8dc6ab12ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 466648, guid: 996b1cdc214c6ad43b2b0a8dc6ab12ed, type: 3}
       propertyPath: m_LocalPosition.z

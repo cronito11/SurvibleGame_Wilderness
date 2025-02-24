@@ -10,6 +10,8 @@ namespace Surviblewilderness
     {
         public event UnityAction<Vector2> Move = delegate { };
         public event UnityAction Interact = delegate { };
+        public event UnityAction Attack = delegate { };
+
         InputSystem_Actions input;
 
         private void OnEnable ()
@@ -33,6 +35,14 @@ namespace Surviblewilderness
 
         public void OnAttack (InputAction.CallbackContext context)
         {
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    Attack?.Invoke();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void OnCrouch (InputAction.CallbackContext context)
