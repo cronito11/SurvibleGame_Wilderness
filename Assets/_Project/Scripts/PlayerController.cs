@@ -45,10 +45,10 @@ namespace Surviblewilderness
         private void UpdateMovement () 
         {
             var adjustedDirection = Quaternion.AngleAxis(mainCamera.eulerAngles.y, Vector3.up) * movement;
+                HandleRoation(adjustedDirection);
             if (adjustedDirection.magnitude > 0)
             {
                 HandleMovement(adjustedDirection);
-                HandleRoation(adjustedDirection);
             }
             else 
             {
@@ -64,8 +64,8 @@ namespace Surviblewilderness
 
         private void HandleRoation (Vector3 adjustedMovement)
         {
-            var targetRotation = Quaternion.LookRotation(adjustedMovement); 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            var targetRotation = Quaternion.AngleAxis(mainCamera.eulerAngles.y, Vector3.up) ;
+            transform.rotation = targetRotation;
         }
 
         private void GetMovement (Vector2 move)
