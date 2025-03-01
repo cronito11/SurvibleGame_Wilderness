@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Surviblewilderness
 {
@@ -10,6 +11,7 @@ namespace Surviblewilderness
         [SerializeField] private int attackDistance = 10;
         [SerializeField] private int atttackAmount = 10;
 
+        public event Action OnAttack;
 
         private void OnEnable ()
         {
@@ -48,6 +50,9 @@ namespace Surviblewilderness
             }
 
             Debug.DrawRay(origin, direction * attackDistance, Color.red);
+
+            //Invoking the onAttack event that basically produces sound in EntitySoundManager script 
+            OnAttack?.Invoke();
         }
     }
 }
