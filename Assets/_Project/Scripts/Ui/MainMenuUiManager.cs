@@ -16,6 +16,7 @@ namespace Surviblewilderness
         [SerializeField] private Button exitGameButton; // Exit Game Button
 
         public static event Action OnButtonClick;
+        public static event Action OnGameStart;
 
 
         private void OnEnable()
@@ -48,6 +49,7 @@ namespace Surviblewilderness
         {
             Debug.Log("Start Game Button Clicked");
             OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            OnGameStart?.Invoke(); // Trigger the OnButtonClick event
             SceneManager.LoadScene("Level_Design");
             mainMenuPannel.SetActive(false);
 

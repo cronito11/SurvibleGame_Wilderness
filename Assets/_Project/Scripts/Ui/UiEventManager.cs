@@ -8,15 +8,15 @@ namespace Surviblewilderness
         public static event Action OnMainMenuOpened;
         public static event Action OnOptionMenuOpened;
         public static event Action OnPauseMenuOpened;
-        public static event Action OnInventoryOpened;
         public static event Action OnGamePlayMenuOpened;
+        public static event Action OnInventoryOpened;
         public static event Action OnGameOverMenuOpened;
 
         public static event Action OnMainMenuClosed;
         public static event Action OnOptionMenuClosed;
         public static event Action OnPauseMenuClosed;
-        public static event Action OnInventoryClosed;
         public static event Action OnGamePlayMenuClosed;
+        public static event Action OnInventoryClosed;
         public static event Action OnGameOverMenuClosed;
 
         private static Action _currentCloseEvent;
@@ -38,6 +38,11 @@ namespace Surviblewilderness
             _currentCloseEvent?.Invoke();
             OnOptionMenuOpened?.Invoke();
             _currentCloseEvent = OnOptionMenuClosed;
+        }
+
+        public static void CloseOptionMenu()
+        {
+            OnOptionMenuClosed?.Invoke();
         }
 
         public static void OpenPauseMenu()

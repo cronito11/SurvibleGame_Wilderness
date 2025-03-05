@@ -38,9 +38,28 @@ namespace Surviblewilderness
             controllsButton.onClick.RemoveListener(OnControllsButtonClicked);
         }
 
+        private void Update()
+        {
+            // Check if Esc key is pressed
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log("Esc Pressed");
+                //If option menu is already open, close it, else oprn it
+                if (optionMenuPannel.activeSelf)
+                {
+                    UiEventManager.CloseOptionMenu();
+                }
+                else
+                {
+                    UiEventManager.OpenOptionMenu();
+                }
+            }
+        }
+
         //  Mehtod for Back button clicked
         private void OnBackButtonClicked()
         {
+            UiEventManager.CloseOptionMenu();
             Debug.Log("Back Button Clicked");
         }
 
