@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ namespace Surviblewilderness
         [SerializeField] private Button loadGameButton; // Load Game Button
         [SerializeField] private Button optionsMenuButton; // Option Menu Button
         [SerializeField] private Button exitGameButton; // Exit Game Button
+
+        public static event Action OnButtonClick;
 
 
         private void OnEnable()
@@ -44,6 +47,7 @@ namespace Surviblewilderness
         private void OnStartGameButtonClicked()
         {
             Debug.Log("Start Game Button Clicked");
+            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             SceneManager.LoadScene("Level_Design");
             mainMenuPannel.SetActive(false);
 
@@ -52,6 +56,7 @@ namespace Surviblewilderness
         // Mehtod for Load Game Button Clicked
         private void OnLoadGameButtonClicked()
         {
+            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             Debug.Log("Load Game Button Clicked");
         }
 
@@ -59,12 +64,14 @@ namespace Surviblewilderness
         private void OnOptionsMenuButtonClicked()
         {
             Debug.Log("Options Button Clicked");
+            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             UiEventManager.OpenOptionMenu();
         }
 
         // Mehtod for Exit Game Button Clickd
         private void OnExitGameButtonClicked()
         {
+            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             Debug.Log("Exit Button Clicked");
         }
 
