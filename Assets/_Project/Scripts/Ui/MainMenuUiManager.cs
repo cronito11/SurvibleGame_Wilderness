@@ -52,7 +52,7 @@ namespace Surviblewilderness
             OnGameStart?.Invoke(); // Trigger the OnButtonClick event
             SceneManager.LoadScene("Level_Design");
             mainMenuPannel.SetActive(false);
-
+            UiEventManager.OpenGamePlayMenu();
         }
 
         // Mehtod for Load Game Button Clicked
