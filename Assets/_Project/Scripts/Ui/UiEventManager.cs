@@ -1,94 +1,90 @@
 using UnityEngine;
 using System;
-using UnityEngine.UI;
-using Unity.VisualScripting;
+
 namespace Surviblewilderness
 {
     public class UiEventManager : MonoBehaviour
     {
-        [Header("Option Panel Buttons")]
-        [SerializeField] private Button optionButton;
-
-        [Header("Inventory Panel Buttons")]
-        [SerializeField] private Button inventoryButton;
-
-        [Header("Pause Panel Buttons")]
-        [SerializeField] private Button pauseButton;
-
-        [Header("Game Over Pannel Buttons")]
-        [SerializeField] private Button loadGameButton;
-        [SerializeField] private Button quitToMainMenu;
-         
-        
-
-        public static event Action OnButtonClick;
         public static event Action OnMainMenuOpened;
-        public static event Action OnInventoryOpened;
-        public static event Action OnPauseMenuOpened;
         public static event Action OnOptionMenuOpened;
+        public static event Action OnPauseMenuOpened;
+        public static event Action OnGamePlayMenuOpened;
+        public static event Action OnInventoryOpened;
         public static event Action OnGameOverMenuOpened;
 
         public static event Action OnMainMenuClosed;
-        public static event Action OnInventoryClosed;
-        public static event Action OnPauseMenuClosed;
         public static event Action OnOptionMenuClosed;
+        public static event Action OnPauseMenuClosed;
+        public static event Action OnGamePlayMenuClosed;
+        public static event Action OnInventoryClosed;
         public static event Action OnGameOverMenuClosed;
+
+        // Event for inventory category selection
+        public static event Action<InventoryType> OnInventoryCategorySelected;
 
         private static Action _currentCloseEvent;
 
+        public static Action OnButtonClick;
+
         private void OnEnable()
         {
-            optionButton.onClick.AddListener(OpenOptionMenu);
-            inventoryButton.onClick.AddListener(OpenInventory);
-            pauseButton.onClick.AddListener(OpenPauseMenu);
-
+            //OpenMainMenu();
         }
 
-        private void OnDisable()
-        {
-            optionButton.onClick.RemoveListener(OpenOptionMenu);
-            inventoryButton.onClick.RemoveListener(OpenInventory);
-            pauseButton.onClick.RemoveListener(OpenPauseMenu);
-        }
-
-        private void Start()
-        {
-            OpenMainMenu();
-        }
-                
-        public void OpenMainMenu()
+        public static void OpenMainMenu()
         {
             _currentCloseEvent?.Invoke();
             OnMainMenuOpened?.Invoke();
             _currentCloseEvent = OnMainMenuClosed;
+            OnButtonClick?.Invoke();
         }
 
-        public void OpenInventory()
-        {
-            _currentCloseEvent?.Invoke();
-            OnInventoryOpened?.Invoke();
-            _currentCloseEvent = OnInventoryClosed;
-        }
-
-        public void OpenPauseMenu()
-        {
-            _currentCloseEvent?.Invoke();
-            OnPauseMenuOpened?.Invoke();
-            _currentCloseEvent = OnPauseMenuClosed;
-        }
-
-        public void OpenOptionMenu()
+        public static void OpenOptionMenu()
         {
             _currentCloseEvent?.Invoke();
             OnOptionMenuOpened?.Invoke();
             _currentCloseEvent = OnOptionMenuClosed;
+            OnButtonClick?.Invoke();
         }
 
-        public void OpenGameOverMenu()
+        public static void OpenPauseMenu()
+        {
+            _currentCloseEvent?.Invoke();
+            OnPauseMenuOpened?.Invoke();
+            _currentCloseEvent = OnPauseMenuClosed;
+            OnButtonClick?.Invoke();
+        }
+
+        public static void OpenInventory()
+        {
+            _currentCloseEvent?.Invoke();
+            OnInventoryOpened?.Invoke();
+            _currentCloseEvent = OnInventoryClosed;
+            OnButtonClick?.Invoke();
+        }
+
+        public static void OpenGamePlayMenu()
+        {
+            _currentCloseEvent?.Invoke();
+            OnGamePlayMenuOpened?.Invoke();
+            _currentCloseEvent = OnGamePlayMenuClosed;
+            OnButtonClick?.Invoke();
+        }
+
+        public static void OpenGameOverMenu()
         {
             _currentCloseEvent?.Invoke();
             OnGameOverMenuOpened?.Invoke();
             _currentCloseEvent = OnGameOverMenuClosed;
+            OnButtonClick?.Invoke();
         }
+
+        // Method to select inventory category
+        public static void SelectInventoryCategory(InventoryType categoty)
+        {
+            OnInventoryCategorySelected?.Invoke(categoty);
+            OnButtonClick?.Invoke();
+        }
+
     }
 }

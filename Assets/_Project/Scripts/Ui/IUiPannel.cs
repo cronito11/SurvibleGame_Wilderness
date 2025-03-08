@@ -1,8 +1,7 @@
-using UnityEngine;
 
 namespace Surviblewilderness
 {
-    public interface IUiPannel 
+    public interface IUiPannel
     {
         void Show();
         void Hide();

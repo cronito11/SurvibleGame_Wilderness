@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &972471051082359833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4734237439844099373}
+  - component: {fileID: 3354568368976385612}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4734237439844099373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972471051082359833}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 559.10345, y: 372.25003, z: 2.2052217}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3354568368976385612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972471051082359833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5eeb5b08feab2840aff70cbb5612432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BUTTONCLICK
+    clip: {fileID: 8300000, guid: d286c86c5a1cb2340a9e9f752154a253, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: GAMEOVER
+    clip: {fileID: 8300000, guid: e80227a00d46a3549bb28fe46b3d1f3e, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: MAINMENUTHEME
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: DAYAMBIENCESOUND
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: NIGHTAMBIENCESOUND
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
+  mainMenuThemeClips:
+  - {fileID: 8300000, guid: 272b39410697608469dc6c99ede3ea68, type: 3}
+  - {fileID: 8300000, guid: 402285b7f5a15e04fb48c00b19c2651d, type: 3}
+  dayAmbienceClips:
+  - {fileID: 8300000, guid: f1d18d69353701041ad08ea8b5e1682c, type: 3}
+  nightAmbienceClips:
+  - {fileID: 8300000, guid: 82f369d944e4476418ab405dcc0471f7, type: 3}

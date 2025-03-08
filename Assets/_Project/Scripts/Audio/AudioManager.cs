@@ -44,23 +44,28 @@ public class AudioManager : MonoBehaviour
 
             s.audioSource.loop = s.loop;
 
-            s.audioSource.volume = s.volume;    
+            s.audioSource.volume = s.volume;
             s.audioSource.pitch = s.pitch;
         }
-        
+
     }
 
     private void OnEnable()
     {
         TimeController.OnChangeTimeOfDay += OnChangeTimeOfDay;
-        UiManager.OnButtonClick += PlayButtonClickSound;
+        UiEventManager.OnButtonClick += PlayButtonClickSound;
     }
 
-   
+
 
     private void OnDisable()
     {
         UiManager.OnButtonClick -= PlayButtonClickSound;
+    }
+
+    private void Start()
+    {
+        AudioManager.Instance.PlayMainMenuTheme();
     }
 
     private void OnChangeTimeOfDay(TimeOfDay day)
@@ -70,7 +75,7 @@ public class AudioManager : MonoBehaviour
             StopMainMenuThemeAudio();
             StopDayAmbienceThemeAudio();
             StopNightAmbienceThemeAudio();
-            
+
             PlayDayAmbienceSound();
         }
         else
@@ -112,20 +117,20 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Cound find the sound with name " + name);
             return;
         }
-        s.audioSource.Play();   
+        s.audioSource.Play();
     }
 
     public void PlayMainMenuTheme()
     {
         mainMenuThemeSound = Array.Find(sounds, sound => sound.name == "MAINMENUTHEME");
 
-        if(mainMenuThemeSound is null)
+        if (mainMenuThemeSound is null)
         {
             Debug.LogWarning("Cound find the Audio Source with name " + "MAINMENUTHEME");
             return;
         }
 
-        audioCoroutine = StartCoroutine(PlayClipsInSequence(mainMenuThemeSound, mainMenuThemeClips,currentMainMenuThemeAudioClipIndex));   
+        audioCoroutine = StartCoroutine(PlayClipsInSequence(mainMenuThemeSound, mainMenuThemeClips, currentMainMenuThemeAudioClipIndex));
 
     }
 
@@ -133,13 +138,13 @@ public class AudioManager : MonoBehaviour
     {
         dayAmbienceSound = Array.Find(sounds, sound => sound.name == "DAYAMBIENCESOUND");
 
-        if(dayAmbienceSound is null)
+        if (dayAmbienceSound is null)
         {
             Debug.LogWarning("Cound find the sound with name " + "DAYAMBIENCESOUND");
             return;
         }
 
-        audioCoroutine = StartCoroutine(PlayClipsInSequence(dayAmbienceSound, dayAmbienceClips, currentDayAmbienceThemeAudioClipIndex));   
+        audioCoroutine = StartCoroutine(PlayClipsInSequence(dayAmbienceSound, dayAmbienceClips, currentDayAmbienceThemeAudioClipIndex));
 
     }
 
@@ -157,14 +162,14 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    private IEnumerator PlayClipsInSequence(Sound sound, AudioClip[] audios,int index)
+    private IEnumerator PlayClipsInSequence(Sound sound, AudioClip[] audios, int index)
     {
         Debug.Log("Mainmenu bg audio is playing");
         while (true)
         {
             sound.audioSource.clip = audios[index];
             sound.audioSource.Play();
-            Debug.Log("Clip "+sound.audioSource.clip.name+" is playing");
+            Debug.Log("Clip " + sound.audioSource.clip.name + " is playing");
 
             // Wait until the current clip finishes playing
             yield return new WaitForSecondsRealtime(sound.audioSource.clip.length);
@@ -183,7 +188,7 @@ public class AudioManager : MonoBehaviour
         }
         mainMenuThemeSound.audioSource.Stop();
         mainMenuThemeSound.audioSource.clip = null;
-    }  
+    }
 
 
     public void StopDayAmbienceThemeAudio()
@@ -207,10 +212,10 @@ public class AudioManager : MonoBehaviour
         }
         if (nightAmbienceSound is null)
             return;
-        
+
         nightAmbienceSound.audioSource.Stop();
         nightAmbienceSound.audioSource.clip = null;
 
-        
+
     }
 }
