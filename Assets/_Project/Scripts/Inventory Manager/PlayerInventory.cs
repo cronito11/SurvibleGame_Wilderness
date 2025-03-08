@@ -33,7 +33,7 @@ public class PlayerInventory :  MonoBehaviour
         InteractableObject.OnItemPickedUp -= AddItem;
     }
 
-    public void AddItem(GameItem item, int amount)
+    public void AddItem(GameItemSO item, int amount)
     {
         if (inventory.ContainsKey(item.id))
         {
@@ -49,7 +49,7 @@ public class PlayerInventory :  MonoBehaviour
         OnInventoryChanged?.Invoke(inventory[item.id]);
     }
 
-    public void RemoveItem(GameItem item, int amount)
+    public void RemoveItem(GameItemSO item, int amount)
     {
         if (inventory.ContainsKey(item.id))
         {
