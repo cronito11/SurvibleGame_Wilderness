@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public static event Action<GameItem, int> OnItemPickedUp;
-    public GameItem item;  // This should be assigned in the inspector
+    public static event Action<GameItemSO, int> OnItemPickedUp;
+    public GameItemSO item;  // This should be assigned in the inspector
     public int amount = 1; // This should be assigned in the inspector
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 public class InventoryItem
 {
     [field: SerializeField] 
-    public GameItem gameItem 
+    public GameItemSO gameItem 
     { 
         get;  set; 
     }
@@ -26,7 +26,7 @@ public class InventoryItem
         get; set;
     }
 
-    public InventoryItem(GameItem item, int quantity)
+    public InventoryItem(GameItemSO item, int quantity)
     {
         this.gameItem = item;
         this.quantity = quantity;

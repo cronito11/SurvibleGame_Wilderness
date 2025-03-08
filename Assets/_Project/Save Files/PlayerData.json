@@ -1,0 +1,12 @@
+{
+    "entityPosition": {
+        "x": 1.0,
+        "y": 2.0,
+        "z": 3.0
+    },
+    "playerStats": {
+        "health": 0.0,
+        "hunger": 0.0,
+        "thirst": 0.0
+    }
+}
