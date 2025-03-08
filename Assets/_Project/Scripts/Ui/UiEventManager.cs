@@ -19,11 +19,16 @@ namespace Surviblewilderness
         public static event Action OnInventoryClosed;
         public static event Action OnGameOverMenuClosed;
 
+        // Event for inventory category selection
+        public static event Action<InventoryType> OnInventoryCategorySelected;
+
         private static Action _currentCloseEvent;
+
+        public static Action OnButtonClick;
 
         private void OnEnable()
         {
-            OpenMainMenu();
+            //OpenMainMenu();
         }
 
         public static void OpenMainMenu()
@@ -31,6 +36,7 @@ namespace Surviblewilderness
             _currentCloseEvent?.Invoke();
             OnMainMenuOpened?.Invoke();
             _currentCloseEvent = OnMainMenuClosed;
+            OnButtonClick?.Invoke();
         }
 
         public static void OpenOptionMenu()
@@ -38,11 +44,7 @@ namespace Surviblewilderness
             _currentCloseEvent?.Invoke();
             OnOptionMenuOpened?.Invoke();
             _currentCloseEvent = OnOptionMenuClosed;
-        }
-
-        public static void CloseOptionMenu()
-        {
-            OnOptionMenuClosed?.Invoke();
+            OnButtonClick?.Invoke();
         }
 
         public static void OpenPauseMenu()
@@ -50,6 +52,7 @@ namespace Surviblewilderness
             _currentCloseEvent?.Invoke();
             OnPauseMenuOpened?.Invoke();
             _currentCloseEvent = OnPauseMenuClosed;
+            OnButtonClick?.Invoke();
         }
 
         public static void OpenInventory()
@@ -57,6 +60,7 @@ namespace Surviblewilderness
             _currentCloseEvent?.Invoke();
             OnInventoryOpened?.Invoke();
             _currentCloseEvent = OnInventoryClosed;
+            OnButtonClick?.Invoke();
         }
 
         public static void OpenGamePlayMenu()
@@ -64,6 +68,7 @@ namespace Surviblewilderness
             _currentCloseEvent?.Invoke();
             OnGamePlayMenuOpened?.Invoke();
             _currentCloseEvent = OnGamePlayMenuClosed;
+            OnButtonClick?.Invoke();
         }
 
         public static void OpenGameOverMenu()
@@ -71,6 +76,15 @@ namespace Surviblewilderness
             _currentCloseEvent?.Invoke();
             OnGameOverMenuOpened?.Invoke();
             _currentCloseEvent = OnGameOverMenuClosed;
+            OnButtonClick?.Invoke();
         }
+
+        // Method to select inventory category
+        public static void SelectInventoryCategory(InventoryType categoty)
+        {
+            OnInventoryCategorySelected?.Invoke(categoty);
+            OnButtonClick?.Invoke();
+        }
+
     }
 }

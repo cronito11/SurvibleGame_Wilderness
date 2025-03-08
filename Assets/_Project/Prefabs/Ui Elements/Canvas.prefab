@@ -151,7 +151,6 @@ GameObject:
   - component: {fileID: 7356527900029955833}
   - component: {fileID: 1185100865703442582}
   - component: {fileID: 42623993309914694}
-  - component: {fileID: 5639176117048354779}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -317,7 +316,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5512578403520094880}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 356f52683edd3cf4d8fb15e87ed225b3, type: 3}
   m_Name: 
@@ -346,18 +345,6 @@ MonoBehaviour:
   clothingButton: {fileID: 3459120124042528397}
   weaponsButton: {fileID: 5481826165617106673}
   materialsButton: {fileID: 8608518807480912953}
---- !u!114 &5639176117048354779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5512578403520094880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8988ad72700f046b2fc0b5e136c210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6308036893800146157
 GameObject:
   m_ObjectHideFlags: 0

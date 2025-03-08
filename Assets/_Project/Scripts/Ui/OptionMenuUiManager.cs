@@ -47,11 +47,11 @@ namespace Surviblewilderness
                 //If option menu is already open, close it, else oprn it
                 if (optionMenuPannel.activeSelf)
                 {
-                    UiEventManager.CloseOptionMenu();
+                    Hide();
                 }
                 else
                 {
-                    UiEventManager.OpenOptionMenu();
+                    Show();
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace Surviblewilderness
         //  Mehtod for Back button clicked
         private void OnBackButtonClicked()
         {
-            UiEventManager.CloseOptionMenu();
+            Hide();
             Debug.Log("Back Button Clicked");
         }
 

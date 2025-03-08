@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Surviblewilderness
 {
@@ -37,6 +38,8 @@ namespace Surviblewilderness
         private void OnBackToMainMenuButtonClicked()
         {
             Debug.Log("Back to Main Menu Button Clicked");
+            SceneManager.LoadScene("Menu");
+
         }
 
         // Method for Exit Game button clicked

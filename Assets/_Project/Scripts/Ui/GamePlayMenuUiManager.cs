@@ -8,7 +8,7 @@ namespace Surviblewilderness
     {
         // UI Components for Gameplay
         [Header("Gameplay Panel Components")]
-        [SerializeField] private GameObject gamePlayPanel; // Gameplay UI Panel
+        [SerializeField] private GameObject gameplayPanel; // Gameplay UI Panel
         [SerializeField] private Button pauseButton; // Pause Button
         [SerializeField] private Button inventoryButton; // Inventory Button
         [SerializeField] private Slider healthSlider; // Health Bar Slider
@@ -41,13 +41,15 @@ namespace Surviblewilderness
         // Method for Pause button clicked
         private void OnPauseButtonClicked()
         {
-            Debug.Log("Pause Button Clicked");
+            //Debug.Log("Pause Button Clicked");
+            UiEventManager.OpenPauseMenu();
         }
 
         // Method for Inventory button clicked
         private void OnInventoryButtonClicked()
         {
-            Debug.Log("Inventory Button Clicked");
+            //Debug.Log("Inventory Button Clicked");
+            UiEventManager.OpenInventory();
         }
 
         // Update the health slider value
@@ -71,19 +73,19 @@ namespace Surviblewilderness
         // Show Panel
         public void Show()
         {
-            gamePlayPanel.SetActive(true);
+            gameplayPanel.SetActive(true);
         }
 
         // Hide Panel
         public void Hide()
         {
-            gamePlayPanel.SetActive(false);
+            gameplayPanel.SetActive(false);
         }
 
         // Check if panel is active
         public bool IsActive()
         {
-            return gamePlayPanel.activeSelf;
+            return gameplayPanel.activeSelf;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Surviblewilderness
         [SerializeField] private Button saveButton; // Save Button
         [SerializeField] private Button optionsButton; // Options Button
         [SerializeField] private Button exitButton; // Exit Button
+        [SerializeField] private Button backButton; // Back Button
 
         private void OnEnable()
         {
@@ -22,6 +23,7 @@ namespace Surviblewilderness
             saveButton.onClick.AddListener(OnSaveButtonClicked);
             optionsButton.onClick.AddListener(OnOptionsButtonClicked);
             exitButton.onClick.AddListener(OnExitButtonClicked);
+            backButton.onClick.AddListener(Hide);
         }
 
         private void OnDisable()
@@ -34,6 +36,7 @@ namespace Surviblewilderness
             saveButton.onClick.RemoveListener(OnSaveButtonClicked);
             optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
             exitButton.onClick.RemoveListener(OnExitButtonClicked);
+            backButton.onClick.RemoveAllListeners();
         }
 
         //  Mehtod for Resume button clicked
@@ -50,6 +53,7 @@ namespace Surviblewilderness
         // Mehtod for Options button clicked
         private void OnOptionsButtonClicked()
         {
+            UiEventManager.OpenOptionMenu();
             Debug.Log("Pause Menu Options Button Clicked");
         }
 

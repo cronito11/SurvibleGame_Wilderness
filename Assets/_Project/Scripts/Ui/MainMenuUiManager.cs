@@ -12,7 +12,7 @@ namespace Surviblewilderness
         [SerializeField] private GameObject mainMenuPannel; // Main Menu Panel
         [SerializeField] private Button startGameButton; // Start Game Button
         [SerializeField] private Button loadGameButton; // Load Game Button
-        [SerializeField] private Button optionsMenuButton; // Option Menu Button
+        [SerializeField] private Button optionsMenuButton; //x Option Menu Button
         [SerializeField] private Button exitGameButton; // Exit Game Button
 
         public static event Action OnButtonClick;
@@ -47,18 +47,18 @@ namespace Surviblewilderness
         //  Mehtod for Start game button clicked
         private void OnStartGameButtonClicked()
         {
-            Debug.Log("Start Game Button Clicked");
-            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            //Debug.Log("Start Game Button Clicked");
+            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             OnGameStart?.Invoke(); // Trigger the OnButtonClick event
+            Destroy(mainMenuPannel);
             SceneManager.LoadScene("Level_Design");
-            mainMenuPannel.SetActive(false);
             UiEventManager.OpenGamePlayMenu();
         }
 
         // Mehtod for Load Game Button Clicked
         private void OnLoadGameButtonClicked()
         {
-            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             Debug.Log("Load Game Button Clicked");
         }
 
@@ -66,14 +66,14 @@ namespace Surviblewilderness
         private void OnOptionsMenuButtonClicked()
         {
             Debug.Log("Options Button Clicked");
-            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             UiEventManager.OpenOptionMenu();
         }
 
         // Mehtod for Exit Game Button Clickd
         private void OnExitGameButtonClicked()
         {
-            OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             Debug.Log("Exit Button Clicked");
         }
 
