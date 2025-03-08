@@ -689,6 +689,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 944590998}
+    - target: {fileID: 1063969508534456472, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
+      propertyPath: gameOverMenuUi
+      value: 
+      objectReference: {fileID: 1982762263}
     - target: {fileID: 3077398107678528763, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.3296604
