@@ -34,16 +34,6 @@ public class TimeController : MonoBehaviour
 
     [SerializeField] private AnimationCurve lightChangeCurve;
 
-
-    private void OnEnable()
-    {
-        UiManager.OnGameStart += OnGameStart;
-    }
-    private void OnDisable()
-    {
-        UiManager.OnGameStart -= OnGameStart;
-    }
-
     private void Start()
     {
         /* 
@@ -57,6 +47,7 @@ public class TimeController : MonoBehaviour
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
 
+        OnGameStart();  
     }
 
     private void Update()
