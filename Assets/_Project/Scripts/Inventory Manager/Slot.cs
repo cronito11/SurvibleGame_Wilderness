@@ -1,0 +1,70 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+namespace Surviblewilderness
+{
+    public abstract class Slot : MonoBehaviour, ISlot
+    {
+        //public static event Action OnItemDropOnSlot;  
+
+        //holds the reference of curret assigned item of type game object on the slot 
+        public GameObject itemUi;
+
+        //holds the reference of the current inventory item assigned to in the slot
+        public InventoryItem currentInventoryItem { get; protected set; }
+        [SerializeField] public bool IsEmpty => currentInventoryItem == null;
+        [SerializeField] protected GameObject itemUiPrefab;
+        public bool isEmpty { get { return currentInventoryItem == null; } }
+
+        //setting the item to the slot
+        public virtual void SetItem(InventoryItem item)
+        {
+            if (item.gameItem == null)
+            {
+                Debug.Log("Item is null");
+                return;
+            }
+
+            //if there is no item assigned to the slot and the slot is empty then instantiate the item prefab
+            if (itemUi == null && isEmpty)
+            {
+                itemUi = GameObject.Instantiate(itemUiPrefab, transform);
+                itemUi.SetActive(true);
+                itemUi.GetComponentInChildren<Image>().sprite = item.gameItem.icon;
+                itemUi.GetComponentInChildren<DraggableItem>().item = item;
+                gameObject.SetActive(true);
+            }
+
+            //if the item is already assigned to the slot then just update the quantity
+            //just updating the quantity
+            currentInventoryItem = item;
+            currentInventoryItem.isAssignedToSlot = true;
+            itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
+        }
+
+        public virtual void EmptySlot()
+        {
+            if (itemUi != null)
+            {
+                Destroy(itemUi);
+            }
+            currentInventoryItem = null;
+        }
+
+        public virtual void ClearSlot()
+        {
+            currentInventoryItem = null;
+            if (itemUi == null)
+                return;
+
+            itemUi = null;
+        }
+
+
+        public virtual void UpdateQuantityText()
+        {
+            itemUi.GetComponentInChildren<TMP_Text>().text = currentInventoryItem.quantity.ToString();
+        }
+    }
+}
