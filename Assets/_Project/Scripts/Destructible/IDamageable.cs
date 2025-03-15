@@ -14,3 +14,10 @@ public interface IDestructible
 
     public void Destroy();
 }
+
+public interface IHealable
+{
+    event Action<int> OnHealed;
+    public int health { get; }
+    public void Heal (int amount);
+}
