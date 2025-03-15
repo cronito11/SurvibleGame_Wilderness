@@ -1,19 +1,22 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Image itemIcon;
-    public Transform prviousParent;
+    public Transform previousParent;
     public Transform parentAfterDrag;
     public InventoryItem item;
     private InventorySlot currentInventorySlot;
+    [SerializeField] private int clonedItemQuantity; 
+    public static event System.Action<InventoryItem> OnItemDragged;
 
     public void OnBeginDrag(PointerEventData eventData)
     { 
         //Debug.Log("OnBeginDrag");
         parentAfterDrag = transform.parent;
-        prviousParent = transform.parent;
+        previousParent = transform.parent;
 
         //implement something other method beacuse it clears the item even if it's quantity is greater than 1
         currentInventorySlot = transform.parent.GetComponent<InventorySlot>();
@@ -21,6 +24,7 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
 
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
+        //currentInventorySlot.CreateCopyOnDrag(item, ref clonedItemQuantity);
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -30,11 +34,9 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
         //currentInventorySlot.itemUi = null;
     }
     public void OnEndDrag(PointerEventData eventData)
-    {
-          
+    {   
         currentInventorySlot.ClearSlot();
         transform.SetParent(parentAfterDrag);
-        parentAfterDrag.GetComponent<InventorySlot>().SetItem(item);
         itemIcon.raycastTarget = true;
     }
 }
