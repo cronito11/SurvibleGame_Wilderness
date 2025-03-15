@@ -29,6 +29,7 @@ namespace Surviblewilderness
         private void OnEnable()
         {
             //OpenMainMenu();
+            _currentCloseEvent = OnMainMenuClosed;
         }
 
         public static void OpenMainMenu()

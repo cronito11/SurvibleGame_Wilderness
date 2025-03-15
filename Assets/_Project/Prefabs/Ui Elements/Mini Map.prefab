@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 941342056051804206}
   - component: {fileID: 7449902063957850079}
   m_Layer: 5
-  m_Name: MiniMap
+  m_Name: MiniMapTexture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 2396654480808539310}
   - component: {fileID: 4993745761151310321}
   m_Layer: 5
-  m_Name: Mask
+  m_Name: MiniMapMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

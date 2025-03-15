@@ -7,16 +7,19 @@ namespace Surviblewilderness
     {
         private static PersistentObject instance;
 
+        // Check if an instance already exists
         private void Awake()
         {
+            // If no instance, make this the persistent instance
             if (instance == null)
             {
                 instance = this;
-                DontDestroyOnLoad(gameObject); // Keep the UI across scenes
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
-                Destroy(gameObject); // Prevent duplicates
+                // If an instance already exists, destroy the duplicate
+                Destroy(gameObject);
             }
         }
     }

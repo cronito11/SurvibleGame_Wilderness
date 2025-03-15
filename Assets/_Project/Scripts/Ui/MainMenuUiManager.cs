@@ -9,7 +9,7 @@ namespace Surviblewilderness
     {
         // UI Components for the Main Menu
         [Header("Main Menu Panel Components")]
-        [SerializeField] private GameObject mainMenuPannel; // Main Menu Panel
+        [SerializeField] private GameObject mainMenuPanel; // Main Menu Panel
         [SerializeField] private Button startGameButton; // Start Game Button
         [SerializeField] private Button loadGameButton; // Load Game Button
         [SerializeField] private Button optionsMenuButton; //x Option Menu Button
@@ -47,18 +47,17 @@ namespace Surviblewilderness
         //  Mehtod for Start game button clicked
         private void OnStartGameButtonClicked()
         {
-            //Debug.Log("Start Game Button Clicked");
-            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            Debug.Log("Start Game Button Clicked");
+            UiEventManager.OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             OnGameStart?.Invoke(); // Trigger the OnButtonClick event
-            Destroy(mainMenuPannel);
             SceneManager.LoadScene("Level_Design");
-            UiEventManager.OpenGamePlayMenu();
+            // UiEventManager.OpenGamePlayMenu();
         }
 
         // Mehtod for Load Game Button Clicked
         private void OnLoadGameButtonClicked()
         {
-            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            UiEventManager.OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             Debug.Log("Load Game Button Clicked");
         }
 
@@ -66,33 +65,34 @@ namespace Surviblewilderness
         private void OnOptionsMenuButtonClicked()
         {
             Debug.Log("Options Button Clicked");
-            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            // UiEventManager.
             UiEventManager.OpenOptionMenu();
         }
 
         // Mehtod for Exit Game Button Clickd
         private void OnExitGameButtonClicked()
         {
-            //OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            UiEventManager.OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
+            Application.Quit();
             Debug.Log("Exit Button Clicked");
         }
 
         // Show Panel
         public void Show()
         {
-            mainMenuPannel.SetActive(true);
+            mainMenuPanel.SetActive(true);
         }
 
         // Hide Panel
         public void Hide()
         {
-            mainMenuPannel.SetActive(false);
+            mainMenuPanel.SetActive(false);
         }
 
         // Check if panel is active
         public bool IsActive()
         {
-            return mainMenuPannel.activeSelf;
+            return mainMenuPanel.activeSelf;
         }
 
     }
