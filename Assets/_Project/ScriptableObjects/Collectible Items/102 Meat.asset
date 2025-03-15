@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf5a2401f17bea4ba6651e7c28502ed, type: 3}
-  m_Name: 201_Meat
-  m_EditorClassIdentifier: 
-  id: 201
+  m_Script: {fileID: 0}
+  m_Name: 102 Meat
+  m_EditorClassIdentifier: Assembly-CSharp::FoodItemSO
+  id: 102
   itemName: Meat
   itemType: 1
-  weight: 0
+  weight: 5
   maxStackSize: 99
-  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: -4006969498744827493, guid: 2497ab3b270125b4f9436d5227725998, type: 3}
+  hungerReplenishment: 50
+  staminaReplenishment: 0

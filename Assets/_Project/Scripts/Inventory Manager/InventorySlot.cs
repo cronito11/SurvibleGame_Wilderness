@@ -3,57 +3,76 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using System;
-public class InventorySlot : MonoBehaviour, IDropHandler
+using Surviblewilderness;
+public class InventorySlot : Slot, IDropHandler
 {
-    //public static event Action OnItemDropOnSlot;  // 🔥 Event for inventory updates
+    //private void OnEnable()
+    //{
+    //    DraggableItem.OnItemDragged += CreateCopyOnDrag;
+    //}
+    //private void OnDisable()
+    //{
+    //    DraggableItem.OnItemDragged -= CreateCopyOnDrag;
+    //}
 
-    public GameObject itemUi;
-
-    public InventoryItem currentInventoryItem { get; private set; }
-    [SerializeField] public bool IsEmpty => currentInventoryItem == null;    
-    [SerializeField] private GameObject itemUiPrefab;   
-    public bool isEmpty { get { return currentInventoryItem == null; } }   
-    public void SetItem(InventoryItem item)
+    public void CreateCopyOnDrag(InventoryItem item, ref int clonedItemQuantity)
     {
-        if(item.gameItem == null)
+        if (item.gameItem == null)
         {
-            Debug.Log("Item is null");
+            Debug.Log("Inventory Item is null");
             return;
         }
 
-        
-        
+
+
+        //if there is no item assigned to the slot and the slot is empty then instantiate the item prefab
         if (itemUi == null && isEmpty)
         {
-            itemUi = GameObject.Instantiate(itemUiPrefab, transform);
-            currentInventoryItem = item;
-            currentInventoryItem.isAssignedToSlot = true;
+            Debug.Log("Creating copy on drag bu the item ui is null of the slot is empty");
         }
 
-        //just updating the quantity
+        //if there is just one item no need to create a copy 
+        if (item.quantity <= 1) { return; }
+
+        itemUi = GameObject.Instantiate(itemUiPrefab, transform);
         itemUi.SetActive(true);
         itemUi.GetComponentInChildren<Image>().sprite = item.gameItem.icon;
-        itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
         itemUi.GetComponentInChildren<DraggableItem>().item = item;
         gameObject.SetActive(true);
-    }
 
-    public void ClearSlot()
-    {
-        currentInventoryItem = null;
-        if (itemUi == null)
-            return;
         
-        itemUi = null;
+        currentInventoryItem = item;
+        currentInventoryItem.isAssignedToSlot = true;
+        item.quantity -= 1; 
+        itemUi.GetComponentInChildren<TMP_Text>().text = (item.quantity).ToString();
     }
 
+    public void MeargeWithCreatedCopy(GameObject item)
+    {
+        if (itemUi == null)
+        {
+            Debug.Log("Item ui is null");
+            return;
+        }
+        currentInventoryItem.quantity += 1;
+        itemUi.GetComponentInChildren<TMP_Text>().text = currentInventoryItem.quantity.ToString();
+        Destroy(item);
+    }
     public void OnDrop(PointerEventData eventData)
     {
+        if (!IsEmpty)
+            return;
         GameObject droppedItem = eventData.pointerDrag;
-        DraggableItem draggableItem = droppedItem.GetComponent<DraggableItem>();
+        DraggableItem draggableItem;
+        if (!droppedItem.TryGetComponent<DraggableItem>(out draggableItem))
+        {
+            Debug.Log("Pointer drag is null");
+            return;
+        }
         draggableItem.parentAfterDrag = transform;
         itemUi = droppedItem;
         
         SetItem(draggableItem.item);
+        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);   
     }
 }

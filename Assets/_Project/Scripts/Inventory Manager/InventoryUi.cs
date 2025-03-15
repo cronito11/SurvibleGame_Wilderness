@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -45,99 +46,187 @@ public class InventoryUi : MonoBehaviour
         Debug.Log("Inventory Ui Updated");
         // Populate UI with inventory items
         Dictionary<int, InventoryItem> inventory = playerInventory.GetInventory();
-        
-        Dictionary<int, InventoryItem> clothsInventory = inventory
-            .Where(pair => pair.Value.gameItem.itemType == ItemType.Clothing)
-            .ToDictionary(pair => pair.Key, pair => pair.Value);
 
-        Dictionary<int, InventoryItem> materialsInventory = inventory
-            .Where(pair => pair.Value.gameItem.itemType == ItemType.Material)
-            .ToDictionary(pair => pair.Key, pair => pair.Value);
+        switch(inventoryItem.gameItem.itemType)
+        {
+            case ItemType.Clothing:
+                UpdateClothingSlots(inventory);
+                break;
+            case ItemType.Material:
+                UpdateMaterialSlots(inventory);
+                break;
+            case ItemType.Food:
+                UpdateFoodSlots(inventory);
+                break;
+            case ItemType.Weapon:
+                UpdateWeaponSlots(inventory);
+                break;
+        }
+    }
 
-
-        Dictionary<int, InventoryItem> foodInventory = inventory
-            .Where(pair => pair.Value.gameItem.itemType == ItemType.Food)
-            .ToDictionary(pair => pair.Key, pair => pair.Value);    
-
+    private void UpdateWeaponSlots(Dictionary<int, InventoryItem> inventory)
+    {
+        #region UpdateWeaponSlots
+        //fetch the weapons from the inventory
         Dictionary<int, InventoryItem> weaponsInventory = inventory
             .Where(pair => pair.Value.gameItem.itemType == ItemType.Weapon)
             .ToDictionary(pair => pair.Key, pair => pair.Value);
-        
-        
-        for(int i = 0; i < inventorySlotsClothing.Count; i++)
+
+        for (int i = 0; i < weaponsInventory.Count; i++)
         {
-            if(i<clothsInventory.Count)
-            {
-                InventoryItem item = clothsInventory.Values.ElementAt(i);
+            int j = 0;
+            InventoryItem item = weaponsInventory.Values.ElementAt(i);
 
-                if (item.isAssignedToSlot)
-                    continue;
-                inventorySlotsClothing[i].SetItem(item);
-            }
-            
-        }
-
-        for (int i = 0; i < inventorySlotsMaterial.Count; i++)
-        {
-
-            if (i < materialsInventory.Count)
-            {
-                InventoryItem item = materialsInventory.Values.ElementAt(i);
-
-                if (item.isAssignedToSlot)
-                    continue;
-                inventorySlotsMaterial[i].SetItem(item);
-            }
-           
-        }
-
-        for(int i = 0,j=0; i < foodInventory.Count; i++)
-        {
-            InventoryItem item = foodInventory.Values.ElementAt(i);
+            //if item is already assigned to a slot then just update the text and then continue
             if (item.isAssignedToSlot)
-                continue;
-
-            while (!inventorySlotsFood[j].isEmpty)
             {
-                if(inventorySlotsFood[j].currentInventoryItem.gameItem.id == item.gameItem.id)
+                //update the text and continue
+                //find the postion where the item is assigned
+                while (inventorySlotsWeapon[j].currentInventoryItem != item)
                 {
-                    break;
-                    //inventorySlotsFood[j].SetItem(item);
+                    j++;
+                }
+                inventorySlotsWeapon[j].SetItem(item);
+                continue;
+            }
+
+            //find the first empty slot and set the item
+            while (!inventorySlotsWeapon[j].isEmpty)
+            {
+
+                if (j > inventorySlotsWeapon.Count)
+                {
+                    Debug.Log("No Empty Slots");
                 }
                 j++;
+            }
+            inventorySlotsWeapon[j].SetItem(item);
+        }
+        #endregion
+    }
+
+    private void UpdateFoodSlots(Dictionary<int, InventoryItem> inventory)
+    {
+        #region UpdateFoodSlots
+        //fetch the foods from the inventory
+        Dictionary<int, InventoryItem> foodInventory = inventory
+            .Where(pair => pair.Value.gameItem.itemType == ItemType.Food)
+            .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        for (int i = 0; i < foodInventory.Count; i++)
+        {
+            int j = 0;
+            InventoryItem item = foodInventory.Values.ElementAt(i);
+
+            //if item is already assigned to a slot then just update the text and then continue
+            if (item.isAssignedToSlot)
+            {
+                //update the text and continue
+                //find the postion where the item is assigned
+                while (inventorySlotsFood[j].currentInventoryItem != item)
+                {
+                    j++;
+                }
+                inventorySlotsFood[j].SetItem(item);
+                continue;
+            }
+
+            //find the first empty slot and set the item
+            while (!inventorySlotsFood[j].isEmpty)
+            {
+
                 if (j > inventorySlotsFood.Count)
                 {
                     Debug.Log("No Empty Slots");
                 }
+                j++;
             }
             inventorySlotsFood[j].SetItem(item);
         }
-
-        //for (int i = 0, j=0; i < inventorySlotsFood.Count; i++)
-        //{
-
-        //    if (j < foodInventory.Count)
-        //    {
-        //        InventoryItem item = foodInventory.Values.ElementAt(i); 
-                
-        //        if(item.isAssignedToSlot)
-        //            continue;
-
-        //        inventorySlotsFood[i].SetItem(item);
-        //        Debug.Log("Setting food item"+ foodInventory.Values.ElementAt(i).gameItem.name);
-        //    }
-        //}
-
-        for (int i = 0; i < inventorySlotsWeapon.Count; i++)
-        {
-            if (i < weaponsInventory.Count)
-            {
-                InventoryItem item = weaponsInventory.Values.ElementAt(i);
-                if (item.isAssignedToSlot)
-                    continue;
-                inventorySlotsWeapon[i].SetItem(item);
-            }
-        }
-
+        #endregion
     }
+
+    private void UpdateMaterialSlots(Dictionary<int, InventoryItem> inventory)
+    {
+        #region UpdateMaterialSlots
+        //fetch the materials from the inventory
+        Dictionary<int, InventoryItem> materialsInventory = inventory
+            .Where(pair => pair.Value.gameItem.itemType == ItemType.Material)
+            .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        for (int i = 0; i < materialsInventory.Count; i++)
+        {
+            int j = 0;
+            InventoryItem item = materialsInventory.Values.ElementAt(i);
+
+            //if item is already assigned to a slot then just update the text and then continue
+            if (item.isAssignedToSlot)
+            {
+                //update the text and continue
+                //find the postion where the item is assigned
+                Debug.Log(inventorySlotsMaterial.Count);
+                while (inventorySlotsMaterial[j].currentInventoryItem != item)
+                {
+                    j++;
+                    Debug.Log("Slot: " + j);
+                }
+                inventorySlotsMaterial[j].SetItem(item);
+                continue;
+            }
+
+            //find the first empty slot and set the item
+            while (!inventorySlotsMaterial[j].isEmpty)
+            {
+
+                if (j > inventorySlotsMaterial.Count)
+                {
+                    Debug.Log("No Empty Slots");
+                }
+                j++;
+            }
+            inventorySlotsMaterial[j].SetItem(item);
+        }
+        #endregion
+    }
+
+    private void UpdateClothingSlots(Dictionary<int, InventoryItem> inventory)
+    {
+        #region UpdateClothingSlots
+        Dictionary<int, InventoryItem> clothsInventory = inventory
+            .Where(pair => pair.Value.gameItem.itemType == ItemType.Clothing)
+            .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        for (int i = 0; i < clothsInventory.Count; i++)
+        {
+            int j = 0;
+            InventoryItem item = clothsInventory.Values.ElementAt(i);
+
+            //if item is already assigned to a slot then just update the text and then continue
+            if (item.isAssignedToSlot)
+            {
+                //update the text and continue
+                //find the postion where the item is assigned
+                while (inventorySlotsClothing[j].currentInventoryItem != item)
+                {
+                    j++;
+                }
+                inventorySlotsClothing[j].SetItem(item);
+                continue;
+            }
+
+            //find the first empty slot and set the item
+            while (!inventorySlotsClothing[j].isEmpty)
+            {
+
+                if (j > inventorySlotsClothing.Count)
+                {
+                    Debug.Log("No Empty Slots");
+                }
+                j++;
+            }
+            inventorySlotsClothing[j].SetItem(item);
+        }
+        #endregion
+    }
+
 }
