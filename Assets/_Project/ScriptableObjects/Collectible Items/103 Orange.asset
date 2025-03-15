@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf5a2401f17bea4ba6651e7c28502ed, type: 3}
-  m_Name: 400_Iron_Ore
-  m_EditorClassIdentifier: 
-  id: 400
-  itemName: Iron_Ore
-  itemType: 2
+  m_Script: {fileID: 0}
+  m_Name: 103 Orange
+  m_EditorClassIdentifier: Assembly-CSharp::FoodItemSO
+  id: 103
+  itemName: Orange
+  itemType: 1
   weight: 1
   maxStackSize: 99
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: -8620474637164483525, guid: a4822d008712e02409c12034e8bbe37a, type: 3}
+  hungerReplenishment: 5
+  staminaReplenishment: 0

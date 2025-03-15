@@ -20,22 +20,29 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             Debug.Log("Item is null");
             return;
         }
-
-        
         
         if (itemUi == null && isEmpty)
         {
             itemUi = GameObject.Instantiate(itemUiPrefab, transform);
-            currentInventoryItem = item;
-            currentInventoryItem.isAssignedToSlot = true;
+            itemUi.SetActive(true);
+            itemUi.GetComponentInChildren<Image>().sprite = item.gameItem.icon;
+            itemUi.GetComponentInChildren<DraggableItem>().item = item;
+            gameObject.SetActive(true);
         }
 
+        currentInventoryItem = item;
+        currentInventoryItem.isAssignedToSlot = true;
         //just updating the quantity
-        itemUi.SetActive(true);
-        itemUi.GetComponentInChildren<Image>().sprite = item.gameItem.icon;
         itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
-        itemUi.GetComponentInChildren<DraggableItem>().item = item;
-        gameObject.SetActive(true);
+    }
+
+    public void EmptySlot()
+    {
+        if (itemUi != null)
+        {
+            Destroy(itemUi);
+        }
+        currentInventoryItem = null;
     }
 
     public void ClearSlot()
@@ -47,13 +54,25 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         itemUi = null;
     }
 
+    public void UpdateQuantityText()
+    {
+        itemUi.GetComponentInChildren<TMP_Text>().text = currentInventoryItem.quantity.ToString();
+    }
     public void OnDrop(PointerEventData eventData)
     {
+        if (!IsEmpty)
+            return;
         GameObject droppedItem = eventData.pointerDrag;
-        DraggableItem draggableItem = droppedItem.GetComponent<DraggableItem>();
+        DraggableItem draggableItem;
+        if (!droppedItem.TryGetComponent<DraggableItem>(out draggableItem))
+        {
+            Debug.Log("Pointer drag is null");
+            return;
+        }
         draggableItem.parentAfterDrag = transform;
         itemUi = droppedItem;
         
         SetItem(draggableItem.item);
+        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);   
     }
 }

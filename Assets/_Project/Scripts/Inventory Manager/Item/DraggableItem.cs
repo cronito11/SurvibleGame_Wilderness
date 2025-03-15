@@ -13,7 +13,9 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
     { 
         //Debug.Log("OnBeginDrag");
         parentAfterDrag = transform.parent;
-        prviousParent = transform.parent;   
+        prviousParent = transform.parent;
+
+        //implement something other method beacuse it clears the item even if it's quantity is greater than 1
         currentInventorySlot = transform.parent.GetComponent<InventorySlot>();
         //currentInventorySlot.ClearSlot();
 
@@ -29,12 +31,10 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnEndDrag");
+          
+        currentInventorySlot.ClearSlot();
         transform.SetParent(parentAfterDrag);
-        if (transform.parent != prviousParent)
-        {
-            currentInventorySlot.ClearSlot();
-        }
+        parentAfterDrag.GetComponent<InventorySlot>().SetItem(item);
         itemIcon.raycastTarget = true;
     }
 }
