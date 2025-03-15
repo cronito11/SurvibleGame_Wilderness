@@ -23,7 +23,7 @@ namespace Surviblewilderness
             saveButton.onClick.AddListener(OnSaveButtonClicked);
             optionsButton.onClick.AddListener(OnOptionsButtonClicked);
             exitButton.onClick.AddListener(OnExitButtonClicked);
-            backButton.onClick.AddListener(Hide);
+            backButton.onClick.AddListener(OnBackButtonClicked);
         }
 
         private void OnDisable()
@@ -36,10 +36,28 @@ namespace Surviblewilderness
             saveButton.onClick.RemoveListener(OnSaveButtonClicked);
             optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
             exitButton.onClick.RemoveListener(OnExitButtonClicked);
-            backButton.onClick.RemoveAllListeners();
+            backButton.onClick.RemoveListener(OnBackButtonClicked);
+        }
+        
+        private void Update()
+        {
+            // Check if Esc key is pressed
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log("Esc Pressed");
+                //If option menu is already open, close it, else oprn it
+                if (pauseMenuPanel.activeSelf)
+                {
+                    Hide();
+                }
+                else
+                {
+                    Show();
+                }
+            }
         }
 
-        //  Mehtod for Resume button clicked
+        //  Method for Resume button clicked
         private void OnResumeButtonClicked()
         {
             Debug.Log("Resume Button Clicked");
@@ -50,17 +68,24 @@ namespace Surviblewilderness
             Debug.Log("Save Button Clicked");
         }
 
-        // Mehtod for Options button clicked
+        // Method for Options button clicked
         private void OnOptionsButtonClicked()
         {
             UiEventManager.OpenOptionMenu();
             Debug.Log("Pause Menu Options Button Clicked");
         }
 
-        // Mehtod for Exit button clicked
+        // Method for Exit button clicked
         private void OnExitButtonClicked()
         {
             Debug.Log("Pause Menu Exit Button Clicked");
+            Application.Quit();
+        }
+
+        // Method for back button clicked
+        private void OnBackButtonClicked()
+        {
+            Hide();
         }
 
         // Show Panel

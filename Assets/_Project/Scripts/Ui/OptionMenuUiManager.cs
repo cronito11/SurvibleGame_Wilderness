@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Surviblewilderness
 {
@@ -38,28 +39,17 @@ namespace Surviblewilderness
             controllsButton.onClick.RemoveListener(OnControllsButtonClicked);
         }
 
-        private void Update()
-        {
-            // Check if Esc key is pressed
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Debug.Log("Esc Pressed");
-                //If option menu is already open, close it, else oprn it
-                if (optionMenuPannel.activeSelf)
-                {
-                    Hide();
-                }
-                else
-                {
-                    Show();
-                }
-            }
-        }
-
         //  Mehtod for Back button clicked
         private void OnBackButtonClicked()
         {
-            Hide();
+            if (SceneManager.GetActiveScene().buildIndex == 0) // Build Index "0" = Menu Scene
+            {
+                UiEventManager.OpenMainMenu();
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 1) // Build Index "1" = Level Secene
+            {
+                UiEventManager.OpenPauseMenu();
+            }
             Debug.Log("Back Button Clicked");
         }
 
@@ -78,6 +68,7 @@ namespace Surviblewilderness
         //  Mehtod for Controlls button clicked
         private void OnControllsButtonClicked()
         {
+            UiEventManager.OnButtonClick?.Invoke();
             Debug.Log("Contorlls Button Clicked");
         }
 
@@ -86,7 +77,7 @@ namespace Surviblewilderness
         {
             optionMenuPannel.SetActive(true);
         }
-        // Hide Panel 
+        // Hide Panel
         public void Hide()
         {
             optionMenuPannel.SetActive(false);
