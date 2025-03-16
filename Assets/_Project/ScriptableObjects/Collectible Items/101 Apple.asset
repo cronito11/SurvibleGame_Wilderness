@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079d74dc34cbc44428dcd5561f299841, type: 3}
   m_Name: 101 Apple
   m_EditorClassIdentifier: Assembly-CSharp::FoodItemSO
-  id: 0
-  itemName: 
+  id: 101
+  itemName: Apple
   itemType: 1
-  weight: 0
-  maxStackSize: 0
+  weight: 1
+  maxStackSize: 100
   icon: {fileID: 0}
-  hungerReplenishment: 0
+  hungerReplenishment: 1
   staminaReplenishment: 0

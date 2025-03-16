@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079d74dc34cbc44428dcd5561f299841, type: 3}
   m_Name: 103 Orange
   m_EditorClassIdentifier: Assembly-CSharp::FoodItemSO
-  id: 0
-  itemName: 
-  itemType: 0
-  weight: 0
-  maxStackSize: 0
+  id: 103
+  itemName: Orange
+  itemType: 1
+  weight: 1
+  maxStackSize: 100
   icon: {fileID: 0}
-  hungerReplenishment: 0
+  hungerReplenishment: 2
   staminaReplenishment: 0

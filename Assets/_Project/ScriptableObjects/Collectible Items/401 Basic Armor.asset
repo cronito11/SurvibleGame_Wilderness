@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b20dc25a98a304888b5c021aeed360, type: 3}
   m_Name: 401 Basic Armor
   m_EditorClassIdentifier: Assembly-CSharp::ClothItemSO
-  id: 0
-  itemName: 
-  itemType: 0
-  weight: 0
-  maxStackSize: 0
+  id: 401
+  itemName: Basic Armor
+  itemType: 3
+  weight: 3000
+  maxStackSize: 2
   icon: {fileID: 0}

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419e0d35d8f67e74fb08527c910bd153, type: 3}
   m_Name: 501 Wood
   m_EditorClassIdentifier: Assembly-CSharp::MaterialItemSO
-  id: 0
-  itemName: 
-  itemType: 0
-  weight: 0
-  maxStackSize: 0
+  id: 501
+  itemName: Wood
+  itemType: 2
+  weight: 5
+  maxStackSize: 100
   icon: {fileID: 0}

@@ -48,6 +48,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: m_Height
+      value: 2.827203
+      objectReference: {fileID: 0}
+    - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: m_Radius
+      value: 1.2618507
+      objectReference: {fileID: 0}
     - target: {fileID: 1197415562472167785, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
       propertyPath: m_Name
       value: DestructibleRock_05 Variant
@@ -60,6 +68,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9052558875315920443, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: e84b70494bc512b41ac0c678fcf3ca00, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -125,7 +137,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64909744343355092, guid: cd606ab60f6818b49a4ec45944e39c49, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

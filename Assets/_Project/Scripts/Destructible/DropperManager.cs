@@ -5,6 +5,8 @@ public class DropperManager : MonoBehaviour
     [SerializeField] private Drops drop;
     [Min(0)]
     [SerializeField] private int amount =1;
+    [SerializeField] private GameItemSO item;
+
 
     private IDestructible destructible;
 
@@ -25,6 +27,6 @@ public class DropperManager : MonoBehaviour
 
     private void OnDestroyed ()
     {
-        Debug.Log($"Dropping {amount} of {drop}");
+        InteractableObject.OnItemPickedUp?.Invoke(item, amount);
     }
 }

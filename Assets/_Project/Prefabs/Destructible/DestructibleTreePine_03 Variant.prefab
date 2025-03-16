@@ -48,6 +48,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: m_Height
+      value: 2.827203
+      objectReference: {fileID: 0}
+    - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: m_Radius
+      value: 0.4265101
+      objectReference: {fileID: 0}
+    - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1197415562472167785, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
       propertyPath: m_Name
       value: DestructibleTreePine_03 Variant
@@ -60,6 +72,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9052558875315920443, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: da478e0f11bb055448c684bab3793ad8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -87,7 +103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 463170, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.088
       objectReference: {fileID: 0}
     - target: {fileID: 463170, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -95,7 +111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 463170, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 463170, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
       propertyPath: m_LocalRotation.w
@@ -125,7 +141,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 64528706169004334, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64766918720421120, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64850746246563654, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64956113986748740, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 64956113986748740, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
+    - {fileID: 64850746246563654, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
+    - {fileID: 64766918720421120, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
+    - {fileID: 64528706169004334, guid: 6593f1a0b8ab64a47bc3038147d84d46, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
