@@ -3,9 +3,12 @@ using UnityEngine;
 
 namespace Surviblewilderness
 {
-    public class CharacterLifeController : MonoBehaviour, IDamageable
+    public class CharacterLifeController : MonoBehaviour, IDamageable, IHealable
     {
+        private const int MAX_HEALTH = 100;
+
         public event Action<int> OnDamageRecieved;
+        public event Action<int> OnHealed;
 
         [SerializeField] private int _health = 100;
 
@@ -20,6 +23,15 @@ namespace Surviblewilderness
 
             if (_health <=0)
                 _health = 0;
+        }
+
+
+        public void Heal (int amount)
+        {
+            _health += amount;
+            if (_health > MAX_HEALTH)
+                _health = MAX_HEALTH;
+            OnHealed?.Invoke(amount);
         }
     }
 }
