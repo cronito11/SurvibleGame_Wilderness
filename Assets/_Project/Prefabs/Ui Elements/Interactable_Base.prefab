@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropType: 0
   amount: 0
+  item: {fileID: 11400000, guid: da478e0f11bb055448c684bab3793ad8, type: 2}
 --- !u!135 &6162063212252995369
 SphereCollider:
   m_ObjectHideFlags: 0

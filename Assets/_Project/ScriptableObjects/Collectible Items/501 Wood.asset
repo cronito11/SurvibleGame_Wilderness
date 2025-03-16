@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 419e0d35d8f67e74fb08527c910bd153, type: 3}
   m_Name: 501 Wood
   m_EditorClassIdentifier: Assembly-CSharp::MaterialItemSO
-  id: 501
-  itemName: Wood
-  itemType: 2
-  weight: 1
-  maxStackSize: 99
-  icon: {fileID: -919095771, guid: b28d8b765d938044ab41999f4f23e096, type: 3}
+  id: 0
+  itemName: 
+  itemType: 0
+  weight: 0
+  maxStackSize: 0
+  icon: {fileID: 0}

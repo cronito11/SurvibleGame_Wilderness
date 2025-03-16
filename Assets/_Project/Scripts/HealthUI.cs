@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Surviblewilderness
 {
@@ -27,7 +28,7 @@ namespace Surviblewilderness
 
         private void OnLifeChanged (int obj)
         {
-            slider.value = characterLifeController.health/100f;
+            slider.DOValue(characterLifeController.health/100f, 0.2f).SetEase(Ease.OutQuad);
         }
     }
 }

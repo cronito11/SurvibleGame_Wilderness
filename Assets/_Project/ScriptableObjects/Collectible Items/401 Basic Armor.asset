@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 21b20dc25a98a304888b5c021aeed360, type: 3}
   m_Name: 401 Basic Armor
   m_EditorClassIdentifier: Assembly-CSharp::ClothItemSO
-  id: 401
-  itemName: Basic Armor
-  itemType: 3
-  weight: 10
-  maxStackSize: 1
-  icon: {fileID: 1533909394052034002, guid: fb9b6e0db65038e4686f8bf78ea56b68, type: 3}
+  id: 0
+  itemName: 
+  itemType: 0
+  weight: 0
+  maxStackSize: 0
+  icon: {fileID: 0}
