@@ -50,7 +50,7 @@ namespace Surviblewilderness
             Debug.Log("Start Game Button Clicked");
             UiEventManager.OnButtonClick?.Invoke(); // Trigger the OnButtonClick event
             OnGameStart?.Invoke(); // Trigger the OnButtonClick event
-            SceneManager.LoadScene("Level_Design");
+            SceneManager.LoadScene("Combine_Level");
             // UiEventManager.OpenGamePlayMenu();
         }
 

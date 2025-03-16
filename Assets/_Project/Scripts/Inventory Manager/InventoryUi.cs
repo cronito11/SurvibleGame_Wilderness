@@ -9,9 +9,9 @@ public class InventoryUi : MonoBehaviour
     [SerializeField] private Transform materialItemsGrid;  // Grid where slots will be placed
     [SerializeField] private Transform weaponItemsGrid;  // Grid where slots will be placed
     [SerializeField] private Transform foodItemsGrid;  // Grid where slots will be placed
-    
+
     [SerializeField] private GameObject slotPrefab;
-    
+
 
     [SerializeField] private PlayerInventory playerInventory;
 
@@ -20,19 +20,19 @@ public class InventoryUi : MonoBehaviour
     [SerializeField] List<InventorySlot> inventorySlotsWeapon = new List<InventorySlot>();
     [SerializeField] List<InventorySlot> inventorySlotsFood = new List<InventorySlot>();
 
-    private void OnEnable()
+    private void OnEnable ()
     {
         PlayerInventory.OnInventoryChanged += UpdateUI;
         //InventorySlot.OnItemDropOnSlot += UpdateUI;
     }
 
-    private void OnDisable()
+    private void OnDisable ()
     {
         PlayerInventory.OnInventoryChanged -= UpdateUI;
         //InventorySlot.OnItemDropOnSlot -= UpdateUI;
     }
 
-    private void Start()
+    private void Start ()
     {
         inventorySlotsClothing = clothingItemsGrid.GetComponentsInChildren<InventorySlot>().ToList();
         inventorySlotsMaterial = materialItemsGrid.GetComponentsInChildren<InventorySlot>().ToList();
@@ -40,9 +40,11 @@ public class InventoryUi : MonoBehaviour
         inventorySlotsFood = foodItemsGrid.GetComponentsInChildren<InventorySlot>().ToList();
     }
 
-    void UpdateUI(InventoryItem inventoryItem)
+    void UpdateUI (InventoryItem inventoryItem)
     {
-        Debug.Log("Inventory Ui Updated");
+        Debug.Log($"Inventory Ui Updated {playerInventory}", gameObject);
+        if (playerInventory == null || playerInventory.GetInventory() == null) //TODO: Remove this check
+            return;
         // Populate UI with inventory items
         Dictionary<int, InventoryItem> inventory = playerInventory.GetInventory();
 

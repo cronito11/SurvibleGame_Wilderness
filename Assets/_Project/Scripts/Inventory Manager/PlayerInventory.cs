@@ -12,6 +12,7 @@ public class PlayerInventory :  MonoBehaviour
 
     private void Awake()
     {
+        inventory = new Dictionary<int, InventoryItem>();
         if (Instance == null)
             Instance = this;
         else

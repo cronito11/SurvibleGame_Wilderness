@@ -50,11 +50,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
       propertyPath: m_Height
-      value: 2.827203
+      value: 8.3173275
       objectReference: {fileID: 0}
     - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
       propertyPath: m_Radius
       value: 0.4265101
+      objectReference: {fileID: 0}
+    - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
+      propertyPath: m_Center.y
+      value: 3.7450628
       objectReference: {fileID: 0}
     - target: {fileID: 977404435642274511, guid: 38920d12234ada647916ed22ec2703e9, type: 3}
       propertyPath: m_Center.z
