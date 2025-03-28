@@ -343,6 +343,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e275ba54fe266bb42884d2e906a1c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectableItems:
+  - {fileID: 11400000, guid: e7b3d0d0a32554541945f953932e7208, type: 2}
+  - {fileID: 11400000, guid: c5a9b021daee3734f80b72a58f6a894c, type: 2}
+  - {fileID: 11400000, guid: 22ddf60a5424b3c4d8d324b629721c79, type: 2}
+  - {fileID: 11400000, guid: 273473cef089d4c41b63105e73306c20, type: 2}
+  - {fileID: 11400000, guid: 613ae818788148f4e91c4d7ad9062c81, type: 2}
+  - {fileID: 11400000, guid: 60a35f613e74d524fbaa5d8fd2e34a0a, type: 2}
+  - {fileID: 11400000, guid: da478e0f11bb055448c684bab3793ad8, type: 2}
+  - {fileID: 11400000, guid: e84b70494bc512b41ac0c678fcf3ca00, type: 2}
 --- !u!1 &6101928107231863777
 GameObject:
   m_ObjectHideFlags: 0

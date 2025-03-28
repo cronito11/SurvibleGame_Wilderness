@@ -24,12 +24,14 @@ public class InventoryUi : MonoBehaviour
     {
         PlayerInventory.OnInventoryChanged += UpdateUI;
         //InventorySlot.OnItemDropOnSlot += UpdateUI;
+        PlayerInventory.OnInventoryClear += ClearAllUiSlots;    
     }
 
     private void OnDisable ()
     {
         PlayerInventory.OnInventoryChanged -= UpdateUI;
         //InventorySlot.OnItemDropOnSlot -= UpdateUI;
+        PlayerInventory.OnInventoryClear -= ClearAllUiSlots;
     }
 
     private void Start ()
@@ -62,6 +64,34 @@ public class InventoryUi : MonoBehaviour
             case ItemType.Weapon:
                 UpdateWeaponSlots(inventory);
                 break;
+        }
+    }
+
+    private void ClearAllUiSlots()
+    {
+        foreach (InventorySlot child in inventorySlotsClothing)
+        {
+            //child.GetComponent<InventorySlot>().ClearSlot();
+            child.EmptySlot();
+            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);  
+        }
+        foreach (InventorySlot child in inventorySlotsMaterial)
+        {
+            //child.GetComponent<InventorySlot>().ClearSlot();
+            child.EmptySlot();
+            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
+        }
+        foreach (InventorySlot child in inventorySlotsWeapon)
+        {
+            //child.GetComponent<InventorySlot>().ClearSlot();
+            child.EmptySlot();
+            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
+        }
+        foreach (InventorySlot child in inventorySlotsFood)
+        {
+            //child.GetComponent<InventorySlot>().ClearSlot();
+            child.EmptySlot();
+            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
         }
     }
 

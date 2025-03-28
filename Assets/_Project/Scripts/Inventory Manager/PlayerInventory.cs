@@ -9,6 +9,7 @@ public class PlayerInventory :  MonoBehaviour
     private Dictionary<int, InventoryItem> inventory = new Dictionary<int, InventoryItem>();
 
     public static event Action<InventoryItem> OnInventoryChanged;  // 🔥 Event for inventory updates
+    public static event Action OnInventoryClear;  // 🔥 Event for item usage
 
     private void Awake()
     {
@@ -67,6 +68,22 @@ public class PlayerInventory :  MonoBehaviour
     {
         return inventory;
     }   
+
+    public void ClearInventory()
+    {
+        inventory.Clear();
+        OnInventoryClear?.Invoke(); 
+    }
+
+    public void ReloadInventory(List<InventoryItem> items)
+    {
+        ClearInventory();   
+        foreach (InventoryItem item in items)
+        {
+            AddItem(item.gameItem, item.quantity);
+        }
+        Debug.Log($"Inventory reloaded, size: ${inventory.Count}");
+    }
 
     public bool HasItem(int itemId, int amount)
     {

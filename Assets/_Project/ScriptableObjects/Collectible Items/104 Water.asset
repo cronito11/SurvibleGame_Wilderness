@@ -17,6 +17,6 @@ MonoBehaviour:
   itemType: 1
   weight: 0
   maxStackSize: 100
-  icon: {fileID: 0}
+  icon: {fileID: -3017979480325208809, guid: 4373b5a1916f3a8468bc2b0fdefa655e, type: 3}
   hungerReplenishment: 0
   staminaReplenishment: 2

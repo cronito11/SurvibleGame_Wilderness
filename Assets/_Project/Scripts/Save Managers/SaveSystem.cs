@@ -17,12 +17,13 @@ namespace Surviblewilderness
 
         public static T Load<T>(string fileName)
         {
-            string path = SAVE_FILE_LOCATION + "/" + fileName;
+            string path = Application.persistentDataPath + "/" + fileName;
 
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
                 T data = JsonUtility.FromJson<T>(json);
+                Debug.Log($"Loaded {fileName} from: " + path);
                 return data;
             }
             else

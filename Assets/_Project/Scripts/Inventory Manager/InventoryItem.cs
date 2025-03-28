@@ -32,6 +32,13 @@ public class InventoryItem
         this.quantity = quantity;
     }
 
+    public InventoryItem(GameItemSO item, int quantity, bool isAssignedToSlot)
+    {
+        this.gameItem = item;
+        this.quantity = quantity;
+        this.isAssignedToSlot = isAssignedToSlot;
+    }
+
     public virtual void UseItem()
     {
         Debug.Log($"Using {gameItem.itemName}");
