@@ -33,5 +33,10 @@ namespace Surviblewilderness
                 _health = MAX_HEALTH;
             OnHealed?.Invoke(amount);
         }
+
+        public void ReloadHealth(int health)
+        {
+            _health = health;
+        }
     }
 }

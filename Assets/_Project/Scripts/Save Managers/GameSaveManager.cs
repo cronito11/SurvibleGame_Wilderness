@@ -10,6 +10,7 @@ namespace Surviblewilderness
         //also this will we subscribed by evey savable entities players, enemies, environmental object etc
         //if this event is triggered then those individual entity who subcribed will save it self to their saperate json object.
         public static event Action OnSave;
+        public static event Action OnLoad;
 
         void Update()
         {
@@ -17,6 +18,10 @@ namespace Surviblewilderness
             if (Input.GetKeyDown(KeyCode.P)) 
             { 
                 SaveGame();
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                LoadGame();
             }
         }
 
@@ -28,5 +33,10 @@ namespace Surviblewilderness
             Debug.Log("Game Saved");
         }
 
+        public void LoadGame()
+        {
+            OnLoad?.Invoke();
+            Debug.Log("Game Loaded");
+        }   
     }
 }
