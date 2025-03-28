@@ -43,6 +43,7 @@ namespace Surviblewilderness
             itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
         }
 
+        //remove the item from the slot destroy the draggable game object
         public virtual void EmptySlot()
         {
             if (itemUi != null)
@@ -52,6 +53,7 @@ namespace Surviblewilderness
             currentInventoryItem = null;
         }
 
+        //only remove reference of the item from the slot
         public virtual void ClearSlot()
         {
             currentInventoryItem = null;
