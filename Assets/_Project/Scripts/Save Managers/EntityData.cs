@@ -5,16 +5,10 @@ namespace Surviblewilderness
     // generic class for entity data
     // only class structure is here with some common entity data 
     // this class will be inherited by other entity data classes which are specific to entities
-
+    [System.Serializable]
     public class EntityData
     {
-        [SerializeField] public EntityPosition entityPosition;
-        
-        public EntityData()
-        {
-            entityPosition = new EntityPosition();
-           
-        }
+        public EntityPosition entityPosition;
     }
 
 

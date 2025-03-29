@@ -8,7 +8,7 @@ using System;
 
 namespace HoudiniEngineUnity
 {
-    [Inspector(typeof(HEU_UnitButton))]
+   /* [Inspector(typeof(HEU_UnitButton))]
     public class HEU_UnitButtonInspector : Inspector
     {
         public HEU_UnitButtonInspector(Metadata metadata) : base(metadata)
@@ -47,6 +47,6 @@ namespace HoudiniEngineUnity
                 }
             }
         }
-    }
+    }*/
 }
 #endif

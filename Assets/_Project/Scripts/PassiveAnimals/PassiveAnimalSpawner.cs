@@ -4,8 +4,19 @@ using Utility;
 
 namespace Surviblewilderness
 {
-    public class PassiveAnimalSpawner : SingletonBase<PassiveAnimalSpawner>  
+    public class PassiveAnimalSpawner : SpawningManager
     {
-        public int activePassiveAnimals { get; private set; } = 5;
+
+        private  const int MAX_AMOUNT = 1000000;
+
+        override protected int MaxAmount ()
+        {
+            return MAX_AMOUNT;
+        }
+
+        override protected float GetProbability ()
+        {
+            return 1;
+        }
     }
 }

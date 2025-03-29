@@ -88,33 +88,40 @@ namespace Surviblewilderness
             //}
 
             //just for testing the architecture is not ready yet
+<<<<<<< HEAD
             //passiveAnimalDataList.list.Add(new PassiveAimaalData(false, false, 0f, 30, false, 0f));
+=======
+            passiveAnimalDataList.list.Add(new PassiveAnimalData(false, PassiveAnimalState.None, 0f, 30));
+>>>>>>> 44db983 (Instantiate elements enemies and passive animals)
 
             SaveSystem.Save(passiveAnimalDataList, PASSIVE_ANIMAL_SAVE_FILE_NAME);
         }
     }
 
     [System.Serializable]
-    public class PassiveAimaalData : EntityData
+    public class PassiveAnimalData : EntityData
     {
         public PassiveAnimalStats passiveAnimalStats;
-        public PassiveAimaalData(bool isMale, bool isPregnant, float pregnancyTimeLeft, int offSpringCount, bool isBaby, float growthTimeLeft) : base()
+        public PassiveAnimalData (bool isMale, PassiveAnimalState state, float timer, int offSpringCount) : base()
         {
             passiveAnimalStats = 
-                new PassiveAnimalStats(isMale,isPregnant,pregnancyTimeLeft,offSpringCount,isBaby,growthTimeLeft);
+                new PassiveAnimalStats(isMale,state,timer,offSpringCount);
         }
+    }
+    public enum PassiveAnimalState
+    {
+        None = 0,
+        Growing = 1,
+        Pregnant = 2,
     }
 
     [System.Serializable]
     public class PassiveAnimalStats : EntityStats
     {
         public bool isMale;
-        public bool isPregnant;
-        public float pregnancyTImeLeft;
+        public PassiveAnimalState secundaryState;
+        public float timer;
         public int offSpringCount;  //number of children produced by that nimal BODY COUNT indirectly.
-
-        public bool isBaby;
-        public float growthTimeLeft;
 
         /*booleans are used in place of custom enums as of 
          * now becuase the breeding mechanic and passive animal are 
@@ -126,25 +133,23 @@ namespace Surviblewilderness
 
         }
 
-        public PassiveAnimalStats(bool isMale, bool isPregnant, float pregnancyTimeLeft, int offSpringCount, bool isBaby, float growthTimeLeft) : base()
+        public PassiveAnimalStats(bool isMale, PassiveAnimalState state, float timer, int offSpringCount) : base()
         {
             this.isMale = isMale;
-            this.isPregnant = isPregnant;
-            this.pregnancyTImeLeft = pregnancyTimeLeft; 
+            this.secundaryState = state;
             this.offSpringCount = offSpringCount;   
-            this.isBaby = isBaby;   
-            this.growthTimeLeft = growthTimeLeft;   
+            this.timer = timer;   
         }
     }
 
     [System.Serializable]
     public class PassiveAnimalDataList
     {
-        public List<PassiveAimaalData> list;
+        public List<PassiveAnimalData> list;
 
         public PassiveAnimalDataList()
         {
-            list = new List<PassiveAimaalData>();
+            list = new List<PassiveAnimalData>();
         }
     }
 }
