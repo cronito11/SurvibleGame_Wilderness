@@ -6015,11 +6015,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3450357186945557151, guid: b03636be11f0af440affae60a1a14bc3, type: 3}
   m_PrefabInstance: {fileID: 99661496}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &100250922 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6701539892187585195, guid: d7fd8c1daaae6cf418649816a7c0c20e, type: 3}
-  m_PrefabInstance: {fileID: 1225288459941527009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &100445524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85429,7 +85424,7 @@ PrefabInstance:
     - target: {fileID: 5758112834210255385, guid: bce80be59f738b948a4a2f6ef9c626bd, type: 3}
       propertyPath: predatorPrefab
       value: 
-      objectReference: {fileID: 100250922}
+      objectReference: {fileID: 6701539892187585195, guid: d7fd8c1daaae6cf418649816a7c0c20e, type: 3}
     - target: {fileID: 8376331152413231787, guid: bce80be59f738b948a4a2f6ef9c626bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10376406
@@ -101252,7 +101247,6 @@ Transform:
   - {fileID: 2073024165}
   - {fileID: 1440062159}
   - {fileID: 1692863806}
-  - {fileID: 975815616}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1660020367

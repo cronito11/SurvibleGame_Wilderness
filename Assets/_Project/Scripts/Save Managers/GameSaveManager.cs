@@ -26,14 +26,14 @@ namespace Surviblewilderness
         }
 
         //this method will be assigned to save button in the ui 
-        public void SaveGame()
+        public static void SaveGame()
         {
 
             OnSave?.Invoke();
             Debug.Log("Game Saved");
         }
 
-        public void LoadGame()
+        public static void LoadGame()
         {
             OnLoad?.Invoke();
             Debug.Log("Game Loaded");

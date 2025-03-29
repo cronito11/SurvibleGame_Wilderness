@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace Surviblewilderness
         [SerializeField] private GameObject pauseMenuPanel; // Pause Menu panel
         [SerializeField] private Button resumeButton; // Resume Button
         [SerializeField] private Button saveButton; // Save Button
+        [SerializeField] private Button loadButton; // Load Button  
         [SerializeField] private Button optionsButton; // Options Button
         [SerializeField] private Button exitButton; // Exit Button
         [SerializeField] private Button backButton; // Back Button
@@ -21,10 +23,13 @@ namespace Surviblewilderness
             // Attaching Button Listners
             resumeButton.onClick.AddListener(OnResumeButtonClicked);
             saveButton.onClick.AddListener(OnSaveButtonClicked);
+            loadButton.onClick.AddListener(OnLoadButtonClicked);
             optionsButton.onClick.AddListener(OnOptionsButtonClicked);
             exitButton.onClick.AddListener(OnExitButtonClicked);
             backButton.onClick.AddListener(OnBackButtonClicked);
         }
+
+       
 
         private void OnDisable()
         {
@@ -34,6 +39,7 @@ namespace Surviblewilderness
             // Removing Button Listners
             resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
             saveButton.onClick.RemoveListener(OnSaveButtonClicked);
+            loadButton.onClick.RemoveListener(OnLoadButtonClicked);
             optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
             exitButton.onClick.RemoveListener(OnExitButtonClicked);
             backButton.onClick.RemoveListener(OnBackButtonClicked);
@@ -57,6 +63,13 @@ namespace Surviblewilderness
             }
         }
 
+        private void OnLoadButtonClicked()
+        {
+            GameSaveManager.LoadGame();
+            Hide();
+            Debug.Log("Load Button Clicked");
+        }
+
         //  Method for Resume button clicked
         private void OnResumeButtonClicked()
         {
@@ -65,6 +78,8 @@ namespace Surviblewilderness
 
         private void OnSaveButtonClicked()
         {
+            GameSaveManager.SaveGame();
+            Hide();
             Debug.Log("Save Button Clicked");
         }
 
