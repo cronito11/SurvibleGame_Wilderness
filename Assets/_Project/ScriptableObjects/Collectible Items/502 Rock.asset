@@ -17,4 +17,4 @@ MonoBehaviour:
   itemType: 2
   weight: 10
   maxStackSize: 100
-  icon: {fileID: 0}
+  icon: {fileID: -3094302376565900353, guid: c52c66e8c335c1640a21e3d2c274bfd7, type: 3}

@@ -27,7 +27,7 @@ namespace Surviblewilderness
             }
 
             //if there is no item assigned to the slot and the slot is empty then instantiate the item prefab
-            if (itemUi == null && isEmpty)
+            if (currentInventoryItem == null && isEmpty)
             {
                 itemUi = GameObject.Instantiate(itemUiPrefab, transform);
                 itemUi.SetActive(true);
@@ -39,19 +39,24 @@ namespace Surviblewilderness
             //if the item is already assigned to the slot then just update the quantity
             //just updating the quantity
             currentInventoryItem = item;
+            //currentInventoryItem = item;
             currentInventoryItem.isAssignedToSlot = true;
             itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
         }
 
+        //remove the item from the slot destroy the draggable game object
         public virtual void EmptySlot()
         {
             if (itemUi != null)
             {
-                Destroy(itemUi);
+                GameObject gameObject = itemUi;
+                itemUi = null;
+                Destroy(gameObject);
             }
             currentInventoryItem = null;
         }
 
+        //only remove reference of the item from the slot
         public virtual void ClearSlot()
         {
             currentInventoryItem = null;

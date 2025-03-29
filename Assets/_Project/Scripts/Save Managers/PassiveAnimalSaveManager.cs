@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,9 +7,11 @@ namespace Surviblewilderness
 {
     public class PassiveAnimalSaveManager : MonoBehaviour, ISaveable
     {
+        [SerializeField] private GameObject passiveAnimalPrefab;
+
         private static Dictionary<GameObject, Transform> allPassiveAnimals = new Dictionary<GameObject, Transform>();
 
-        private const string PREDATOR_SAVE_FILE_NAME = "PassiveAnimalsData.json";
+        private const string PASSIVE_ANIMAL_SAVE_FILE_NAME = "PassiveAnimalsData.json";
 
         private void OnEnable()
         {
@@ -31,7 +34,44 @@ namespace Surviblewilderness
 
         public void Load()
         {
-            throw new System.NotImplementedException();
+            foreach (var key in allPassiveAnimals.Keys.ToList()) // ToList() to avoid modifying the dictionary while iterating
+            {
+                //Transform transform = allPredators[key];
+                //allPredators.Remove(key);
+                //Destroy(transform.gameObject);
+
+                if (allPassiveAnimals.TryGetValue(key, out Transform transform) && transform != null)
+                {
+                    if (transform.gameObject.scene.IsValid()) // Avoid destroying prefabs
+                    {
+                        Destroy(transform.gameObject);
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogWarning($"Skipping prefab: {transform.gameObject.name}");
+                    }
+                    UnityEngine.Debug.Log($"Removed predator with key: {key}");
+                }
+
+                //UnityEngine.Debug.Log($"Removed item with key: {key}");
+            }
+
+
+
+            //load the predators data from the save file
+            PassiveAnimalDataList passiveAnimalDataList  = SaveSystem.Load<PassiveAnimalDataList>(PASSIVE_ANIMAL_SAVE_FILE_NAME);   
+
+            foreach (PassiveAimaalData predatorData in passiveAnimalDataList.list)
+            {
+                //instantiate the predator at saved position
+                GameObject predator = GameObject.Instantiate(passiveAnimalPrefab, new Vector3(predatorData.entityPosition.x, predatorData.entityPosition.y, predatorData.entityPosition.z), Quaternion.identity);
+
+                //reload the health of the passive animal
+                predator.GetComponent<CharacterLifeController>().ReloadHealth((int)predatorData.passiveAnimalStats.health);
+
+                //reload the pregnansy stats of the passive animals
+
+            }
         }
 
         public void Save()
@@ -41,16 +81,16 @@ namespace Surviblewilderness
             //pass that list to save system and save it 
             PassiveAnimalDataList passiveAnimalDataList = new PassiveAnimalDataList();
 
-            //NOTE:: complete this loop when the architecture of passive animal is complete DISCUSS WITH LUIS
+            //NOTE:: complete this loop when the architecture of passive animal is complete DISCUSSED WITH LUIS
             //foreach (var passiveAnimal in allPassiveAnimals)
             //{
             //    passiveAnimalDataList.list.Add(new PassiveAimaalData())
             //}
 
             //just for testing the architecture is not ready yet
-            passiveAnimalDataList.list.Add(new PassiveAimaalData(false, false, 0f, 30, false, 0f));
+            //passiveAnimalDataList.list.Add(new PassiveAimaalData(false, false, 0f, 30, false, 0f));
 
-            SaveSystem.Save(passiveAnimalDataList, PREDATOR_SAVE_FILE_NAME);
+            SaveSystem.Save(passiveAnimalDataList, PASSIVE_ANIMAL_SAVE_FILE_NAME);
         }
     }
 

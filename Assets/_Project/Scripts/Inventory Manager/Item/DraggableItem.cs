@@ -10,7 +10,7 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
     public InventoryItem item;
     private InventorySlot currentInventorySlot;
     [SerializeField] private int clonedItemQuantity; 
-    public static event System.Action<InventoryItem> OnItemDragged;
+    public event System.Action OnItemDragged;
 
     public void OnBeginDrag(PointerEventData eventData)
     { 
@@ -25,6 +25,7 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         //currentInventorySlot.CreateCopyOnDrag(item, ref clonedItemQuantity);
+        OnItemDragged?.Invoke();    
     }
     public void OnDrag(PointerEventData eventData)
     {

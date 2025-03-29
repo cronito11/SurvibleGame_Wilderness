@@ -3,12 +3,19 @@ using UnityEngine;
 
 namespace Surviblewilderness
 {
+    
    
     //manages the player save data
     //saveing and loading data for player object 
     //in future it will take care of inventory as well 
     public class PlayerSaveManager : MonoBehaviour,ISaveable
     {
+        //list of collectable items of the game reference from inspector
+        [SerializeField] private GameItemSO[] collectableItems;
+
+        //a dictionary to store the collectable items for faster access
+        Dictionary<int, GameItemSO> collectableItemsDict = new Dictionary<int, GameItemSO>();
+
         [SerializeField] private const string PLAYER_SAVE_FILE_NAME = "PlayerData.json";
 
         private CharacterLifeController characterLifeController;
@@ -19,9 +26,17 @@ namespace Surviblewilderness
             inventory = GetComponent<PlayerInventory>();    
         }
 
+        private void Start()
+        {
+            foreach (GameItemSO item in collectableItems)
+            {
+                collectableItemsDict.Add(item.id, item);
+            }
+        }
         private void OnEnable()
         {
             GameSaveManager.OnSave += Save;
+            GameSaveManager.OnLoad += Load;
         }
 
         public void Save()
@@ -45,7 +60,6 @@ namespace Surviblewilderness
                 playerData.inventoryDataList.list.Add(new PlayerInventoryData(
                     inventoryItem.Value.gameItem.id, 
                     inventoryItem.Value.quantity, 
-                    inventoryItem.Value.currentDurability, 
                     inventoryItem.Value.isAssignedToSlot
                     ));
             }
@@ -58,7 +72,28 @@ namespace Surviblewilderness
 
         public void Load()
         {
-            throw new System.NotImplementedException();
+            PlayerData playerData = SaveSystem.Load<PlayerData>(PLAYER_SAVE_FILE_NAME);
+                        
+            //reload player inventory 
+            List<InventoryItem> inventoryItems = new List<InventoryItem>();
+
+            inventory.ClearInventory(); 
+            foreach(PlayerInventoryData data in playerData.inventoryDataList.list)
+            {
+                inventoryItems.Add(new InventoryItem(collectableItemsDict[data.itemId], data.quantity, data.isAssignedToSlot));
+            }
+            inventory.ReloadInventory(inventoryItems);
+
+            //reload player position
+            Vector3 loadedPosition = new Vector3(playerData.entityPosition.x, playerData.entityPosition.y, playerData.entityPosition.z);
+            transform.position = loadedPosition;
+            Debug.Log($"Loaded postion {loadedPosition}");
+
+            //realod player stats   
+            characterLifeController.ReloadHealth((int)playerData.playerStats.health);
+            /*
+             * Hubger and thirst will be implemented in future
+             */
         }
     }
     //JSON architecture for playerdata 
@@ -105,14 +140,12 @@ namespace Surviblewilderness
     {
         public int itemId;
         public int quantity;
-        public int currentDurability;
         public bool isAssignedToSlot;
 
-        public PlayerInventoryData(int itemId, int quantity, int currentDurability, bool isAssignedToSlot)
+        public PlayerInventoryData(int itemId, int quantity, bool isAssignedToSlot)
         {
             this.itemId = itemId;
             this.quantity = quantity;
-            this.currentDurability = currentDurability;
             this.isAssignedToSlot = isAssignedToSlot;
         }
     }
