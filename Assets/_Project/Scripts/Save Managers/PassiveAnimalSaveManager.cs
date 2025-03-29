@@ -81,18 +81,7 @@ namespace Surviblewilderness
             //pass that list to save system and save it 
             PassiveAnimalDataList passiveAnimalDataList = new PassiveAnimalDataList();
 
-            //NOTE:: complete this loop when the architecture of passive animal is complete DISCUSSED WITH LUIS
-            //foreach (var passiveAnimal in allPassiveAnimals)
-            //{
-            //    passiveAnimalDataList.list.Add(new PassiveAimaalData())
-            //}
-
-            //just for testing the architecture is not ready yet
-<<<<<<< HEAD
-            //passiveAnimalDataList.list.Add(new PassiveAimaalData(false, false, 0f, 30, false, 0f));
-=======
             passiveAnimalDataList.list.Add(new PassiveAnimalData(false, PassiveAnimalState.None, 0f, 30));
->>>>>>> 44db983 (Instantiate elements enemies and passive animals)
 
             SaveSystem.Save(passiveAnimalDataList, PASSIVE_ANIMAL_SAVE_FILE_NAME);
         }
