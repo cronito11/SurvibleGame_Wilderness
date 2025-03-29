@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Surviblewilderness
 {
@@ -53,19 +54,35 @@ namespace Surviblewilderness
 
             foreach (var key in allPredators.Keys.ToList()) // ToList() to avoid modifying the dictionary while iterating
             {
-                Transform transform = allPredators[key];
-                allPredators.Remove(key);
-                Destroy(transform.gameObject);
-                UnityEngine.Debug.Log($"Removed item with key: {key}");
+                //Transform transform = allPredators[key];
+                //allPredators.Remove(key);
+                //Destroy(transform.gameObject);
+
+                if (allPredators.TryGetValue(key, out Transform transform) && transform != null)
+                {
+                    if (transform.gameObject.scene.IsValid()) // Avoid destroying prefabs
+                    {
+                        Destroy(transform.gameObject);
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogWarning($"Skipping prefab: {transform.gameObject.name}");
+                    }
+                    UnityEngine.Debug.Log($"Removed predator with key: {key}");
+                }
+
+                //UnityEngine.Debug.Log($"Removed item with key: {key}");
             }
+
+            
 
             //load the predators data from the save file
             PredatorSaveDataList predatorSaveDataList = SaveSystem.Load<PredatorSaveDataList>(PREDATOR_SAVE_FILE_NAME);
 
-            foreach (var predatorData in predatorSaveDataList.predatorDataList)
+            foreach (PredatorSaveData predatorData in predatorSaveDataList.predatorDataList)
             {
                 //instantiate the predator at saved position
-                GameObject predator = Instantiate(predatorPrefab, new Vector3(predatorData.entityPosition.x, predatorData.entityPosition.y, predatorData.entityPosition.z), Quaternion.identity);
+                GameObject predator = GameObject.Instantiate(predatorPrefab, new Vector3(predatorData.entityPosition.x, predatorData.entityPosition.y, predatorData.entityPosition.z), Quaternion.identity);
 
                 //reload the health of the predator
                 predator.GetComponent<CharacterLifeController>().ReloadHealth((int)predatorData.predatorStats.health) ;

@@ -14,7 +14,7 @@ public class InventorySlot : Slot, IDropHandler
     //{
     //    DraggableItem.OnItemDragged -= CreateCopyOnDrag;
     //}
-
+   
     public void CreateCopyOnDrag(InventoryItem item, ref int clonedItemQuantity)
     {
         if (item.gameItem == null)
@@ -66,13 +66,17 @@ public class InventorySlot : Slot, IDropHandler
         DraggableItem draggableItem;
         if (!droppedItem.TryGetComponent<DraggableItem>(out draggableItem))
         {
+            //item will be returned to the previous parent/slot
             Debug.Log("Pointer drag is null");
             return;
         }
+
+        //assign the item to this slot  
         draggableItem.parentAfterDrag = transform;
         itemUi = droppedItem;
         
         SetItem(draggableItem.item);
+
         Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);   
     }
 }

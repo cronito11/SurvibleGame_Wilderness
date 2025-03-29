@@ -77,7 +77,7 @@ public class PlayerInventory :  MonoBehaviour
 
     public void ReloadInventory(List<InventoryItem> items)
     {
-        ClearInventory();   
+          
         foreach (InventoryItem item in items)
         {
             AddItem(item.gameItem, item.quantity);

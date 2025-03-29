@@ -77,11 +77,11 @@ namespace Surviblewilderness
             //reload player inventory 
             List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
+            inventory.ClearInventory(); 
             foreach(PlayerInventoryData data in playerData.inventoryDataList.list)
             {
                 inventoryItems.Add(new InventoryItem(collectableItemsDict[data.itemId], data.quantity, data.isAssignedToSlot));
             }
-
             inventory.ReloadInventory(inventoryItems);
 
             //reload player position
