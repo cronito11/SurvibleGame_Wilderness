@@ -17,11 +17,13 @@ namespace Surviblewilderness
         private void OnEnable ()
         {
             input.Interact += DetectTargets;
+            PhoneMenuUiManager.CollectButtonClicked += DetectTargets;
         }
 
         private void OnDisable ()
         {
             input.Interact -= DetectTargets;
+            PhoneMenuUiManager.CollectButtonClicked -= DetectTargets;
         }
 
         private void DetectTargets ()
