@@ -18,6 +18,4 @@ public class InteractableObject : MonoBehaviour
             //trigger qeuipt item event from inventory manager  
         }
     }
-    
-
 }

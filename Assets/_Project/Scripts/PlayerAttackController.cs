@@ -16,11 +16,13 @@ namespace Surviblewilderness
         private void OnEnable ()
         {
             input.Attack += Attack;
+            PhoneMenuUiManager.AttackButtonClicked += Attack;
         }
 
         private void OnDisable ()
         {
             input.Attack -= Attack;
+            PhoneMenuUiManager.AttackButtonClicked -= Attack;
         }
 
         private void Update ()
