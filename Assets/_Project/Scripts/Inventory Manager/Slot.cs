@@ -27,14 +27,14 @@ namespace Surviblewilderness
             }
 
             //if there is no item assigned to the slot and the slot is empty then instantiate the item prefab
-            if (currentInventoryItem == null && isEmpty)
+            if (itemUi == null && isEmpty)
             {
                 itemUi = GameObject.Instantiate(itemUiPrefab, transform);
                 itemUi.SetActive(true);
                 itemUi.GetComponentInChildren<Image>().sprite = item.gameItem.icon;
                 itemUi.GetComponentInChildren<DraggableItem>().item = item;
-                gameObject.SetActive(true);
             }
+            gameObject.SetActive(true);
 
             //if the item is already assigned to the slot then just update the quantity
             //just updating the quantity
