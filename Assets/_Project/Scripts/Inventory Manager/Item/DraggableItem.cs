@@ -36,8 +36,15 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
     }
     public void OnEndDrag(PointerEventData eventData)
     {   
-        currentInventorySlot.ClearSlot();
+        currentInventorySlot.EmptySlot();
         transform.SetParent(parentAfterDrag);
+        
+            parentAfterDrag.GetComponent<InventorySlot>().SetItem(item);
+        
         itemIcon.raycastTarget = true;
+    }
+    public void AssignToPreviousSlot()
+    {
+        this.previousParent.GetComponent<InventorySlot>().SetItem(item);
     }
 }

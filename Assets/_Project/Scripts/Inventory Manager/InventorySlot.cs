@@ -60,22 +60,25 @@ public class InventorySlot : Slot, IDropHandler
     }
     public void OnDrop(PointerEventData eventData)
     {
-        if (!IsEmpty)
+        if (!IsEmpty || itemUi != null)
             return;
         GameObject droppedItem = eventData.pointerDrag;
         DraggableItem draggableItem;
+
+        //check if the pointer drag is null or not 
         if (!droppedItem.TryGetComponent<DraggableItem>(out draggableItem))
         {
-            //item will be returned to the previous parent/slot
+            //item will be returned to the previous parent/slot and get assigned to that previous slot  
             Debug.Log("Pointer drag is null");
+            //draggableItem.AssignToPreviousSlot();
             return;
         }
 
         //assign the item to this slot  
         draggableItem.parentAfterDrag = transform;
-        itemUi = droppedItem;
+        //itemUi = droppedItem;
         
-        SetItem(draggableItem.item);
+       // SetItem(draggableItem.item);
 
         Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);   
     }
