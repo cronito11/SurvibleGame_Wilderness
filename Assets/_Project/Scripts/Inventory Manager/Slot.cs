@@ -12,10 +12,10 @@ namespace Surviblewilderness
         public GameObject itemUi;
 
         //holds the reference of the current inventory item assigned to in the slot
-        public InventoryItem currentInventoryItem { get; protected set; }
-        [SerializeField] public bool IsEmpty => currentInventoryItem == null;
+        [field: SerializeField] public InventoryItem currentInventoryItem { get; protected set; }
+        //[SerializeField] public bool IsEmpty => currentInventoryItem == null;
         [SerializeField] protected GameObject itemUiPrefab;
-        public bool isEmpty { get { return currentInventoryItem == null; } }
+        [field: SerializeField] public bool isEmpty => currentInventoryItem == null && itemUi == null;
 
         //setting the item to the slot
         public virtual void SetItem(InventoryItem item)
@@ -33,8 +33,8 @@ namespace Surviblewilderness
                 itemUi.SetActive(true);
                 itemUi.GetComponentInChildren<Image>().sprite = item.gameItem.icon;
                 itemUi.GetComponentInChildren<DraggableItem>().item = item;
+                gameObject.SetActive(true);
             }
-            gameObject.SetActive(true);
 
             //if the item is already assigned to the slot then just update the quantity
             //just updating the quantity
@@ -42,6 +42,13 @@ namespace Surviblewilderness
             //currentInventoryItem = item;
             currentInventoryItem.isAssignedToSlot = true;
             itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
+            
+            //if the item there is no item of this type in inventory 
+            if(item.quantity <= 0)
+            {
+                Debug.Log("Item quantity is 0");    
+                EmptySlot();
+            }
         }
 
         //remove the item from the slot destroy the draggable game object

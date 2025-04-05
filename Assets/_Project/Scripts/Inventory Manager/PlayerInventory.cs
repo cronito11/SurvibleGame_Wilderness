@@ -28,11 +28,13 @@ public class PlayerInventory :  MonoBehaviour
     private void OnEnable()
     {
         InteractableObject.OnItemPickedUp += AddItem;
+        InventoryItem.OnItemUsed += RemoveItem; // Subscribe to item usage event
     }
 
     private void OnDisable()
     {
         InteractableObject.OnItemPickedUp -= AddItem;
+        InventoryItem.OnItemUsed -= RemoveItem; // Unsubscribe from item usage event
     }
 
     public void AddItem(GameItemSO item, int amount)
@@ -53,15 +55,18 @@ public class PlayerInventory :  MonoBehaviour
 
     public void RemoveItem(GameItemSO item, int amount)
     {
+        InventoryItem inventoryItem = inventory[item.id];
         if (inventory.ContainsKey(item.id))
         {
             inventory[item.id].quantity -= amount;
             if (inventory[item.id].quantity <= 0)
             {
+                Debug.Log($"Removed {item.itemName} from inventory");
                 inventory.Remove(item.id);
             }
         }
-        //OnInventoryChanged?.Invoke(inventory[item.id]);
+        Debug.Log($"removed {amount} {item.itemName} from inventory");
+        OnInventoryChanged?.Invoke(inventoryItem);
     }
 
     public Dictionary<int, InventoryItem> GetInventory()

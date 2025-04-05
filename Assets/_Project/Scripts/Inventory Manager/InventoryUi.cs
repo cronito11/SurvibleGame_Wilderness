@@ -69,29 +69,49 @@ public class InventoryUi : MonoBehaviour
 
     private void ClearAllUiSlots()
     {
+        ClearFoodItemUiSlots();
+        ClearMaterialItemUiSlots();
+        ClearWeaponItemUiSlots();
+        ClearClothingItemUiSlots();
+    }
+
+    private void ClearClothingItemUiSlots()
+    {
         foreach (InventorySlot child in inventorySlotsClothing)
-        {
-            //child.GetComponent<InventorySlot>().ClearSlot();
-            child.EmptySlot();
-            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);  
-        }
-        foreach (InventorySlot child in inventorySlotsMaterial)
         {
             //child.GetComponent<InventorySlot>().ClearSlot();
             child.EmptySlot();
             //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
         }
+    }
+
+    private void ClearWeaponItemUiSlots()
+    {
         foreach (InventorySlot child in inventorySlotsWeapon)
         {
             //child.GetComponent<InventorySlot>().ClearSlot();
             child.EmptySlot();
             //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
         }
-        foreach (InventorySlot child in inventorySlotsFood)
+    }
+
+    private void ClearMaterialItemUiSlots()
+    {
+        foreach (InventorySlot child in inventorySlotsMaterial)
         {
             //child.GetComponent<InventorySlot>().ClearSlot();
             child.EmptySlot();
             //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
+        }
+    }
+
+    private void ClearFoodItemUiSlots()
+    {
+        foreach (InventorySlot child in inventorySlotsFood)
+        {
+            //child.GetComponent<InventorySlot>().ClearSlot();
+            child.EmptySlot();
+            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);  
         }
     }
 
@@ -143,6 +163,12 @@ public class InventoryUi : MonoBehaviour
         Dictionary<int, InventoryItem> foodInventory = inventory
             .Where(pair => pair.Value.gameItem.itemType == ItemType.Food)
             .ToDictionary(pair => pair.Key, pair => pair.Value);
+        if(foodInventory.Count == 0)
+        {
+            Debug.Log("No Food Items");
+            ClearAllUiSlots();  
+            return;
+        }
 
         for (int i = 0; i < foodInventory.Count; i++)
         {

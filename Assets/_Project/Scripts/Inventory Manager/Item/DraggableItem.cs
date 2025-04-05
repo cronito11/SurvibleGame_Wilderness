@@ -39,7 +39,7 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
         currentInventorySlot.EmptySlot();
         transform.SetParent(parentAfterDrag);
         
-            parentAfterDrag.GetComponent<InventorySlot>().SetItem(item);
+        parentAfterDrag.GetComponent<InventorySlot>().SetItem(item);
         
         itemIcon.raycastTarget = true;
     }
