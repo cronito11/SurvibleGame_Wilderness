@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [ System.Serializable ]
-public class InventoryItem : MonoBehaviour
+public class InventoryItem 
 {
     public static event Action<GameItemSO,int> OnItemUsed; // 🔥 Event for any item usage to remove it from inventory
     public static event Action<GameItemSO> OnConsumeFoodItem; // 🔥 Event for food item usage to generate health or other effects
@@ -25,9 +25,9 @@ public class InventoryItem : MonoBehaviour
     }
 
     [field: SerializeField]
-    public int currentDurability // Only for weapons/armor
+    public bool isStackable // Only for weapons/armor
     {
-        get;  set;
+        get { return gameItem.maxStackSize > 1; }
     }
     [field: SerializeField]
     public bool isAssignedToSlot 
@@ -60,7 +60,7 @@ public class InventoryItem : MonoBehaviour
                 break;
             case ItemType.Weapon:
                 // Use the weapon item
-                Debug.Log($"Equipping {gameItem.itemName}");
+                EquipWeapon();
                 break;
             case ItemType.Clothing:
                 // Use the clothing item
@@ -70,7 +70,15 @@ public class InventoryItem : MonoBehaviour
 
         Debug.Log($"Using {gameItem.itemName}");
     
-    }   
+    }
+
+    private void EquipWeapon()
+    {
+        OnConsumeWeaponItem?.Invoke(gameItem);  
+
+        OnItemUsed?.Invoke(gameItem, defaultConsumeAmount);
+        Debug.Log($"Equipping {gameItem.itemName}");
+    }
 
     private void ConsumeFoodItem()
     {

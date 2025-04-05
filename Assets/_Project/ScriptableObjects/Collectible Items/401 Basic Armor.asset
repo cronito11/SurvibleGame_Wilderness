@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: Basic Armor
   itemType: 3
   weight: 3000
-  maxStackSize: 2
+  maxStackSize: 1
   icon: {fileID: -6009198046271197863, guid: 416d7ad4879a2ec4c99603e9260521e1, type: 3}

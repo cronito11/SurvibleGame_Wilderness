@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Silver Sword
   itemType: 0
   weight: 1000
-  maxStackSize: 3
+  maxStackSize: 1
   icon: {fileID: 5806247343882902020, guid: f14422fe0972f6742b86a49a59c03d34, type: 3}
   damage: 10
   maxDurability: 10

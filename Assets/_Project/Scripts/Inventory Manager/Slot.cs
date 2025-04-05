@@ -15,7 +15,7 @@ namespace Surviblewilderness
         [field: SerializeField] public InventoryItem currentInventoryItem { get; protected set; }
         //[SerializeField] public bool IsEmpty => currentInventoryItem == null;
         [SerializeField] protected GameObject itemUiPrefab;
-        [field: SerializeField] public bool isEmpty => currentInventoryItem == null && itemUi == null;
+        [field: SerializeField] public bool isEmpty => itemUi == null;
 
         //setting the item to the slot
         public virtual void SetItem(InventoryItem item)
@@ -27,7 +27,7 @@ namespace Surviblewilderness
             }
 
             //if there is no item assigned to the slot and the slot is empty then instantiate the item prefab
-            if (itemUi == null && isEmpty)
+            if (itemUi == null)
             {
                 itemUi = GameObject.Instantiate(itemUiPrefab, transform);
                 itemUi.SetActive(true);
