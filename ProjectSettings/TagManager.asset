@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemies
+  - Prey
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Minimap
   - Map
   - Lights
-  - 
+  - Prey
   - 
   - 
   - 

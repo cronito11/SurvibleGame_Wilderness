@@ -61,7 +61,7 @@ namespace Surviblewilderness
             //load the predators data from the save file
             PassiveAnimalDataList passiveAnimalDataList  = SaveSystem.Load<PassiveAnimalDataList>(PASSIVE_ANIMAL_SAVE_FILE_NAME);   
 
-            foreach (PassiveAimaalData predatorData in passiveAnimalDataList.list)
+            foreach (PassiveAnimalData predatorData in passiveAnimalDataList.list)
             {
                 //instantiate the predator at saved position
                 GameObject predator = GameObject.Instantiate(passiveAnimalPrefab, new Vector3(predatorData.entityPosition.x, predatorData.entityPosition.y, predatorData.entityPosition.z), Quaternion.identity);

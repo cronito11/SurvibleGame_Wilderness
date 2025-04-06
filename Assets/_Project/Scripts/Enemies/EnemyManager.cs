@@ -10,14 +10,22 @@ namespace Surviblewilderness
         Hunting  = 2,
         Attacking = 3,
     }
-    public class EnemyManager : EntityManager
+    public class EnemyManager : EntityManager<IObserver>
     {
+        private PassiveAnimalManager passiveAnimal;
+        private PassiveAnimalSpawner passiveAnimalSpawner;
+
+        protected override void Awake ()
+        {
+            base.Awake();
+            passiveAnimalSpawner = FindAnyObjectByType<PassiveAnimalSpawner>();
+            passiveAnimal = passiveAnimalSpawner.GetRandomPassiveAnimal();
+        }
+
         public override void FindTarget (Transform newTarget)
         {
                 target = newTarget;
                 state = EntityState.Evaluating;
-                Debug.Log(target.gameObject, target);
-
         }
 
         public override void LostTarget (Transform target)
@@ -38,10 +46,21 @@ namespace Surviblewilderness
 
                 break;
             }
-            agent.destination = destination;
-            if (!target)
-                return;
-            destination = target.position;
+
+            if (target)
+            {
+                destination = target.position;
+            } else if (passiveAnimal)
+            {
+                destination = passiveAnimal.transform.position;
+            } else 
+            {
+                if (passiveAnimalSpawner.activeElementCount == 0)
+                    return;
+                passiveAnimal = passiveAnimalSpawner.GetRandomPassiveAnimal();
+            }
+
+            agent.destination = destination;            
         }
     }
 }

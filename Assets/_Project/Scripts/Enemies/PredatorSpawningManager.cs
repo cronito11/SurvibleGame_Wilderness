@@ -25,7 +25,7 @@ namespace Surviblewilderness
 
         override protected int MaxAmount ()
         {
-            int passiveAnimalCount = passiveAnimalSpawner.activeElementCount; // Count passive animals
+            int passiveAnimalCount = Mathf.Max(passiveAnimalSpawner.activeElementCount, 5); // Count passive animals
             return passiveAnimalCount / 2; // Predator cap (optional)
         }
 
@@ -38,11 +38,9 @@ namespace Surviblewilderness
         {
             if (timeOfDay == TimeOfDay.Night)
             {
-                StartCoroutine(SpawnPrefab2());
-            } else
-            {
-                StopAllCoroutines();
+                SpawnPrefab2();
             }
+            
         }
     }
 }

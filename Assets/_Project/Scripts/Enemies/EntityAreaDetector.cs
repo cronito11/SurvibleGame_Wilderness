@@ -5,11 +5,11 @@ namespace Surviblewilderness
 {
     public class EntityAreaDetector : MonoBehaviour
     {
-        private EntityManager manager;
+        private EntityManager<IObserver> manager;
 
         private void Awake ()
         {
-            manager = GetComponentInParent<EntityManager>();
+            manager = GetComponentInParent<EntityManager<IObserver>>();
         }
 
         private void OnTriggerEnter (Collider other)

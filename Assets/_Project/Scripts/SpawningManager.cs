@@ -45,24 +45,11 @@ namespace Surviblewilderness
         abstract protected int MaxAmount ();
         abstract protected float GetProbability ();
 
-        protected IEnumerator SpawnPrefab2 ()
+        protected void SpawnPrefab2 ()
         {
-            while (true)
+            for(int idx = 0; idx < MaxAmount(); idx++)
             {
-                yield return new WaitForSeconds(spawnRate);
-
-                int maxPredators =MaxAmount (); 
-
-                if (activeElementCount < maxPredators)
-                {
-                    float probability = GetProbability();
-                    float randomValue = Random.Range(0f, 1f);
-
-                    if (randomValue < probability)
-                    {
-                        SpawnPrefab();
-                    }
-                }
+                SpawnPrefab();
             }
         }
 

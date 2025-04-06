@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Surviblewilderness
 {
-    public class EnemyBasicAttack : MonoBehaviour, IAttacker
+    public class PreyBasicAttack : MonoBehaviour, IAttacker
     {
         private const float COLD_DOWN = 2;
 
@@ -24,9 +24,6 @@ namespace Surviblewilderness
             if (other.CompareTag("Player"))
             {
                 player = other.GetComponent<IDamageable>();
-            } else if (other.CompareTag("Prey"))
-            {
-                target = other.GetComponent<IDamageable>();
             }
         }
 
@@ -35,9 +32,6 @@ namespace Surviblewilderness
             if (other.CompareTag("Player"))
             {
                 player = null;
-            } else if(other.CompareTag("Prey") && other.GetComponent<IDamageable>() == target)
-            {
-                target = null;
             }
         }
 
@@ -55,7 +49,7 @@ namespace Surviblewilderness
             else
             {
                 currentColdDownCounter = COLD_DOWN;
-                if(player != null)
+                if (player != null)
                     player.ApplyDamage(attackDamage);
                 else if (target != null)
                     target.ApplyDamage(attackDamage);
@@ -63,7 +57,7 @@ namespace Surviblewilderness
             }
         }
 
-        public void Attack()
+        public void Attack ()
         {
 
             if (target == null && player == null)
@@ -73,11 +67,11 @@ namespace Surviblewilderness
             else
             {
                 currentColdDownCounter = COLD_DOWN;
-                if(player != null)
+                if (player != null)
                     player.ApplyDamage(attackDamage);
                 else if (target != null)
                     target.ApplyDamage(attackDamage);
-                OnAttack?.Invoke(); 
+                OnAttack?.Invoke();
             }
         }
     }

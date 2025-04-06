@@ -3,16 +3,16 @@ using UnityEngine.AI;
 
 namespace Surviblewilderness
 {
-    public abstract class EntityManager : MonoBehaviour
+    public abstract class EntityManager<T> : Subject<T>
     {
         protected NavMeshAgent agent;
         protected Vector3 destination;
         protected Transform target;
         protected EntityState state;
 
-        private void Awake ()
+        virtual protected void Awake ()
         {
-            agent = GetComponentInParent<NavMeshAgent>();
+            agent = gameObject.GetComponentInParent<NavMeshAgent>();
         }
 
         abstract public void FindTarget (Transform newTarget);
@@ -25,5 +25,13 @@ namespace Surviblewilderness
         }
 
         abstract protected void UpdateTarget ();
+
+        public override void NotifyObservers ()
+        {
+            for (int idx = 0; idx < observers.Count; idx++)
+            {
+                ((IObserver)observers [idx]).OnNotify();
+            }
+        }
     }
 }
