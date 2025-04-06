@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
-public class PlayerInventory :  MonoBehaviour
+public class PlayerInventory : SingletonBase<PlayerInventory>
 {
-    public static PlayerInventory Instance { get; private set; }
+    //public static PlayerInventory Instance { get; private set; }
 
     private Dictionary<int, InventoryItem> inventory = new Dictionary<int, InventoryItem>();
 
     public static event Action<InventoryItem> OnInventoryChanged;  // 🔥 Event for inventory updates
     public static event Action OnInventoryClear;  // 🔥 Event for item usage
 
-    private void Awake()
-    {
-        inventory = new Dictionary<int, InventoryItem>();
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
+    //private void Awake()
+    //{
+    //    inventory = new Dictionary<int, InventoryItem>();
+    //    if (Instance == null)
+    //        Instance = this;
+    //    else
+    //        Destroy(gameObject);
+    //}
 
     private void Start()
     {

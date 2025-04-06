@@ -9,7 +9,7 @@ public class InventoryItem
     public static event Action<GameItemSO> OnConsumeWeaponItem; // 🔥 Event for weapon item usage to generate damage or other effects
     public static event Action<GameItemSO> OnConsumeClothingItem; // 🔥 Event for clothing item usage to generate armor or other effects
 
-
+   
     private int defaultConsumeAmount = 1; // Default amount to consume when using an item
 
     [field: SerializeField] 
@@ -31,6 +31,12 @@ public class InventoryItem
     }
     [field: SerializeField]
     public bool isAssignedToSlot 
+    {
+        get; set;
+    }
+
+    [field: SerializeField]
+    public bool isEqupped // Only for weapons/armor
     {
         get; set;
     }
@@ -64,7 +70,7 @@ public class InventoryItem
                 break;
             case ItemType.Clothing:
                 // Use the clothing item
-                Debug.Log($"Wearing {gameItem.itemName}");
+                EquipOutfit();
                 break;
         }
 
@@ -72,10 +78,18 @@ public class InventoryItem
     
     }
 
+    private void EquipOutfit()
+    {
+        isEqupped = true;
+        OnConsumeClothingItem?.Invoke(gameItem);
+        OnItemUsed?.Invoke(gameItem, defaultConsumeAmount);
+        Debug.Log($"Equipping {gameItem.itemName}");
+    }
+
     private void EquipWeapon()
     {
-        OnConsumeWeaponItem?.Invoke(gameItem);  
-
+        isEqupped = true;
+        OnConsumeWeaponItem?.Invoke(gameItem);
         OnItemUsed?.Invoke(gameItem, defaultConsumeAmount);
         Debug.Log($"Equipping {gameItem.itemName}");
     }

@@ -74,6 +74,17 @@ public class InventorySlot : Slot, IDropHandler,IPointerClickHandler
             return;
         }
 
+        if (draggableItem.item.isEqupped)
+        {
+            if (draggableItem.item.gameItem.itemType == ItemType.Weapon
+                || draggableItem.item.gameItem.itemType == ItemType.Clothing)
+            {
+                draggableItem.item.isEqupped = false;
+                PlayerInventory.Instance.AddItem(draggableItem.item.gameItem, draggableItem.item.quantity);
+            }
+        }
+       
+
         //assign the item to this slot  
         draggableItem.parentAfterDrag = transform;
         //itemUi = droppedItem;

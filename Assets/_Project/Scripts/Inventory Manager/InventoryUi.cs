@@ -144,7 +144,7 @@ public class InventoryUi : MonoBehaviour
 
             //if the item is not stackable then for full quantity we need to assign the item to separate slots  
             int itemCount = item.quantity;
-            item.quantity = 1; // Set the quantity to 1 for each slot   
+            InventoryItem newItem = new InventoryItem(item.gameItem, 1,false);    
             while (itemCount > 0)
             {
                 //find the first empty slot and set the item
@@ -157,7 +157,7 @@ public class InventoryUi : MonoBehaviour
                     }
                     j++;
                 }
-                inventorySlotsWeapon[j].SetItem(item);
+                inventorySlotsWeapon[j].SetItem(newItem);
                 itemCount--;    
             }
 
@@ -283,7 +283,7 @@ public class InventoryUi : MonoBehaviour
                 //}
 
             int itemCount = item.quantity;
-            item.quantity = 1; // Set the quantity to 1 for each slot
+            InventoryItem newItem = new InventoryItem(item.gameItem, 1, false);
             while (itemCount > 0)
             {
                 //find the first empty slot and set the item
@@ -295,7 +295,7 @@ public class InventoryUi : MonoBehaviour
                     }
                     j++;
                 }
-                inventorySlotsClothing[j].SetItem(item);
+                inventorySlotsClothing[j].SetItem(newItem);
                 itemCount--;
             }
         }

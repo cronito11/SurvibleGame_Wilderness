@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21b20dc25a98a304888b5c021aeed360, type: 3}
-  m_Name: 401 Basic Armor
+  m_Name: 202 Elite Knight Set
   m_EditorClassIdentifier: Assembly-CSharp::ClothItemSO
-  id: 401
-  itemName: Basic Armor
+  id: 202
+  itemName: Elite Knight Set
   itemType: 3
-  weight: 3000
+  weight: 50
   maxStackSize: 1
-  icon: {fileID: -6009198046271197863, guid: 416d7ad4879a2ec4c99603e9260521e1, type: 3}
+  icon: {fileID: 1692742518842296893, guid: cea8186578848314b86d47c6daedf32d, type: 3}
