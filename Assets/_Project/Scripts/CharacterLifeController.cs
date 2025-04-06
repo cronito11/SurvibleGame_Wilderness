@@ -14,6 +14,16 @@ namespace Surviblewilderness
 
         public int health => _health;
 
+        private void OnEnable()
+        {
+            InventoryItem.OnConsumeFoodItem += ReStoreHealthOnFoodConsume;
+        }
+        private void OnDisable()
+        {
+            InventoryItem.OnConsumeFoodItem -= ReStoreHealthOnFoodConsume;
+        }
+
+
         public void ApplyDamage (int amount)
         {
             if (health <=0)
@@ -32,11 +42,19 @@ namespace Surviblewilderness
             if (_health > MAX_HEALTH)
                 _health = MAX_HEALTH;
             OnHealed?.Invoke(amount);
+            Debug.Log($"Healed {amount} health, Current Health: {_health}");
         }
 
         public void ReloadHealth(int health)
         {
             _health = health;
+        }
+
+        private void ReStoreHealthOnFoodConsume(GameItemSO gameItemSO)
+        {
+            FoodItemSO foodItem = gameItemSO as FoodItemSO;
+            Debug.Log($"Restoring health with {foodItem.itemName}, Restores: {foodItem.staminaReplenishment} Hunger");
+            Heal(foodItem.staminaReplenishment);
         }
     }
 }
