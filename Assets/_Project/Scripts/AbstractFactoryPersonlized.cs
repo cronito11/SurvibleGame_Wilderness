@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Surviblewilderness
 {
-    public abstract class SpawningManager : MonoBehaviour
+    public abstract class AbstractFactoryPersonlized : MonoBehaviour
     {
         public GameObject prefab;
 
@@ -20,7 +20,6 @@ namespace Surviblewilderness
         #endregion
 
         public int activeElementCount { get; private set; }
-        protected int passiveAnimalCount;
 
         protected IEnumerator SpawningPrefab ()
         {

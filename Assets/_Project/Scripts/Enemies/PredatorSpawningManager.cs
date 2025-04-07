@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Surviblewilderness
 {
-    public class PredatorSpawningManager : SpawningManager
+    public class PredatorSpawningManager : AbstractFactoryPersonlized
     {
         private PassiveAnimalSpawner passiveAnimalSpawner;
 
@@ -39,8 +39,7 @@ namespace Surviblewilderness
             if (timeOfDay == TimeOfDay.Night)
             {
                 SpawnPrefab2();
-            }
-            
+            }            
         }
     }
 }
