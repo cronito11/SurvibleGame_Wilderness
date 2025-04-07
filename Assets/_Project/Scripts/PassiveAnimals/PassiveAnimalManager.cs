@@ -17,12 +17,15 @@ namespace Surviblewilderness
         {
             base.Awake();
             PassiveAnimalSpawner = GetComponentInParent<PassiveAnimalSpawner>();
-            initialPosition = transform.position;
+            float radius = 2f;
+            Vector2 circle = UnityEngine.Random.insideUnitCircle * radius;
+            initialPosition = new Vector3(circle.x, 0, circle.y) + transform.position;
         }
 
         private void Start ()
         {
             NotifyObservers();
+            agent.destination = initialPosition;
         }
 
         public void SetStats (PassiveAnimalStats stats)

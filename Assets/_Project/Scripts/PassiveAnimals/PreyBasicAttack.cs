@@ -16,7 +16,7 @@ namespace Surviblewilderness
         private IDamageable player;
 
         public event Action OnAttack;
-
+        public bool isPlayerInRange => player != null;
 
 
         private void OnTriggerEnter (Collider other)

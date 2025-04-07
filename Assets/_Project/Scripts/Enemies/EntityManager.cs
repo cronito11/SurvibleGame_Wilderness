@@ -9,6 +9,7 @@ namespace Surviblewilderness
         protected Vector3 destination;
         protected Transform target;
         protected EntityState state;
+        public bool isTargetInRange => target != null;
 
         virtual protected void Awake ()
         {

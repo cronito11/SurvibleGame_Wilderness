@@ -28,6 +28,7 @@ namespace Surviblewilderness
             PassiveAnimalManager animal = passiveAnimals[index];
             return animal;
         }
+
         public void InstantiateChild ()
         {
             SpawnPrefab(true);
