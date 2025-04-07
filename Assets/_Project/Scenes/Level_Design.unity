@@ -693,6 +693,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 944590998}
+    - target: {fileID: 242337902581076473, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
+      propertyPath: rotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3077398107678528763, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.3296604
