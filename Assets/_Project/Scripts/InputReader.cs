@@ -11,6 +11,8 @@ namespace Surviblewilderness
         public event UnityAction<Vector2> Move = delegate { };
         public event UnityAction Interact = delegate { };
         public event UnityAction Attack = delegate { };
+        
+        public event UnityAction<bool> Sprint = delegate { }; // Event to notify sprinting state
 
         InputSystem_Actions input;
 
@@ -92,6 +94,16 @@ namespace Surviblewilderness
 
         public void OnSprint (InputAction.CallbackContext context)
         {
+            // Trigger Sprint event
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    Sprint?.Invoke(true); // Player started sprinting
+                    break;
+                case InputActionPhase.Canceled:
+                    Sprint?.Invoke(false); // Player stoped sprinting
+                    break;
+            }
         }
     }
 }

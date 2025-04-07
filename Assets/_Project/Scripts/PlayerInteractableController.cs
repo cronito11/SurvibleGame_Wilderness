@@ -9,6 +9,7 @@ namespace Surviblewilderness
         [SerializeField] private float viewRadius = 2f;
         [SerializeField] private float viewAngle = 110f;
         [SerializeField] private LayerMask targetMask; // Layer of the objects to detect
+        [SerializeField] private Animator anim;
 
         private SortedList<IInteractable, float> orderedList = new SortedList<IInteractable, float>();
         private Collider[] targetsInViewRadius = new Collider[10];
@@ -34,6 +35,8 @@ namespace Surviblewilderness
                 return;
             orderedList.Clear();
 
+            anim.SetTrigger("Interact");
+            
             for (int idx= 0; idx< targetsFound; idx++)
             {
                 Collider target = targetsInViewRadius[idx];
