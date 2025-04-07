@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5bc5ee9c24a1f44d988b8ceec9202fb, type: 3}
-  m_Name: 301 Silver Sword
+  m_Name: 302 Iron Sword
   m_EditorClassIdentifier: Assembly-CSharp::WeaponItemSO
-  id: 301
-  itemName: Silver Sword
+  id: 302
+  itemName: Iron Sword
   itemType: 0
   weight: 1000
   maxStackSize: 1
-  icon: {fileID: 5806247343882902020, guid: f14422fe0972f6742b86a49a59c03d34, type: 3}
+  icon: {fileID: 712035800519618848, guid: 5555116c8467a454c8c90c5cece8dc84, type: 3}
   damage: 10
   maxDurability: 10

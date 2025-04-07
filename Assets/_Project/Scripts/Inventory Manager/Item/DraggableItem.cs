@@ -1,3 +1,4 @@
+using Surviblewilderness;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,8 +9,9 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
     public Transform previousParent;
     public Transform parentAfterDrag;
     public InventoryItem item;
-    private InventorySlot currentInventorySlot;
-    [SerializeField] private int clonedItemQuantity; 
+    private Slot previousSlotRef;
+    [SerializeField] private int clonedItemQuantity;
+    
     public event System.Action OnItemDragged;
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -19,12 +21,12 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
         previousParent = transform.parent;
 
         //implement something other method beacuse it clears the item even if it's quantity is greater than 1
-        currentInventorySlot = transform.parent.GetComponent<InventorySlot>();
-        //currentInventorySlot.ClearSlot();
+        previousSlotRef = transform.parent.GetComponent<Slot>();
+        //previousSlotRef.ClearSlot();
 
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
-        //currentInventorySlot.CreateCopyOnDrag(item, ref clonedItemQuantity);
+        //previousSlotRef.CreateCopyOnDrag(item, ref clonedItemQuantity);
         OnItemDragged?.Invoke();    
     }
     public void OnDrag(PointerEventData eventData)
@@ -32,12 +34,30 @@ public class DraggableItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IEnd
         //Debug.Log("OnDrag");
         transform.position = Input.mousePosition;
         itemIcon.raycastTarget = false;
-        //currentInventorySlot.itemUi = null;
+        //previousSlotRef.itemUi = null;
     }
     public void OnEndDrag(PointerEventData eventData)
     {   
-        currentInventorySlot.ClearSlot();
+        previousSlotRef.EmptySlot();
         transform.SetParent(parentAfterDrag);
+        
+        parentAfterDrag.GetComponent<Slot>().SetItem(item);
+
+        //NOTE CREATE A CLOTH SLOT AND ADD THE CONDITION FOR CLOTHING AS WELL 
+        //if it is a weapon slit then equipt the weapon 
+        if(parentAfterDrag.GetComponent<Slot>() as WeaponSlot)
+        {
+            item.UseItem();
+        }
+        if (parentAfterDrag.GetComponent<Slot>() as OutfitSlot)
+        {
+            item.UseItem();
+        }
+
         itemIcon.raycastTarget = true;
+    }
+    public void AssignToPreviousSlot()
+    {
+        previousParent.GetComponent<Slot>().SetItem(item);
     }
 }

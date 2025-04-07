@@ -69,29 +69,49 @@ public class InventoryUi : MonoBehaviour
 
     private void ClearAllUiSlots()
     {
+        ClearFoodItemUiSlots();
+        ClearMaterialItemUiSlots();
+        ClearWeaponItemUiSlots();
+        ClearClothingItemUiSlots();
+    }
+
+    private void ClearClothingItemUiSlots()
+    {
         foreach (InventorySlot child in inventorySlotsClothing)
-        {
-            //child.GetComponent<InventorySlot>().ClearSlot();
-            child.EmptySlot();
-            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);  
-        }
-        foreach (InventorySlot child in inventorySlotsMaterial)
         {
             //child.GetComponent<InventorySlot>().ClearSlot();
             child.EmptySlot();
             //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
         }
+    }
+
+    private void ClearWeaponItemUiSlots()
+    {
         foreach (InventorySlot child in inventorySlotsWeapon)
         {
             //child.GetComponent<InventorySlot>().ClearSlot();
             child.EmptySlot();
             //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
         }
-        foreach (InventorySlot child in inventorySlotsFood)
+    }
+
+    private void ClearMaterialItemUiSlots()
+    {
+        foreach (InventorySlot child in inventorySlotsMaterial)
         {
             //child.GetComponent<InventorySlot>().ClearSlot();
             child.EmptySlot();
             //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);
+        }
+    }
+
+    private void ClearFoodItemUiSlots()
+    {
+        foreach (InventorySlot child in inventorySlotsFood)
+        {
+            //child.GetComponent<InventorySlot>().ClearSlot();
+            child.EmptySlot();
+            //Destroy(child.GetComponentInChildren<DraggableItem>().gameObject);  
         }
     }
 
@@ -102,36 +122,46 @@ public class InventoryUi : MonoBehaviour
         Dictionary<int, InventoryItem> weaponsInventory = inventory
             .Where(pair => pair.Value.gameItem.itemType == ItemType.Weapon)
             .ToDictionary(pair => pair.Key, pair => pair.Value);
-
+        ClearWeaponItemUiSlots();
         for (int i = 0; i < weaponsInventory.Count; i++)
         {
             int j = 0;
             InventoryItem item = weaponsInventory.Values.ElementAt(i);
 
-            //if item is already assigned to a slot then just update the text and then continue
-            if (item.isAssignedToSlot)
+            //No because these items are not stackable
+                //if item is already assigned to a slot then just update the text and then continue
+                //if (item.isAssignedToSlot)
+                //{
+                //    //update the text and continue
+                //    //find the postion where the item is assigned
+                //    while (inventorySlotsWeapon[j].currentInventoryItem != item)
+                //    {
+                //        j++;
+                //    }
+                //    inventorySlotsWeapon[j].SetItem(item);
+                //    continue;
+                //}
+
+            //if the item is not stackable then for full quantity we need to assign the item to separate slots  
+            int itemCount = item.quantity;
+            InventoryItem newItem = new InventoryItem(item.gameItem, 1,false);    
+            while (itemCount > 0)
             {
-                //update the text and continue
-                //find the postion where the item is assigned
-                while (inventorySlotsWeapon[j].currentInventoryItem != item)
+                //find the first empty slot and set the item
+                while (!inventorySlotsWeapon[j].isEmpty)
                 {
+
+                    if (j > inventorySlotsWeapon.Count)
+                    {
+                        Debug.Log("No Empty Slots");
+                    }
                     j++;
                 }
-                inventorySlotsWeapon[j].SetItem(item);
-                continue;
+                inventorySlotsWeapon[j].SetItem(newItem);
+                itemCount--;    
             }
 
-            //find the first empty slot and set the item
-            while (!inventorySlotsWeapon[j].isEmpty)
-            {
-
-                if (j > inventorySlotsWeapon.Count)
-                {
-                    Debug.Log("No Empty Slots");
-                }
-                j++;
-            }
-            inventorySlotsWeapon[j].SetItem(item);
+            
         }
         #endregion
     }
@@ -143,6 +173,12 @@ public class InventoryUi : MonoBehaviour
         Dictionary<int, InventoryItem> foodInventory = inventory
             .Where(pair => pair.Value.gameItem.itemType == ItemType.Food)
             .ToDictionary(pair => pair.Key, pair => pair.Value);
+        if(foodInventory.Count == 0)
+        {
+            Debug.Log("No Food Items");
+            ClearAllUiSlots();  
+            return;
+        }
 
         for (int i = 0; i < foodInventory.Count; i++)
         {
@@ -226,36 +262,42 @@ public class InventoryUi : MonoBehaviour
         Dictionary<int, InventoryItem> clothsInventory = inventory
             .Where(pair => pair.Value.gameItem.itemType == ItemType.Clothing)
             .ToDictionary(pair => pair.Key, pair => pair.Value);
-
+        ClearClothingItemUiSlots();
         for (int i = 0; i < clothsInventory.Count; i++)
         {
             int j = 0;
             InventoryItem item = clothsInventory.Values.ElementAt(i);
 
-            //if item is already assigned to a slot then just update the text and then continue
-            if (item.isAssignedToSlot)
+            //No because these items are not stackable
+                ////if item is already assigned to a slot then just update the text and then continue
+                //if (item.isAssignedToSlot)
+                //{
+                //    //update the text and continue
+                //    //find the postion where the item is assigned
+                //    while (inventorySlotsClothing[j].currentInventoryItem != item)
+                //    {
+                //        j++;
+                //    }
+                //    inventorySlotsClothing[j].SetItem(item);
+                //    continue;
+                //}
+
+            int itemCount = item.quantity;
+            InventoryItem newItem = new InventoryItem(item.gameItem, 1, false);
+            while (itemCount > 0)
             {
-                //update the text and continue
-                //find the postion where the item is assigned
-                while (inventorySlotsClothing[j].currentInventoryItem != item)
+                //find the first empty slot and set the item
+                while (!inventorySlotsClothing[j].isEmpty)
                 {
+                    if (j > inventorySlotsClothing.Count)
+                    {
+                        Debug.Log("No Empty Slots");
+                    }
                     j++;
                 }
-                inventorySlotsClothing[j].SetItem(item);
-                continue;
+                inventorySlotsClothing[j].SetItem(newItem);
+                itemCount--;
             }
-
-            //find the first empty slot and set the item
-            while (!inventorySlotsClothing[j].isEmpty)
-            {
-
-                if (j > inventorySlotsClothing.Count)
-                {
-                    Debug.Log("No Empty Slots");
-                }
-                j++;
-            }
-            inventorySlotsClothing[j].SetItem(item);
         }
         #endregion
     }
