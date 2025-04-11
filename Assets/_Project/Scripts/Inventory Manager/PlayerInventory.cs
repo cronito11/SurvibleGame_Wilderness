@@ -59,18 +59,25 @@ public class PlayerInventory : SingletonBase<PlayerInventory>
 
     public void RemoveItem(GameItemSO item, int amount)
     {
-        InventoryItem inventoryItem = inventory[item.id];
+        InventoryItem removedInventoryItem = inventory[item.id];
         if (inventory.ContainsKey(item.id))
         {
             inventory[item.id].quantity -= amount;
+            removedInventoryItem = inventory[item.id];
             if (inventory[item.id].quantity <= 0)
             {
                 Debug.Log($"Item {item.itemName} has {inventory[item.id].quantity} int inventory");
+                //removedInventoryItem = inventory[item.id];
                 inventory.Remove(item.id);
             }
         }
+        else
+        {
+            Debug.Log($"Item {item.itemName} not found in inventory");
+            return;
+        }
         Debug.Log($"removed {amount} {item.itemName} from inventory");
-        OnInventoryChanged?.Invoke(inventoryItem);
+        OnInventoryChanged?.Invoke(removedInventoryItem);
     }
 
     public Dictionary<int, InventoryItem> GetInventory()

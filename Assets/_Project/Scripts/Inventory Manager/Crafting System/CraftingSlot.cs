@@ -6,6 +6,7 @@ namespace Surviblewilderness
 {
     public class CraftingSlot : Slot, IDropHandler, IPointerClickHandler
     {
+        public static event Action<InventoryItem> OnRemoveMaterialFromCraftingPanel;
         //public static Action<GameItemSO> OnRemoveMaterialFromCraftingPanel;
         public void OnDrop(PointerEventData eventData)
         {
@@ -38,7 +39,7 @@ namespace Surviblewilderness
         public override void EmptySlot()
         {
             //currentInventoryItem.isEqupped = false;
-            //OnRemoveMaterialFromCraftingPanel?.Invoke(currentInventoryItem.gameItem);
+            OnRemoveMaterialFromCraftingPanel?.Invoke(currentInventoryItem);
             base.EmptySlot();
         }
 
