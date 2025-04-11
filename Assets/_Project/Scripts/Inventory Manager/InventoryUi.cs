@@ -220,7 +220,14 @@ public class InventoryUi : MonoBehaviour
         Dictionary<int, InventoryItem> materialsInventory = inventory
             .Where(pair => pair.Value.gameItem.itemType == ItemType.Material)
             .ToDictionary(pair => pair.Key, pair => pair.Value);
-
+        Debug.Log(materialsInventory.Count);    
+        if(materialsInventory.Count == 0)
+        {
+            Debug.Log("No Material Items");
+            ClearMaterialItemUiSlots();
+            return;
+        }
+        
         for (int i = 0; i < materialsInventory.Count; i++)
         {
             int j = 0;

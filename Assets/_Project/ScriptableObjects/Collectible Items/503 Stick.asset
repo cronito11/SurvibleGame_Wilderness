@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 419e0d35d8f67e74fb08527c910bd153, type: 3}
-  m_Name: 501 Wood
-  m_EditorClassIdentifier: Assembly-CSharp::MaterialItemSO
-  id: 501
-  itemName: Wood
+  m_Name: 503 Stick
+  m_EditorClassIdentifier: 
+  id: 503
+  itemName: Stick
   itemType: 2
   weight: 5
   maxStackSize: 100
-  icon: {fileID: -2180588317352946653, guid: d58fce3806791a446a633c9b19afa689, type: 3}
-  materialType: 1
+  icon: {fileID: 2823479486145030729, guid: b67c53ee68dad3640b6698ae3135ffd9, type: 3}
+  materialType: 4

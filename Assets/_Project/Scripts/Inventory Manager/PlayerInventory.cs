@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Surviblewilderness;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -30,12 +31,14 @@ public class PlayerInventory : SingletonBase<PlayerInventory>
     {
         InteractableObject.OnItemPickedUp += AddItem;
         InventoryItem.OnItemUsed += RemoveItem; // Subscribe to item usage event
+        DropMaterial.OnRemoveMaterialFromInventory += RemoveItem; // Subscribe to item drop event
     }
 
     private void OnDisable()
     {
         InteractableObject.OnItemPickedUp -= AddItem;
         InventoryItem.OnItemUsed -= RemoveItem; // Unsubscribe from item usage event
+        DropMaterial.OnRemoveMaterialFromInventory -= RemoveItem; // Unsubscribe from item drop event
     }
 
     public void AddItem(GameItemSO item, int amount)
@@ -62,7 +65,7 @@ public class PlayerInventory : SingletonBase<PlayerInventory>
             inventory[item.id].quantity -= amount;
             if (inventory[item.id].quantity <= 0)
             {
-                Debug.Log($"Removed {item.itemName} from inventory");
+                Debug.Log($"Item {item.itemName} has {inventory[item.id].quantity} int inventory");
                 inventory.Remove(item.id);
             }
         }

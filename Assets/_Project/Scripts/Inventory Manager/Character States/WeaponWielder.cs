@@ -7,6 +7,7 @@ namespace Surviblewilderness
     {
         Dictionary<string, GameObject> weaponDict = new Dictionary<string, GameObject>();
         [SerializeField] List<GameObject> weaponList = new List<GameObject>();
+        //[SerializeField] WeaponSlot weaponSlot;
 
         private void Start()
         {
@@ -36,6 +37,7 @@ namespace Surviblewilderness
            string weaponName = weapon.itemName;
             if(weaponDict.ContainsKey(weaponName))
             {
+                //weaponSlot.SetItem(new InventoryItem(weapon,1));
                 weaponDict[weaponName].SetActive(true);
             }
             else

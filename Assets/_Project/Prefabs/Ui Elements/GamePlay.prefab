@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 609140282010467024}
   - component: {fileID: 8624177040393644218}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: Force Bar Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +371,7 @@ RectTransform:
   m_Father: {fileID: 45573017329673105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.852, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -486,8 +486,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6998985666229571812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.852, y: 0}
-  m_AnchorMax: {x: 0.852, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -859,7 +859,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1390407940339520722, guid: 51be22b134271fa4a9bc3d0c2bb15bc3, type: 3}
       propertyPath: m_Name
-      value: Health
+      value: Health Bar Slider
       objectReference: {fileID: 0}
     - target: {fileID: 1560627903773273793, guid: 51be22b134271fa4a9bc3d0c2bb15bc3, type: 3}
       propertyPath: m_Pivot.x
@@ -1091,7 +1091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8991370318696815631, guid: 335b15e7907a79d4bb1bb05354cf0d70, type: 3}
       propertyPath: m_Name
-      value: Pause
+      value: Pause Button
       objectReference: {fileID: 0}
     - target: {fileID: 8991370318696815631, guid: 335b15e7907a79d4bb1bb05354cf0d70, type: 3}
       propertyPath: m_IsActive
@@ -1123,6 +1123,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3269796018979124395, guid: bf9ae037f0d53ac4d9c218f011906493, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269796018979124395, guid: bf9ae037f0d53ac4d9c218f011906493, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 135
+      objectReference: {fileID: 0}
     - target: {fileID: 8148590713393201693, guid: bf9ae037f0d53ac4d9c218f011906493, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1149,11 +1157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148590713393201693, guid: bf9ae037f0d53ac4d9c218f011906493, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 150
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: 8148590713393201693, guid: bf9ae037f0d53ac4d9c218f011906493, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: 8148590713393201693, guid: bf9ae037f0d53ac4d9c218f011906493, type: 3}
       propertyPath: m_LocalPosition.x

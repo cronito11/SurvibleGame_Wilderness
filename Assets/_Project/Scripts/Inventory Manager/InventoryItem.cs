@@ -8,8 +8,8 @@ public class InventoryItem
     public static event Action<GameItemSO> OnConsumeFoodItem; // 🔥 Event for food item usage to generate health or other effects
     public static event Action<GameItemSO> OnConsumeWeaponItem; // 🔥 Event for weapon item usage to generate damage or other effects
     public static event Action<GameItemSO> OnConsumeClothingItem; // 🔥 Event for clothing item usage to generate armor or other effects
+    public static event Action<InventoryItem> OnDropOnCraftingPanel; // 🔥 Event for material item usage to generate crafting or other effects
 
-   
     private int defaultConsumeAmount = 1; // Default amount to consume when using an item
 
     [field: SerializeField] 
@@ -72,11 +72,28 @@ public class InventoryItem
                 // Use the clothing item
                 EquipOutfit();
                 break;
+            case ItemType.Material:
+                // Use the material item
+                OnMaterialDropBegin();
+                break;  
+            default:
+                Debug.Log($"Item {gameItem.itemName} is not consumable");
+                break;  
         }
 
         Debug.Log($"Using {gameItem.itemName}");
     
     }
+
+    public void OnMaterialDropBegin()
+    {
+        OnDropOnCraftingPanel?.Invoke(this);
+    }
+    //private void DropMaterialInCraftingPanel()
+    //{
+    //    OnItemUsed?.Invoke(gameItem, defaultConsumeAmount);
+    //    Debug.Log($"Equipping {gameItem.itemName}");
+    //}
 
     private void EquipOutfit()
     {

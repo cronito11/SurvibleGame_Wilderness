@@ -1,7 +1,16 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 public enum ItemType { Weapon, Food, Material, Clothing }
-public enum MaterialType { Wood, Stond, Iron }
+public enum MaterialType 
+{
+    None,
+    Wood,
+    Stone,
+    Iron,
+    Stick,
+    Diamond,
+    RareDiamond
+}
 
 [CreateAssetMenu(fileName = "GameItem", menuName = "Scriptable Objects/GameItem")]
 public class GameItemSO : ScriptableObject
