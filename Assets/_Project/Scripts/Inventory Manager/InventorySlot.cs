@@ -110,8 +110,12 @@ public class InventorySlot : Slot, IDropHandler,IPointerClickHandler
         {
             // Double click detected
             Debug.Log($"Double Click! on item {currentInventoryItem.gameItem.name}");
-            currentInventoryItem.UseItem();
-            //OnDoubleClick();
+            if (currentInventoryItem.gameItem.itemType != ItemType.Weapon
+                && currentInventoryItem.gameItem.itemType != ItemType.Clothing)
+            {
+                //double click use item only works for food and material    
+                currentInventoryItem.UseItem();
+            }
         }
 
         lastClickTime = Time.time;
