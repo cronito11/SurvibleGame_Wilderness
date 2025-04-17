@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 419e0d35d8f67e74fb08527c910bd153, type: 3}
-  m_Name: 502 Rock
+  m_Name: 504 Iron
   m_EditorClassIdentifier: 
-  id: 502
-  itemName: Rock
+  id: 504
+  itemName: Iron
   itemType: 2
   weight: 10
   maxStackSize: 100
-  icon: {fileID: -3094302376565900353, guid: c52c66e8c335c1640a21e3d2c274bfd7, type: 3}
+  icon: {fileID: 8796267687936727094, guid: cecd9cbf00a9099418ce8a1653a82c7f, type: 3}
+  materialType: 3

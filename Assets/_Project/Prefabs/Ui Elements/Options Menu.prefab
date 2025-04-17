@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1583054870640788126}
   m_Layer: 0
-  m_Name: SFX Control
+  m_Name: SFX Sound Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6022576489480726502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -472,7 +472,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5563668944592844350}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 3643456936825728014}
   - component: {fileID: 2084177257994038346}
   m_Layer: 0
-  m_Name: Button 2 (1)
+  m_Name: Back Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -563,7 +563,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5.3999023, y: -6.899933}
+  m_AnchoredPosition: {x: -305, y: -42}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9082689239822443169
@@ -927,7 +927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 958064459619848964}
   m_Layer: 0
-  m_Name: Music Sound Contro;
+  m_Name: Music Sound Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1019,9 +1019,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'X
-
-'
+  m_text: <
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c065efefdeecf04db0008337317b629, type: 2}
   m_sharedMaterial: {fileID: -5736362757133984657, guid: 9c065efefdeecf04db0008337317b629, type: 2}
@@ -1118,7 +1116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6108464915059127336, guid: 267d0f0f1215e9b4585dbf0e33830747, type: 3}
       propertyPath: m_Name
-      value: Sound Slider (1)
+      value: Sound Slider
       objectReference: {fileID: 0}
     - target: {fileID: 6982811872352222758, guid: 267d0f0f1215e9b4585dbf0e33830747, type: 3}
       propertyPath: m_Value
@@ -1296,7 +1294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6108464915059127336, guid: 267d0f0f1215e9b4585dbf0e33830747, type: 3}
       propertyPath: m_Name
-      value: Sound Slider
+      value: SFX Sound Slider
       objectReference: {fileID: 0}
     - target: {fileID: 6982811872352222758, guid: 267d0f0f1215e9b4585dbf0e33830747, type: 3}
       propertyPath: m_Value

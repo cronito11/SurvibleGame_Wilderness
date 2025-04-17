@@ -108,10 +108,12 @@ namespace Surviblewilderness
                 predatorDataList.Add(data);
                 Debug.Log(JsonUtility.ToJson(predatorDataList, true).ToString());
             }
-            PredatorSaveDataList predatorSaveDataList = new PredatorSaveDataList();
-            predatorSaveDataList.predatorDataList = predatorDataList;
 
-            SaveSystem.Save(predatorSaveDataList, PREDATOR_SAVE_FILE_NAME);
+            Debug.Log(predatorDataList.Count);
+            //PredatorSaveDataList predatorSaveDataList = new PredatorSaveDataList();
+            // predatorSaveDataList.predatorDataList = predatorDataList;
+
+            SaveSystem.Save(predatorDataList, PREDATOR_SAVE_FILE_NAME);
         }
         
     }
@@ -120,10 +122,6 @@ namespace Surviblewilderness
     public class PredatorSaveData : EntityData
     {
         public PredatorSats predatorStats;
-        public PredatorSaveData() : base()
-        {
-            predatorStats = new PredatorSats();
-        }
     }
 
     [System.Serializable]
@@ -140,9 +138,6 @@ namespace Surviblewilderness
     {
         public List<PredatorSaveData> predatorDataList;
 
-        public PredatorSaveDataList() 
-        {
-            predatorDataList = new List<PredatorSaveData>();
-        }   
+       
     }
 }

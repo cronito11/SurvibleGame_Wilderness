@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 namespace Surviblewilderness
 {
-    public enum EnemyState 
+    public enum EntityState 
     {
         None = 0,
         Evaluating = 4,
@@ -11,44 +10,57 @@ namespace Surviblewilderness
         Hunting  = 2,
         Attacking = 3,
     }
-
-    public class EnemyManager : MonoBehaviour
+    public class EnemyManager : EntityManager<IObserver>
     {
-        private NavMeshAgent agent;
-        private Transform target;
-        private Vector3 destination;
-        private EnemyState state;
+        private PassiveAnimalManager passiveAnimal;
+        private PassiveAnimalSpawner passiveAnimalSpawner;
 
-        private void Awake ()
+        protected override void Awake ()
         {
-            agent = GetComponentInParent<NavMeshAgent>();
+            base.Awake();
+            passiveAnimalSpawner = FindAnyObjectByType<PassiveAnimalSpawner>();
+            passiveAnimal = passiveAnimalSpawner.GetRandomPassiveAnimal();
         }
 
-        public void FindTarget(Transform newTarget)
+        public override void FindTarget (Transform newTarget)
         {
-            target = newTarget;
-            state = EnemyState.Evaluating;
-            Debug.Log(target.gameObject, target);
+                target = newTarget;
+                state = EntityState.Evaluating;
+        }
+
+        public override void LostTarget (Transform target)
+        {
+                if (this.target == null || this.target != target)
+                    return;
+
+                this.target = null;
+                state = EntityState.None;
 
         }
 
-        private void Update ()
-        {
-            UpdateTarget();
-        }
-
-        private void UpdateTarget ()
+        protected override void UpdateTarget ()
         {
             switch (state)
             {
-                case EnemyState.Evaluating:
+                case EntityState.Evaluating:
 
-                    break;
+                break;
             }
-            agent.destination = destination;
-            if (!target)
-                return;
-            destination = target.position;
+
+            if (target)
+            {
+                destination = target.position;
+            } else if (passiveAnimal)
+            {
+                destination = passiveAnimal.transform.position;
+            } else 
+            {
+                if (passiveAnimalSpawner.activeElementCount == 0)
+                    return;
+                passiveAnimal = passiveAnimalSpawner.GetRandomPassiveAnimal();
+            }
+
+            agent.destination = destination;            
         }
     }
 }

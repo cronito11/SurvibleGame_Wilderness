@@ -285,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMask:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 8961
   input: {fileID: 11400000, guid: 54cdc9996d145f4478ef104210e91f49, type: 2}
   attackDistance: 10
   atttackAmount: 10

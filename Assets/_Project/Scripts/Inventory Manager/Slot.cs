@@ -40,7 +40,9 @@ namespace Surviblewilderness
             //just updating the quantity
             currentInventoryItem = item;
             //currentInventoryItem = item;
-            currentInventoryItem.isAssignedToSlot = true;
+            if(this as InventorySlot)
+                currentInventoryItem.isAssignedToSlot = true;
+            
             itemUi.GetComponentInChildren<TMP_Text>().text = item.quantity.ToString();
             
             //if the item there is no item of this type in inventory 
