@@ -1,8 +1,14 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EntityType
+{
+    Player,
+    NPC,
+    Enemy,
+    Item
+}
 namespace Surviblewilderness
 {
     [CreateAssetMenu(fileName = "QuestManager", menuName = "Scriptable Objects/QuestManager")]
@@ -17,6 +23,9 @@ namespace Surviblewilderness
             List<QuestGeneric> activeQuests = new List<QuestGeneric>();
             foreach (var quest in quests)
             {
+                if(quest.Status == QuestStatus.InProgress || quest.Status == QuestStatus.NotStarted &&
+                    quest.Visible)    
+                    activeQuests.Add(quest);
             }
             return activeQuests;
         }
@@ -57,33 +66,5 @@ namespace Surviblewilderness
             }
         }
 
-    }
-
-    class QuestGameManager : MonoBehaviour // Should Be in the gamescene // or in Dont Destroy
-    {
-        [SerializeField] private QuestManager questManager;
-        private PlayerInventory inventoryManager;
-
-
-        private void Awake ()
-        {
-            inventoryManager = PlayerInventory.Instance;
-        }
-        private void Start ()
-        {
-            PlayerInventory.OnInventoryChanged += OnInventoryChanged;
-            //L
-            // link to Event of player
-        }
-
-        private void OnDestroy ()
-        {
-            PlayerInventory.OnInventoryChanged -= OnInventoryChanged;
-        }
-
-        private void OnInventoryChanged (InventoryItem item)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

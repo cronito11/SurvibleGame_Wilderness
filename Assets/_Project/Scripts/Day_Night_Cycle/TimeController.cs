@@ -11,6 +11,7 @@ public enum TimeOfDay
 public class TimeController : MonoBehaviour
 {
     public static event Action<TimeOfDay> OnChangeTimeOfDay;
+    public static event Action<DateTime> OnChangeTime;
 
     [Header("Time Variables")]
     [SerializeField] private float timeMultiplier; // Controls how fast time passes in the game

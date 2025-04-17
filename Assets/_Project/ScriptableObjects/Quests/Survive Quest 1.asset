@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419e0d35d8f67e74fb08527c910bd153, type: 3}
-  m_Name: 502 Stone
+  m_Script: {fileID: 11500000, guid: 3950d260ea73790488b78f5d75904595, type: 3}
+  m_Name: Survive Quest 1
   m_EditorClassIdentifier: 
-  id: 502
-  itemName: Stone
-  itemType: 2
-  gameElement: 2
-  weight: 10
-  maxStackSize: 100
-  icon: {fileID: -3094302376565900353, guid: c52c66e8c335c1640a21e3d2c274bfd7, type: 3}
-  materialType: 2
+  questId: survivesq5
+  questName: Are you a sirvival ?
+  questDescription: 'Survive for 5 hours '
+  visible: 1
+  status: 1
+  type: 2
+  surviveTime: 5
+  timeSurvived: 0
