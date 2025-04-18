@@ -22,10 +22,8 @@ namespace Surviblewilderness
         {
             List<QuestGeneric> activeQuests = new List<QuestGeneric>();
             foreach (var quest in quests)
-            {
-                if(quest.Status == QuestStatus.InProgress || quest.Status == QuestStatus.NotStarted &&
-                    quest.Visible)    
-                    activeQuests.Add(quest);
+            { 
+                activeQuests.Add(quest);
             }
             return activeQuests;
         }
@@ -54,17 +52,17 @@ namespace Surviblewilderness
             }
         }
 
-        public void CompleteQuest (string questId)
-        {
-            QuestGeneric quest = GetQuest(questId);
-            if (quest != null)
-            {
-                quest.CompleteQuest();
-            } else
-            {
-                Debug.LogWarning($"Quest with ID {questId} not found.");
-            }
-        }
+        //public void CompleteQuest (string questId)
+        //{
+        //    QuestGeneric quest = GetQuest(questId);
+        //    if (quest != null)
+        //    {
+        //        quest.CompleteQuest();
+        //    } else
+        //    {
+        //        Debug.LogWarning($"Quest with ID {questId} not found.");
+        //    }
+        //}
 
     }
 }

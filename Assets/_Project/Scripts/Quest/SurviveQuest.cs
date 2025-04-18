@@ -10,16 +10,20 @@ namespace Surviblewilderness
         public override void StartQuest ()
         {
             status = QuestStatus.InProgress;
+            visible = true;
+            NotifyQuestStatusUpdate(); // Notify quest status update
             Debug.Log($"Quest: {questName} started.");
         }
         public override void CompleteQuest ()
         {
             status = QuestStatus.Completed;
+            NotifyQuestStatusUpdate(); // Notify quest status update
             Debug.Log($"Quest: {questName} completed.");
         }
         public override void FailQuest ()
         {
             status = QuestStatus.Failed;
+            NotifyQuestStatusUpdate(); // Notify quest status update
             Debug.Log($"Quest: {questName} failed.");
         }
         public override void UpdateQuestProgress (int progress)
@@ -32,6 +36,10 @@ namespace Surviblewilderness
         }
         public override void ResetQuest ()
         {
+            timeSurvived = 0;
+            status = QuestStatus.NotStarted;
+            visible = true;
+            NotifyQuestStatusUpdate(); // Notify quest status update
             Debug.Log($"Quest: {questName} reset.");
         }
         public override void LoadData (string jsonData)

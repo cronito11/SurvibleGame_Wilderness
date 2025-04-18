@@ -16,7 +16,7 @@ MonoBehaviour:
   questName: Are you a sirvival ?
   questDescription: 'Survive for 5 hours '
   visible: 1
-  status: 1
+  status: 0
   type: 2
   surviveTime: 5
   timeSurvived: 0

@@ -8,7 +8,7 @@ namespace Surviblewilderness
     [System.Serializable]
     public class EntityData
     {
-        public EntityPosition entityPosition;
+        public EntityPosition entityPosition = new EntityPosition();
     }
 
 
