@@ -1,20 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 namespace Surviblewilderness
 {
     class QuestGameManager : MonoBehaviour // Should Be in the gamescene // or in Dont Destroy
     {
         [SerializeField] private QuestManager questManager;
         
-
-        private void Awake ()
-        {
-            
-        }
         private void Start ()
         {
             PlayerInventory.OnInventoryChanged += OnInventoryChanged;
             DestroyCharacterDeath.OnCharacterDeath += OnCharacterDeath;
+            TimeController.OnAnHourPassed += SurvialQuestTracking;
 
         }
 
@@ -22,7 +17,7 @@ namespace Surviblewilderness
         {
             PlayerInventory.OnInventoryChanged -= OnInventoryChanged;
             DestroyCharacterDeath.OnCharacterDeath -= OnCharacterDeath;
-
+            TimeController.OnAnHourPassed -= SurvialQuestTracking;
         }
 
         private void OnInventoryChanged (InventoryItem item)
@@ -76,7 +71,7 @@ namespace Surviblewilderness
                 {
                     if (survivalQuest.Status == QuestStatus.Completed)
                         return;
-                   // survivalQuest.UpdateQuestProgress(1);
+                    survivalQuest.UpdateQuestProgress(1);
                 }
             }
         }

@@ -11,13 +11,16 @@ public enum TimeOfDay
 public class TimeController : MonoBehaviour
 {
     public static event Action<TimeOfDay> OnChangeTimeOfDay;
-    public static event Action<DateTime> OnChangeTime;
+    public static event Action OnAnHourPassed;
 
     [Header("Time Variables")]
     [SerializeField] private float timeMultiplier; // Controls how fast time passes in the game
     [SerializeField] private float startHour; // The hour that the game starts with (e.g., 6 for 6 AM)
     [SerializeField] private TextMeshProUGUI timeText; // Reference to UI element to display the time
     private DateTime currentTime; // Holds the current in-game time as a DateTime object
+
+    public DateTime DateTime => currentTime; // Public property to access the current in-game time
+
     private TimeSpan sunriseTime;
     private TimeSpan sunsetTime;
     [SerializeField]private TimeOfDay currentTimeOfDay = TimeOfDay.Day;
@@ -35,6 +38,8 @@ public class TimeController : MonoBehaviour
 
     [SerializeField] private AnimationCurve lightChangeCurve;
 
+    private float lastHourCheck = 0f; // Used to track the last time an hour was checked
+    private float hour = 1;
 
     private void OnEnable()
     {
@@ -71,6 +76,21 @@ public class TimeController : MonoBehaviour
     {
         OnChangeTimeOfDay?.Invoke(currentTimeOfDay);
     }
+
+    private void AfterAnHourTriggerQuestUpdateEvent(DateTime _currentTime)
+    {
+        //calculate and check if one hour has been passed or not 
+        //if yes then fire an event that will be used to update active quests related to survival time
+        
+        if (Mathf.Abs(_currentTime.Hour - lastHourCheck) >= hour)
+        {
+            //one hour has passed
+            Debug.Log("One hour has passed");   
+            lastHourCheck = _currentTime.Hour;
+            OnAnHourPassed?.Invoke();
+        }
+    }
+
     private void UpdateTimeOfDay()
     {
         /*
@@ -79,6 +99,8 @@ public class TimeController : MonoBehaviour
             Multiply by timeMultiplier to control the speed of time in the game
         */
         currentTime = currentTime.AddSeconds(Time.deltaTime * timeMultiplier);
+
+        AfterAnHourTriggerQuestUpdateEvent(currentTime);
 
         // Check if the timeText is not null
         if (timeText != null)
@@ -140,7 +162,7 @@ public class TimeController : MonoBehaviour
         RenderSettings.ambientLight = Color.Lerp(nightAmbientLight, dayAmbientLight, lightChangeCurve.Evaluate(dotProduct));
     }
 
-    private TimeSpan CalculateTimeDifference(TimeSpan fromTime, TimeSpan toTime)
+    private TimeSpan  CalculateTimeDifference(TimeSpan fromTime, TimeSpan toTime)
     {
         TimeSpan difference = toTime - fromTime;
 

@@ -24,7 +24,11 @@ namespace Surviblewilderness
         }
         public override void UpdateQuestProgress (int progress)
         {
-
+            timeSurvived += progress;
+            if(timeSurvived >= surviveTime)
+            {
+                CompleteQuest();
+            }
         }
         public override void ResetQuest ()
         {
