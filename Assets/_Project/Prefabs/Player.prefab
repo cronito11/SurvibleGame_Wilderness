@@ -615,9 +615,11 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 54cdc9996d145f4478ef104210e91f49, type: 2}
   rb: {fileID: 3151348453753549425}
   movement: {x: 0, y: 0, z: 0}
-  movSpeed: 200
+  moveSpeed: 200
+  runSpeed: 250
   rotationSpeed: 200
   mainCamera: {fileID: 0}
+  anim: {fileID: 3668368865166016907}
 --- !u!114 &3871996858610948706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,6 +638,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 256
+  anim: {fileID: 0}
 --- !u!114 &7743722598472044482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,7 +823,6 @@ MonoBehaviour:
   collectableItems:
   - {fileID: 11400000, guid: e7b3d0d0a32554541945f953932e7208, type: 2}
   - {fileID: 11400000, guid: c5a9b021daee3734f80b72a58f6a894c, type: 2}
-  - {fileID: 11400000, guid: 22ddf60a5424b3c4d8d324b629721c79, type: 2}
   - {fileID: 11400000, guid: 273473cef089d4c41b63105e73306c20, type: 2}
   - {fileID: 11400000, guid: 613ae818788148f4e91c4d7ad9062c81, type: 2}
   - {fileID: 11400000, guid: 60a35f613e74d524fbaa5d8fd2e34a0a, type: 2}
@@ -1436,6 +1438,11 @@ PrefabInstance:
       addedObject: {fileID: 491118449549039917}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 996b1cdc214c6ad43b2b0a8dc6ab12ed, type: 3}
+--- !u!95 &3668368865166016907 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9539514, guid: 996b1cdc214c6ad43b2b0a8dc6ab12ed, type: 3}
+  m_PrefabInstance: {fileID: 3668368865173392945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3668368865173459177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 466648, guid: 996b1cdc214c6ad43b2b0a8dc6ab12ed, type: 3}

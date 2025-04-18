@@ -1641,30 +1641,6 @@ PrefabInstance:
       propertyPath: gameOverMenuUi
       value: 
       objectReference: {fileID: 3699284856067338078}
-    - target: {fileID: 2520976293044936299, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
-      propertyPath: collectableItems.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2520976293044936299, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
-      propertyPath: 'collectableItems.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 273473cef089d4c41b63105e73306c20, type: 2}
-    - target: {fileID: 2520976293044936299, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
-      propertyPath: 'collectableItems.Array.data[3]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 613ae818788148f4e91c4d7ad9062c81, type: 2}
-    - target: {fileID: 2520976293044936299, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
-      propertyPath: 'collectableItems.Array.data[4]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 60a35f613e74d524fbaa5d8fd2e34a0a, type: 2}
-    - target: {fileID: 2520976293044936299, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
-      propertyPath: 'collectableItems.Array.data[5]'
-      value: 
-      objectReference: {fileID: 11400000, guid: da478e0f11bb055448c684bab3793ad8, type: 2}
-    - target: {fileID: 2520976293044936299, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
-      propertyPath: 'collectableItems.Array.data[6]'
-      value: 
-      objectReference: {fileID: 11400000, guid: e84b70494bc512b41ac0c678fcf3ca00, type: 2}
     - target: {fileID: 3077398107678528763, guid: ef7ba9f779e3d7f4e942612a068dcb8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.25
@@ -91614,6 +91590,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 0
+  anim: {fileID: 0}
 --- !u!4 &1455719096
 Transform:
   m_ObjectHideFlags: 0
