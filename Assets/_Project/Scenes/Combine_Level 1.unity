@@ -44673,6 +44673,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7292658344771522932, guid: f5b41ba4c79702547a89de7544b80656, type: 3}
   m_PrefabInstance: {fileID: 386837419}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &722179845 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3734775969355451150, guid: f5b41ba4c79702547a89de7544b80656, type: 3}
+  m_PrefabInstance: {fileID: 386837419}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &722395993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133251,6 +133256,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBase
       objectReference: {fileID: 0}
+    - target: {fileID: 8041180363943274593, guid: d7fd8c1daaae6cf418649816a7c0c20e, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 722179845}
+    - target: {fileID: 8041180363943274593, guid: d7fd8c1daaae6cf418649816a7c0c20e, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 722179845}
     - target: {fileID: 8541319536043838168, guid: d7fd8c1daaae6cf418649816a7c0c20e, type: 3}
       propertyPath: m_Camera
       value: 
