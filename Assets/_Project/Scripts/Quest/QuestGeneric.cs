@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Surviblewilderness
 {
     public enum QuestStatus { NotStarted, InProgress, Completed, Failed }
-    public enum QuestType { MainQuest, SideQuest, DailyQuest }
+    public enum QuestType { KillQuest, CollectItemQuest, SurviveQuest }
 
     public abstract class QuestGeneric : ScriptableObject
     {
@@ -25,9 +25,10 @@ namespace Surviblewilderness
         public abstract void StartQuest ();
         public abstract void CompleteQuest ();
         public abstract void FailQuest ();
-        public abstract void UpdateQuestProgress (string data);
+        public abstract void UpdateQuestProgress (int data);
         public abstract void ResetQuest ();
         public abstract void LoadData (string jsonData);
+        public abstract string SaveData(); 
 
     }
 }
