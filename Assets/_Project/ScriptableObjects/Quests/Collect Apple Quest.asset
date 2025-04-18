@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419e0d35d8f67e74fb08527c910bd153, type: 3}
-  m_Name: 502 Stone
+  m_Script: {fileID: 11500000, guid: 01a76292d0fd3c9438294dc43f33c458, type: 3}
+  m_Name: Collect Apple Quest
   m_EditorClassIdentifier: 
-  id: 502
-  itemName: Stone
-  itemType: 2
-  gameElement: 2
-  weight: 10
-  maxStackSize: 100
-  icon: {fileID: -3094302376565900353, guid: c52c66e8c335c1640a21e3d2c274bfd7, type: 3}
-  materialType: 2
+  questId: appleciq5
+  questName: Get Some Food 1
+  questDescription: Collect 10 apples from trees
+  visible: 1
+  status: 0
+  type: 1
+  itemType: 11
+  targetCount: 5
+  currentCount: 10

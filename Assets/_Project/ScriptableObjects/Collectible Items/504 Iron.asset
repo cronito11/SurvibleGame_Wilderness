@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 504
   itemName: Iron
   itemType: 2
+  gameElement: 3
   weight: 10
   maxStackSize: 100
   icon: {fileID: 8796267687936727094, guid: cecd9cbf00a9099418ce8a1653a82c7f, type: 3}

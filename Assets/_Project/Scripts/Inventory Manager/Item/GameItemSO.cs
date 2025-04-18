@@ -12,6 +12,24 @@ public enum MaterialType
     RareDiamond
 }
 
+public enum GameElement
+{
+    None,   
+    Material_Wood,
+    Material_Stone,
+    Material_Iron,
+    Material_Stick,
+    Material_Diamond,
+    Material_RareDiamond,
+    Weapon_IronSword,
+    Weapon_IronAxe,
+    Weapon_SilverSword,
+    Weapon_SilverAxe,
+    Food_Apple,
+    Food_Meat,
+    Cloth_HavelsArmor,
+}
+
 [CreateAssetMenu(fileName = "GameItem", menuName = "Scriptable Objects/GameItem")]
 public class GameItemSO : ScriptableObject
 {
@@ -19,6 +37,7 @@ public class GameItemSO : ScriptableObject
     public int id;
     public string itemName;
     public ItemType itemType;
+    public GameElement gameElement;
     public float weight;
     public int maxStackSize;
     public Sprite icon;

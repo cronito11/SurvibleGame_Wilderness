@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 
-public class PlayerInventory : SingletonBase<PlayerInventory>
+public class PlayerInventory : MonoBehaviour
 {
     //public static PlayerInventory Instance { get; private set; }
 

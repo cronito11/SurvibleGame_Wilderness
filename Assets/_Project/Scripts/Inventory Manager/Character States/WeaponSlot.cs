@@ -9,6 +9,13 @@ namespace Surviblewilderness
     public class WeaponSlot : Slot, IDropHandler, IPointerClickHandler
     {
         public static Action<GameItemSO> OnUnequipWeapon;
+        private PlayerInventory inventory;
+
+        private void Start()
+        {
+            inventory = GameObject.FindAnyObjectByType<PlayerInventory>();
+            //inventory.OnInventoryChanged += UpdateSlot;
+        }
         public void OnDrop(PointerEventData eventData)
         {
             if (!isEmpty || itemUi != null)
@@ -60,7 +67,7 @@ namespace Surviblewilderness
                 Debug.Log($"Double Click! on item {currentInventoryItem.gameItem.name}");
 
                 //restore item to inventory 
-                PlayerInventory.Instance.AddItem(currentInventoryItem.gameItem, currentInventoryItem.quantity);
+                inventory.AddItem(currentInventoryItem.gameItem, currentInventoryItem.quantity);
 
                 //OnUnequipLower?.Invoke(currentInventoryItem.gameItem);
 

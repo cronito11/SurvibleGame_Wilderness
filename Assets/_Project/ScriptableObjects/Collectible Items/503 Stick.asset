@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 503
   itemName: Stick
   itemType: 2
+  gameElement: 4
   weight: 5
   maxStackSize: 100
   icon: {fileID: 2823479486145030729, guid: b67c53ee68dad3640b6698ae3135ffd9, type: 3}

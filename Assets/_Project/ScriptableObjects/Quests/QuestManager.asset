@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419e0d35d8f67e74fb08527c910bd153, type: 3}
-  m_Name: 502 Stone
+  m_Script: {fileID: 11500000, guid: 3dc05f1af13ab6148b148674b3571983, type: 3}
+  m_Name: QuestManager
   m_EditorClassIdentifier: 
-  id: 502
-  itemName: Stone
-  itemType: 2
-  gameElement: 2
-  weight: 10
-  maxStackSize: 100
-  icon: {fileID: -3094302376565900353, guid: c52c66e8c335c1640a21e3d2c274bfd7, type: 3}
-  materialType: 2
+  quests:
+  - {fileID: 11400000, guid: 270e235a58ac9a944a7a4ddcf23d2427, type: 2}
+  - {fileID: 11400000, guid: 4ac2f814c47063d40bff98fa21c1b6a2, type: 2}
