@@ -20,4 +20,4 @@ MonoBehaviour:
   type: 1
   itemType: 11
   targetCount: 5
-  currentCount: 10
+  currentCount: 0

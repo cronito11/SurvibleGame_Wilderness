@@ -121,7 +121,7 @@ namespace Surviblewilderness
     [System.Serializable]
     public class PredatorSaveData : EntityData
     {
-        public PredatorSats predatorStats;
+        public PredatorSats predatorStats = new PredatorSats();
     }
 
     [System.Serializable]
@@ -136,7 +136,7 @@ namespace Surviblewilderness
     [System.Serializable]
     public class PredatorSaveDataList
     {
-        public List<PredatorSaveData> predatorDataList;
+        public List<PredatorSaveData> predatorDataList = new List<PredatorSaveData>();
 
        
     }

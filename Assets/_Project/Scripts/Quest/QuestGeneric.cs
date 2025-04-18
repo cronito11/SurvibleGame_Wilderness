@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Surviblewilderness
@@ -7,7 +8,9 @@ namespace Surviblewilderness
 
     public abstract class QuestGeneric : ScriptableObject
     {
-        
+        public static event Action<QuestGeneric> OnQuestStatusUpdate;
+
+
         [SerializeField] protected string questId;
         [SerializeField] protected string questName;
         [SerializeField] protected string questDescription;
@@ -30,5 +33,9 @@ namespace Surviblewilderness
         public abstract void LoadData (string jsonData);
         public abstract string SaveData(); 
 
+        public virtual void NotifyQuestStatusUpdate()
+        {
+            OnQuestStatusUpdate?.Invoke(this);
+        }
     }
 }
