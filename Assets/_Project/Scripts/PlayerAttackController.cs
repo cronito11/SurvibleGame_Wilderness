@@ -5,11 +5,13 @@ namespace Surviblewilderness
 {
     public class PlayerAttackController : MonoBehaviour, IAttacker
     {
+        private static readonly int AttackAnim = Animator.StringToHash("Attack");
 
         [SerializeField] private LayerMask hitMask;
         [SerializeField] private InputReader input;
         [SerializeField] private int attackDistance = 10;
         [SerializeField] private int atttackAmount = 10;
+        [SerializeField] private Animator animator;
 
         public event Action OnAttack;
 
@@ -52,7 +54,7 @@ namespace Surviblewilderness
             }
 
             Debug.DrawRay(origin, direction * attackDistance, Color.red);
-
+            animator.SetTrigger(AttackAnim);
             //Invoking the onAttack event that basically produces sound in EntitySoundManager script 
             OnAttack?.Invoke();
         }

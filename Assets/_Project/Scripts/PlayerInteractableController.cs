@@ -5,6 +5,8 @@ namespace Surviblewilderness
 {
     public class PlayerInteractableController : MonoBehaviour
     {
+        private static readonly int InteractAnim = Animator.StringToHash("Interact");
+
         [SerializeField] private InputReader input;
         [SerializeField] private float viewRadius = 2f;
         [SerializeField] private float viewAngle = 110f;
@@ -35,7 +37,7 @@ namespace Surviblewilderness
                 return;
             orderedList.Clear();
 
-            anim.SetTrigger("Interact");
+            anim.SetTrigger(InteractAnim);
             
             for (int idx= 0; idx< targetsFound; idx++)
             {

@@ -5,11 +5,13 @@ namespace Surviblewilderness
 {
     public class CharacterLifeController : MonoBehaviour, IDamageable, IHealable
     {
-        private const int MAX_HEALTH = 100;
+        private static readonly int Hit = Animator.StringToHash("Hit");
 
+        private const int MAX_HEALTH = 100;
         public event Action<int> OnDamageRecieved;
         public event Action<int> OnHealed;
 
+        [SerializeField] private Animator[] _animator;
         [SerializeField] private int _health = 100;
 
         public int health => _health;
@@ -28,6 +30,10 @@ namespace Surviblewilderness
         {
             if (health <=0)
                 return;
+            for (int idx = 0; idx < _animator.Length; idx++)
+            {
+                _animator [idx].SetTrigger(Hit);
+            }
             _health -= amount;
             OnDamageRecieved?.Invoke(amount);
 

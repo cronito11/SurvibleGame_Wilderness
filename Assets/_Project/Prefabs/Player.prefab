@@ -638,7 +638,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 256
-  anim: {fileID: 0}
+  anim: {fileID: 3668368865166016907}
 --- !u!114 &7743722598472044482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,6 +657,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 54cdc9996d145f4478ef104210e91f49, type: 2}
   attackDistance: 10
   atttackAmount: 10
+  animator: {fileID: 3668368865166016907}
 --- !u!114 &4448587234252428595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21564870258917a4bae23b50cc067a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator:
+  - {fileID: 3668368865166016907}
   _health: 100
 --- !u!114 &1841480363423910471
 MonoBehaviour:
