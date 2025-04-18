@@ -1,84 +1,83 @@
 ﻿using System;
+using Surviblewilderness;
 using UnityEngine;
 
-namespace Surviblewilderness
+namespace Surviblewildness
 {
     public class EnemyBasicAttack : MonoBehaviour, IAttacker
     {
-        private const float COLD_DOWN = 2;
+        // Attack trigger animation cache
+        private static readonly int Attack1 = Animator.StringToHash("Attack1");
+        private static readonly int Attack5 = Animator.StringToHash("Attack5");
+        
+        private const float COOL_DOWN = 2.0f;
 
         [SerializeField] private int attackDamage = 10;
-        //[SerializeField] private AudioClip attackSound;
+        [SerializeField] private Animator anim;
 
-        private float currentColdDownCounter;
-
-        private IDamageable target;
-        private IDamageable player;
+        private float currentCooldown;
+        private IDamageable currentTarget;
+        private string currentTargetTag;
 
         public event Action OnAttack;
 
-
-
-        private void OnTriggerEnter (Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                player = other.GetComponent<IDamageable>();
-            } else if (other.CompareTag("Prey"))
-            {
-                target = other.GetComponent<IDamageable>();
-            }
-        }
-
-        private void OnTriggerExit (Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                player = null;
-            } else if(other.CompareTag("Prey") && other.GetComponent<IDamageable>() == target)
-            {
-                target = null;
-            }
-        }
-
-        private void Update ()
-        {
-            Attack();
-        }
-
-        private void UpdateTarget ()
-        {
-            if (target == null && player == null)
-                return;
-            if (currentColdDownCounter>0)
-                currentColdDownCounter -=Time.deltaTime;
-            else
-            {
-                currentColdDownCounter = COLD_DOWN;
-                if(player != null)
-                    player.ApplyDamage(attackDamage);
-                else if (target != null)
-                    target.ApplyDamage(attackDamage);
-                //AudioSource.PlayClipAtPoint(attackSound, transform.position);
-            }
-        }
-
+        // Explicit interface implementation
         public void Attack()
         {
+            // This is now just a public wrapper for TryAttack
+            TryAttack();
+        }
 
-            if (target == null && player == null)
-                return;
-            if (currentColdDownCounter > 0)
-                currentColdDownCounter -= Time.deltaTime;
-            else
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player") && !other.CompareTag("Prey")) return;
+            
+            currentTarget = other.GetComponent<IDamageable>();
+            currentTargetTag = other.tag;
+            Attack(); // Use the interface method
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if ((other.CompareTag("Player") || other.CompareTag("Prey")) 
+                && other.GetComponent<IDamageable>() == currentTarget)
             {
-                currentColdDownCounter = COLD_DOWN;
-                if(player != null)
-                    player.ApplyDamage(attackDamage);
-                else if (target != null)
-                    target.ApplyDamage(attackDamage);
-                OnAttack?.Invoke(); 
+                Attack(); // Use the interface method
             }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<IDamageable>() == currentTarget)
+            {
+                currentTarget = null;
+                currentTargetTag = null;
+            }
+        }
+
+        private void TryAttack()
+        {
+            if (currentCooldown > 0)
+            {
+                currentCooldown -= Time.deltaTime;
+                return;
+            }
+
+            if (currentTarget == null || anim == null) return;
+
+            // Trigger appropriate animation
+            if (currentTargetTag == "Player")
+            {
+                anim.SetTrigger(Attack1);
+            }
+            else if (currentTargetTag == "Prey")
+            {
+                anim.SetTrigger(Attack5);
+            }
+
+            currentTarget.ApplyDamage(attackDamage);
+            OnAttack?.Invoke();
+            currentCooldown = COOL_DOWN;
         }
     }
 }

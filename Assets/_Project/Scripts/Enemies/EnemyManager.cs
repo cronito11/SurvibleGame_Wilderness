@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Surviblewilderness
 {
@@ -14,6 +15,7 @@ namespace Surviblewilderness
     {
         private PassiveAnimalManager passiveAnimal;
         private PassiveAnimalSpawner passiveAnimalSpawner;
+        [SerializeField] private Animator anim;
 
         protected override void Awake ()
         {
@@ -35,32 +37,65 @@ namespace Surviblewilderness
 
                 this.target = null;
                 state = EntityState.None;
-
+                UpdateWalkingAnimation(false); // Stop walking when target is lost
         }
 
         protected override void UpdateTarget ()
         {
+            bool shouldWalk = false;
+            
             switch (state)
             {
                 case EntityState.Evaluating:
-
-                break;
+                    // evaluation logic
+                    
+                    shouldWalk = true;
+                    break;
+                case EntityState.Chasing:
+                case EntityState.Hunting:
+                    shouldWalk = true;
+                    break;
+                case EntityState.Attacking:
+                    shouldWalk = false; // Stop walking when attacking
+                    break;
+                default:
+                    shouldWalk = false;
+                    break;
             }
 
             if (target)
             {
                 destination = target.position;
+                shouldWalk = true;
             } else if (passiveAnimal)
             {
                 destination = passiveAnimal.transform.position;
+                shouldWalk = true;
             } else 
             {
                 if (passiveAnimalSpawner.activeElementCount == 0)
                     return;
                 passiveAnimal = passiveAnimalSpawner.GetRandomPassiveAnimal();
             }
+            
+            // Update walking animation based on movement
+            if (agent.velocity.magnitude > 0.1f && shouldWalk)
+            {
+                UpdateWalkingAnimation(true);
+            }
+            else
+            {
+                UpdateWalkingAnimation(false);
+            }
 
-            agent.destination = destination;            
+            agent.destination = destination;  
+        }
+        private void UpdateWalkingAnimation(bool isWalking)
+        {
+            if (anim != null)
+            {
+                anim.SetBool("WalkForward", isWalking);
+            }
         }
     }
 }

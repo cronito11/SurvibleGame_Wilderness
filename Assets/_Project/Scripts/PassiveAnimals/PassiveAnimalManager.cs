@@ -8,6 +8,7 @@ namespace Surviblewilderness
     {
         private const float GESTATION_TIME = 500f;
         [SerializeField] private PassiveAnimalStats stats;
+        [SerializeField] private Animator animator;
 
         private PassiveAnimalSpawner PassiveAnimalSpawner;
         private Vector3 initialPosition;
@@ -26,6 +27,7 @@ namespace Surviblewilderness
         {
             NotifyObservers();
             agent.destination = initialPosition;
+            UpdateWalkingAnimation(true); // Start walking to initial position
         }
 
         public void SetStats (PassiveAnimalStats stats)
@@ -79,6 +81,10 @@ namespace Surviblewilderness
 
         protected override void UpdateTarget ()
         {
+            // Update walking animation based on movement
+            bool isMoving = agent.velocity.magnitude > 0.1f && agent.remainingDistance > agent.stoppingDistance;
+            UpdateWalkingAnimation(isMoving);
+            
             switch (stats.secundaryState)
             {
                 case PassiveAnimalState.Pregnant:
@@ -98,6 +104,14 @@ namespace Surviblewilderness
                 default:
                 break;
 
+            }
+        }
+        
+        private void UpdateWalkingAnimation(bool isWalking)
+        {
+            if (animator != null)
+            {
+                animator.SetBool("Walking", isWalking);
             }
         }
 

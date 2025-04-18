@@ -5,74 +5,73 @@ namespace Surviblewilderness
 {
     public class PreyBasicAttack : MonoBehaviour, IAttacker
     {
-        private const float COLD_DOWN = 2;
+        // Attack trigger animation cache
+        private static readonly int AttackAnim = Animator.StringToHash("Attack");
+        
+        private const float COOL_DOWN = 2.0f;
 
         [SerializeField] private int attackDamage = 10;
-        //[SerializeField] private AudioClip attackSound;
+        [SerializeField] private Animator anim;
 
-        private float currentColdDownCounter;
-
-        private IDamageable target;
-        private IDamageable player;
+        private float currentCooldown;
+        private IDamageable currentTarget;
+        private string currentTargetTag;
 
         public event Action OnAttack;
-        public bool isPlayerInRange => player != null;
 
-
-        private void OnTriggerEnter (Collider other)
+        // Explicit interface implementation
+        public void Attack()
         {
-            if (other.CompareTag("Player"))
+            // This is now just a public wrapper for TryAttack
+            TryAttack();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player")) return;
+            
+            currentTarget = other.GetComponent<IDamageable>();
+            currentTargetTag = other.tag;
+            Attack(); // Use the interface method
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if ((other.CompareTag("Player")) 
+                && other.GetComponent<IDamageable>() == currentTarget)
             {
-                player = other.GetComponent<IDamageable>();
+                Attack(); // Use the interface method
             }
         }
 
-        private void OnTriggerExit (Collider other)
+        private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.GetComponent<IDamageable>() == currentTarget)
             {
-                player = null;
+                currentTarget = null;
+                currentTargetTag = null;
             }
         }
 
-        private void Update ()
+        private void TryAttack()
         {
-            Attack();
-        }
-
-        private void UpdateTarget ()
-        {
-            if (target == null && player == null)
+            if (currentCooldown > 0)
+            {
+                currentCooldown -= Time.deltaTime;
                 return;
-            if (currentColdDownCounter>0)
-                currentColdDownCounter -=Time.deltaTime;
-            else
-            {
-                currentColdDownCounter = COLD_DOWN;
-                if (player != null)
-                    player.ApplyDamage(attackDamage);
-                else if (target != null)
-                    target.ApplyDamage(attackDamage);
-                //AudioSource.PlayClipAtPoint(attackSound, transform.position);
             }
-        }
 
-        public void Attack ()
-        {
+            if (currentTarget == null || anim == null) return;
 
-            if (target == null && player == null)
-                return;
-            if (currentColdDownCounter > 0)
-                currentColdDownCounter -= Time.deltaTime;
-            else
+            // Trigger appropriate animation
+            if (currentTargetTag == "Player")
             {
-                currentColdDownCounter = COLD_DOWN;
-                if (player != null)
-                    player.ApplyDamage(attackDamage);
-                else if (target != null)
-                    target.ApplyDamage(attackDamage);
-                OnAttack?.Invoke();
+                anim.SetTrigger(AttackAnim);
             }
+
+            currentTarget.ApplyDamage(attackDamage);
+            OnAttack?.Invoke();
+            currentCooldown = COOL_DOWN;
         }
     }
 }
