@@ -505,6 +505,7 @@ MonoBehaviour:
     secundaryState: 0
     timer: 0
     offSpringCount: 0
+  animator: {fileID: 0}
 --- !u!114 &7172719092907321172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1597,7 +1598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8073443194988779917, guid: 6b0b0b098177a3b439c80991ec9deacc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8881504610387854135, guid: 6b0b0b098177a3b439c80991ec9deacc, type: 3}
       propertyPath: m_LocalPosition.x
