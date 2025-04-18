@@ -10,12 +10,18 @@ namespace Surviblewilderness
         
         private const float COOL_DOWN = 2.0f;
 
+        [SerializeField] private Animator [] animators;
         [SerializeField] private int attackDamage = 10;
         [SerializeField] private Animator anim;
 
         private float currentCooldown;
         private IDamageable currentTarget;
         private string currentTargetTag;
+        private float currentColdDownCounter;
+
+
+        private IDamageable target;
+        private IDamageable player;
 
         public event Action OnAttack;
 
@@ -67,6 +73,16 @@ namespace Surviblewilderness
             if (currentTargetTag == "Player")
             {
                 anim.SetTrigger(AttackAnim);
+                currentColdDownCounter = COOL_DOWN;
+                if (player != null)
+                    player.ApplyDamage(attackDamage);
+                else if (target != null)
+                    target.ApplyDamage(attackDamage);
+                for (int i = 0; i < animators.Length; i++)
+                {
+                    animators [i].SetTrigger("Attack");
+                }
+                OnAttack?.Invoke();
             }
 
             currentTarget.ApplyDamage(attackDamage);

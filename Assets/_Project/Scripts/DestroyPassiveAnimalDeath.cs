@@ -10,7 +10,7 @@ namespace Surviblewilderness
         private void Awake ()
         {
             damageable = GetComponentInParent<IDamageable>();
-            passiveAnimalSpawner = GetComponent<PassiveAnimalSpawner>();
+            passiveAnimalSpawner = GetComponentInParent<PassiveAnimalSpawner>();
         }
 
         private void OnEnable ()
