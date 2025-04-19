@@ -1243,10 +1243,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4301115878228512586}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Surviblewilderness.UiManager, Assembly-CSharp
         m_MethodName: OnClosePannel
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 4301115878228512586}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -5432,9 +5444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4108e4f72478a49a828a970a861b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipes:
-  - {fileID: 11400000, guid: 42127aaa807c30644986c3f20785b39b, type: 2}
-  - {fileID: 11400000, guid: a5d84717177deb54aaeee9a5ef251a4b, type: 2}
+  craftingSlotsGrid: {fileID: 0}
+  outputSlotGrid: {fileID: 0}
+  allRecipes: []
   inputIngredients: []
 --- !u!1001 &2071056354884538146
 PrefabInstance:

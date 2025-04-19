@@ -331,6 +331,8 @@ MonoBehaviour:
   _animator:
   - {fileID: 3668368865166016907}
   _health: 100
+  isPlayer: 1
+  healthReduction: 2
 --- !u!114 &1841480363423910471
 MonoBehaviour:
   m_ObjectHideFlags: 0

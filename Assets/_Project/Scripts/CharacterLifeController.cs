@@ -14,7 +14,13 @@ namespace Surviblewilderness
         [SerializeField] private Animator[] _animator;
         [SerializeField] private int _health = 100;
 
+
         public int health => _health;
+        [Header("Player")]
+        public bool isPlayer;
+        [SerializeField] private int  healthReduction = 2;
+        [SerializeField] private float reduceHealthTime = 5f;
+        private float currentTime = 0;
 
         private void OnEnable()
         {
@@ -39,6 +45,19 @@ namespace Surviblewilderness
 
             if (_health <=0)
                 _health = 0;
+        }
+
+        private void Update ()
+        {
+            if (!isPlayer)
+                return;
+            if (currentTime > 0)
+                currentTime -= Time.deltaTime;
+            else
+            {
+                currentTime = reduceHealthTime;
+                ApplyDamage(healthReduction);
+            }
         }
 
 
