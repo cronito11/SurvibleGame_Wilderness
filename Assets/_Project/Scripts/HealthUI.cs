@@ -18,15 +18,17 @@ namespace Surviblewilderness
         private void Start ()
         {
             characterLifeController.OnDamageRecieved += OnLifeChanged;
+            characterLifeController.OnHealed += OnLifeChanged;
             OnLifeChanged(characterLifeController.health);
         }
 
         private void OnDestroy ()
         {
             characterLifeController.OnDamageRecieved -= OnLifeChanged;
+            characterLifeController.OnHealed -= OnLifeChanged;
         }
 
-        private void OnLifeChanged (int obj)
+        private void OnLifeChanged (int _)
         {
             slider.DOValue(characterLifeController.health/100f, 0.2f).SetEase(Ease.OutQuad);
         }

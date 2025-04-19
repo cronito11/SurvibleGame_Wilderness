@@ -63,7 +63,7 @@ namespace Surviblewilderness
         //  Method for Resume button clicked
         private void OnResumeButtonClicked()
         {
-            Debug.Log("Resume Button Clicked");
+            Hide();
         }
 
         private void OnSaveButtonClicked()
@@ -103,11 +103,13 @@ namespace Surviblewilderness
         // Show Panel
         public void Show()
         {
+            Time.timeScale = 0; // Pause the game
             pauseMenuPanel.SetActive(true);
         }
         // Hide Panel 
         public void Hide()
         {
+            Time.timeScale = 1; // Pause the game
             pauseMenuPanel.SetActive(false);
         }
         // Check if panel is active
